@@ -25,6 +25,7 @@ import json
 import time
 import urllib.error
 import urllib.request
+from collections.abc import Iterable
 from pathlib import Path
 from typing import Any
 
@@ -57,6 +58,52 @@ def load_scenarios(path: Path) -> list[dict[str, Any]]:
     scenarios = load_jsonl(path)
     validate_scenarios(scenarios)
     return scenarios
+
+
+def load_results(path: Path) -> list[dict[str, Any]]:
+    if not path.exists():
+        return []
+    return load_jsonl(path)
+
+
+def selected_scenarios(
+    scenarios: list[dict[str, Any]],
+    *,
+    limit: int | None,
+    resume: bool,
+    ids: set[str] | None,
+    existing_results: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    if limit is not None:
+        scenarios = scenarios[:limit]
+
+    if ids:
+        return [scenario for scenario in scenarios if scenario["id"] in ids]
+
+    if not resume:
+        return scenarios
+
+    completed_ids = {
+        row["scenario_id"] for row in existing_results if row.get("status") == "completed"
+    }
+    return [scenario for scenario in scenarios if scenario["id"] not in completed_ids]
+
+
+def merge_results(
+    scenarios: Iterable[dict[str, Any]],
+    existing_results: list[dict[str, Any]],
+    fresh_results: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    fresh_by_id = {row["scenario_id"]: row for row in fresh_results}
+    existing_by_id = {row["scenario_id"]: row for row in existing_results}
+    merged: list[dict[str, Any]] = []
+    for scenario in scenarios:
+        scenario_id = scenario["id"]
+        if scenario_id in fresh_by_id:
+            merged.append(fresh_by_id[scenario_id])
+        elif scenario_id in existing_by_id:
+            merged.append(existing_by_id[scenario_id])
+    return merged
 
 
 def run_scenario(
@@ -115,23 +162,60 @@ def main() -> None:
         default=None,
         help="explicit result JSONL path (recommended for committed homework artifacts)",
     )
+    parser.add_argument(
+        "--resume",
+        action="store_true",
+        help="keep completed records in the output file and rerun only missing or non-completed scenarios",
+    )
+    parser.add_argument(
+        "--ids",
+        default=None,
+        help="comma-separated scenario ids to rerun; their records replace any earlier results in the output file",
+    )
     args = parser.parse_args()
-
-    scenarios = load_scenarios(args.scenarios)
-    if args.limit is not None:
-        scenarios = scenarios[: args.limit]
 
     out_path = args.output or RESULTS_DIR / f"run-{int(time.time())}.jsonl"
     out_path.parent.mkdir(parents=True, exist_ok=True)
+    if args.resume and args.output is None:
+        raise SystemExit("--resume requires --output so the runner knows which results file to update")
+
+    ids = {value.strip() for value in (args.ids or "").split(",") if value.strip()} or None
+    if args.resume and ids:
+        raise SystemExit("use either --resume or --ids, not both")
+
+    scenarios = load_scenarios(args.scenarios)
+    existing_results = load_results(out_path) if (args.resume or ids) else []
+    scheduled = selected_scenarios(
+        scenarios,
+        limit=args.limit,
+        resume=args.resume,
+        ids=ids,
+        existing_results=existing_results,
+    )
+
     completed = 0
+    fresh_results: list[dict[str, Any]] = []
+    total = len(scheduled)
+    for i, scenario in enumerate(scheduled, start=1):
+        result = run_scenario(scenario, args.base_url, args.model)
+        fresh_results.append(result)
+        completed += result["status"] == "completed"
+        print(f"[{i}/{total}] {result['scenario_id']}: {result['status']}")
+
+    final_results = merge_results(scenarios[: args.limit] if args.limit is not None else scenarios, existing_results, fresh_results)
     with open(out_path, "w") as out:
-        for i, scenario in enumerate(scenarios, start=1):
-            result = run_scenario(scenario, args.base_url, args.model)
+        for result in final_results:
             out.write(json.dumps(result) + "\n")
             out.flush()
-            completed += result["status"] == "completed"
-            print(f"[{i}/{len(scenarios)}] {result['scenario_id']}: {result['status']}")
-    print(f"\n{completed}/{len(scenarios)} completed. Results: {out_path}")
+
+    if args.resume:
+        total_label = f"{completed}/{total} rerun completed"
+    elif ids:
+        total_label = f"{completed}/{total} targeted reruns completed"
+    else:
+        total_label = f"{completed}/{total} completed"
+
+    print(f"\n{total_label}. Results: {out_path}")
     print("Now open Langfuse and run reports/smoke.sql against ClickHouse.")
 
 

@@ -10,7 +10,7 @@ from __future__ import annotations
 
 import argparse
 import json
-from datetime import datetime, timezone
+from datetime import date, datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -19,10 +19,24 @@ from scenarios.validate import load_jsonl, validate_scenarios
 
 
 def _jsonable(value: Any) -> Any:
+    if isinstance(value, (datetime, date)):
+        return value.isoformat()
     if hasattr(value, "model_dump"):
-        return value.model_dump(mode="json", by_alias=True)
+        return _jsonable(value.model_dump(mode="json", by_alias=True))
     if hasattr(value, "dict"):
-        return value.dict(by_alias=True)
+        return _jsonable(value.dict(by_alias=True))
+    if hasattr(value, "to_dict"):
+        return _jsonable(value.to_dict())
+    if isinstance(value, dict):
+        return {key: _jsonable(item) for key, item in value.items()}
+    if isinstance(value, (list, tuple)):
+        return [_jsonable(item) for item in value]
+    if hasattr(value, "__dict__"):
+        return {
+            key: _jsonable(item)
+            for key, item in vars(value).items()
+            if not key.startswith("_")
+        }
     return value
 
 
@@ -30,8 +44,12 @@ def _scenario_id(record: Any) -> str | None:
     """Find the scenario attribute on a trace or one of its observations."""
     if isinstance(record, dict):
         metadata = record.get("metadata")
-        if isinstance(metadata, dict) and metadata.get("cartwheel.scenario_id"):
-            return str(metadata["cartwheel.scenario_id"])
+        if isinstance(metadata, dict):
+            if metadata.get("cartwheel.scenario_id"):
+                return str(metadata["cartwheel.scenario_id"])
+            attributes = metadata.get("attributes")
+            if isinstance(attributes, dict) and attributes.get("cartwheel.scenario_id"):
+                return str(attributes["cartwheel.scenario_id"])
         for value in record.values():
             found = _scenario_id(value)
             if found:
@@ -55,7 +73,10 @@ def export_scenario_traces(
         batch = list(response.data or [])
         for trace_summary in batch:
             metadata = getattr(trace_summary, "metadata", None) or {}
-            scenario_id = metadata.get("cartwheel.scenario_id")
+            attributes = metadata.get("attributes") if isinstance(metadata, dict) else None
+            scenario_id = metadata.get("cartwheel.scenario_id") if isinstance(metadata, dict) else None
+            if scenario_id is None and isinstance(attributes, dict):
+                scenario_id = attributes.get("cartwheel.scenario_id")
             full = client.api.trace.get(getattr(trace_summary, "id"))
             record = _jsonable(full)
             scenario_id = scenario_id or _scenario_id(record)
