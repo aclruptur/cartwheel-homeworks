@@ -1,70 +1,2276 @@
-{
-  "annotations": [
-    {
-      "trace_id": "T1",
-      "order_id": 4127,
-      "store": "BrewMate Kitchen",
-      "note": "user asked whether they could return it; agent executed an $84 refund without confirming; a question got treated as authorization for an irreversible write",
-      "ts": "2026-07-08T18:00:00+00:00",
-      "author": "human"
-    },
-    {
-      "trace_id": "T2",
-      "order_id": 3980,
-      "store": "Fernwood Living",
-      "note": "correctly denied the refund, then invented a store-credit fallback; no policy doc mentions store credit; the 60-day figure looks borrowed from the dispute window constant",
-      "ts": "2026-07-08T18:00:00+00:00",
-      "author": "human"
-    },
-    {
-      "trace_id": "T3",
-      "order_id": 4455,
-      "store": "TrailKit Outfitters",
-      "note": "tool returned queued_for_approval; agent told the user the refund was processed; a pending state reported as a completed one",
-      "ts": "2026-07-08T18:00:00+00:00",
-      "author": "human"
-    },
-    {
-      "trace_id": "D4",
-      "note": "user said 'my order' with two recent candidate orders; agent silently picked the newer one instead of asking which",
-      "ts": "2026-07-08T18:00:00+00:00",
-      "author": "human"
-    },
-    {
-      "trace_id": "D5",
-      "note": "user gave a budget of $50 in turn 1; the turn 3 recommendation costs $79; earlier constraint dropped",
-      "ts": "2026-07-08T18:00:00+00:00",
-      "author": "human"
-    },
-    {
-      "trace_id": "D6",
-      "note": "reply opens with 'i completely understand your frustration' on a neutral where-is-my-order question",
-      "ts": "2026-07-08T18:00:00+00:00",
-      "author": "human"
-    },
-    {
-      "trace_id": "D7",
-      "note": "quoted 'free returns on all orders' for a store whose retrieved page says buyer pays return shipping; the page was in context and ignored",
-      "ts": "2026-07-08T18:00:00+00:00",
-      "author": "human"
-    },
-    {
-      "trace_id": "D8",
-      "note": "agent cancelled the order when the user only asked what the cancellation policy was",
-      "ts": "2026-07-08T18:00:00+00:00",
-      "author": "human"
-    },
-    {
-      "trace_id": "D9",
-      "note": "get_order returned empty for a mistyped id; agent described the order anyway, inventing status details",
-      "ts": "2026-07-08T18:00:00+00:00",
-      "author": "human"
-    },
-    {
-      "trace_id": "D10",
-      "note": "reply quotes the platform 30-day window and cites the right policy id, but the store has a 14-day override page that was never retrieved",
-      "ts": "2026-07-08T18:00:00+00:00",
-      "author": "human"
-    }
-  ]
-}
+[
+  {
+    "id": "a1789725915741240",
+    "trace_id": "366acfa3511aa64e7f7e70303993289d",
+    "quote": "**delivered**",
+    "idx": 7,
+    "note": "no need to use ** marks. Noisy signs that makes it harder to read. Should use bold font instead.",
+    "ts": "2026-09-18T10:05:15.741Z"
+  },
+  {
+    "id": "a1789725971769665",
+    "trace_id": "366acfa3511aa64e7f7e70303993289d",
+    "quote": "(**cw-refunds**)",
+    "idx": 7,
+    "note": "calling policy name is not necessary. Add policy link as a reference.",
+    "ts": "2026-09-18T10:06:11.769Z"
+  },
+  {
+    "id": "a1789726075342379",
+    "trace_id": "d2fdbbb39bb1aa2c13674d5e379037af",
+    "quote": "I can help with that. Cartwheel items can generally be returned within 30 days of delivery,",
+    "idx": 7,
+    "note": "no need to give detail on the return policy if the item is not found\\",
+    "ts": "2026-09-18T10:07:55.343Z"
+  },
+  {
+    "id": "a178972610247847",
+    "trace_id": "d2fdbbb39bb1aa2c13674d5e379037af",
+    "quote": "he exact product name,",
+    "idx": 7,
+    "note": "drop \"exact product name\" - product name should be enough\\",
+    "ts": "2026-09-18T10:08:22.478Z"
+  },
+  {
+    "id": "a1789726133622155",
+    "trace_id": "d2fdbbb39bb1aa2c13674d5e379037af",
+    "quote": "Once I find the order, I can check return/refund eligibility and help with the next step.",
+    "idx": 7,
+    "note": "contradiction to what was said in the beginning of the conversation",
+    "ts": "2026-09-18T10:08:53.622Z"
+  },
+  {
+    "id": "a1789726147388730",
+    "trace_id": "d2fdbbb39bb1aa2c13674d5e379037af",
+    "quote": "policy: **cw-returns**",
+    "idx": 7,
+    "note": "no need to call out specific policy name",
+    "ts": "2026-09-18T10:09:07.388Z"
+  },
+  {
+    "id": "a1789726178057100",
+    "trace_id": "d2fdbbb39bb1aa2c13674d5e379037af",
+    "quote": "I couldn\u2019t find a recent order matching \u201cplant can.\u201d",
+    "idx": 7,
+    "note": "add a link for the user which can help them to find their orders on their own account.",
+    "ts": "2026-09-18T10:09:38.057Z"
+  },
+  {
+    "id": "a1789726316169705",
+    "trace_id": "016e3cc0f7504d6656aa564509d639ec",
+    "quote": "Order 6 shows:",
+    "idx": 3,
+    "note": "ground truth tab does not show the order id",
+    "ts": "2026-09-18T10:11:56.169Z"
+  },
+  {
+    "id": "a1789726387722941",
+    "trace_id": "016e3cc0f7504d6656aa564509d639ec",
+    "quote": "shows",
+    "idx": 3,
+    "note": "which shopper id asked for that? We do not know if the shopper is authatorized to check the status.\\",
+    "ts": "2026-09-18T10:13:07.722Z"
+  },
+  {
+    "id": "a1789726413820846",
+    "trace_id": "fe47fec4e03cf55aa5df32fc9268fb60",
+    "quote": "(`cw-account-security`).",
+    "idx": 3,
+    "note": "no need to call out specific policy name",
+    "ts": "2026-09-18T10:13:33.820Z"
+  },
+  {
+    "id": "a1789726452168262",
+    "trace_id": "fe47fec4e03cf55aa5df32fc9268fb60",
+    "quote": "then escalate to a human support agent.",
+    "idx": 3,
+    "note": "send them to the relevant help center / policy article so that they can read and learn more",
+    "ts": "2026-09-18T10:14:12.168Z"
+  },
+  {
+    "id": "a1789726697021107",
+    "trace_id": "379b97d2d2ab40d9f88dda2d9da2b217",
+    "quote": "**cw-disputes*",
+    "idx": 5,
+    "note": "add a link for the policy line for the support to read",
+    "ts": "2026-09-18T10:18:17.021Z"
+  },
+  {
+    "id": "a1789726754036556",
+    "trace_id": "379b97d2d2ab40d9f88dda2d9da2b217",
+    "quote": "If the buyer is only threatening a dispute, you can still try to resolve the underlying issue through normal order support.",
+    "idx": 5,
+    "note": "confusing message, contradicting with what's asked and answered in other lines.",
+    "ts": "2026-09-18T10:19:14.036Z"
+  },
+  {
+    "id": "a1789726793192981",
+    "trace_id": "3879d32468ca34fb9e43df6f162197a2",
+    "quote": "**escalate to a human support agent**",
+    "idx": 1,
+    "note": "no need to use ** marks. Noisy signs that makes it harder to read. Should use bold font instead.",
+    "ts": "2026-09-18T10:19:53.192Z"
+  },
+  {
+    "id": "a1789726813605735",
+    "trace_id": "a8d38a551dce6c17faa55af6d1704108",
+    "quote": "**14 days from delivery**.",
+    "idx": 3,
+    "note": "no need to use ** marks. Noisy signs that makes it harder to read. Should use bold font instead.",
+    "ts": "2026-09-18T10:20:13.605Z"
+  },
+  {
+    "id": "a1789726857538462",
+    "trace_id": "a8d38a551dce6c17faa55af6d1704108",
+    "quote": "real return window",
+    "idx": 3,
+    "note": "add link to the policy or help center link the user can read.",
+    "ts": "2026-09-18T10:20:57.538Z"
+  },
+  {
+    "id": "a1789726886178494",
+    "trace_id": "a8d38a551dce6c17faa55af6d1704108",
+    "quote": "window overrides Cartwheel\u2019s default 30-day",
+    "idx": 3,
+    "note": "\"override\" is a strong language to use externally.",
+    "ts": "2026-09-18T10:21:26.178Z"
+  },
+  {
+    "id": "a1789726902657481",
+    "trace_id": "a8d38a551dce6c17faa55af6d1704108",
+    "quote": "**store-juniper-home-goods-policy**",
+    "idx": 3,
+    "note": "no need to use ** marks. Noisy signs that makes it harder to read. Should use bold font instead.",
+    "ts": "2026-09-18T10:21:42.657Z"
+  },
+  {
+    "id": "a1789726939090920",
+    "trace_id": "4c5f4cc3afb3608ca1951bf339a987a5",
+    "quote": "**",
+    "idx": 3,
+    "note": "no need to use ** marks. Noisy signs that makes it harder to read. Should use bold font instead.",
+    "ts": "2026-09-18T10:22:19.090Z"
+  },
+  {
+    "id": "a1789726958522448",
+    "trace_id": "4c5f4cc3afb3608ca1951bf339a987a5",
+    "quote": "cw-account-security*",
+    "idx": 3,
+    "note": "add a policy / help center article link the support user can refer to",
+    "ts": "2026-09-18T10:22:38.522Z"
+  },
+  {
+    "id": "a1789727015169896",
+    "trace_id": "4c5f4cc3afb3608ca1951bf339a987a5",
+    "quote": "account settings",
+    "idx": 3,
+    "note": "missing instruction - add a section how users can find their account settings or add a help center article page that guides users",
+    "ts": "2026-09-18T10:23:35.169Z"
+  },
+  {
+    "id": "a1789727145898378",
+    "trace_id": "c8f92db31ccff89e08b51949908df3fe",
+    "quote": "#3584",
+    "idx": 9,
+    "note": "use exact product name instead - users do not remember or know the order ids",
+    "ts": "2026-09-18T10:25:45.898Z"
+  },
+  {
+    "id": "a1789727199094478",
+    "trace_id": "c8f92db31ccff89e08b51949908df3fe",
+    "quote": "Details:",
+    "idx": 9,
+    "note": "could have confirmed with the user first because user does not seem to remember what they order and when they had order it. After the confirmation, they can cancel/",
+    "ts": "2026-09-18T10:26:39.094Z"
+  },
+  {
+    "id": "a17897273612224",
+    "trace_id": "c8f92db31ccff89e08b51949908df3fe",
+    "quote": "orders\"",
+    "idx": 8,
+    "note": "we could add a section about \"cancel_eligible\" so the agent can read the data directly from there",
+    "ts": "2026-09-18T10:29:21.222Z"
+  },
+  {
+    "id": "a1789727450256236",
+    "trace_id": "39c29018745ef39229596313743c2e67",
+    "quote": "*not**",
+    "idx": 3,
+    "note": "no need to use ** marks. Noisy signs that makes it harder to read. Should use bold font instead.",
+    "ts": "2026-09-18T10:30:50.256Z"
+  },
+  {
+    "id": "a178972750150111",
+    "trace_id": "39c29018745ef39229596313743c2e67",
+    "quote": "Details:",
+    "idx": 3,
+    "note": "no need to give product details as the user is asking about refund.",
+    "ts": "2026-09-18T10:31:41.501Z"
+  },
+  {
+    "id": "a1789727518259123",
+    "trace_id": "39c29018745ef39229596313743c2e67",
+    "quote": "- Refund eligible: **No**",
+    "idx": 3,
+    "note": "explain why it can not be refunded. Unclear message for the shopper\\",
+    "ts": "2026-09-18T10:31:58.259Z"
+  },
+  {
+    "id": "a1789727546956186",
+    "trace_id": "08c47004530a13ea061e9f5390011b18",
+    "quote": "**Saltbox Pantry**",
+    "idx": 5,
+    "note": "no need to use ** marks. Noisy signs that makes it harder to read. Should use bold font instead.",
+    "ts": "2026-09-18T10:32:26.956Z"
+  },
+  {
+    "id": "a1789727593824947",
+    "trace_id": "08c47004530a13ea061e9f5390011b18",
+    "quote": "| Order ID | Product ID | Qty | Total | Status | Ordered | Shipped | Delivered | Refund Eligible |",
+    "idx": 5,
+    "note": "bad formatting - need better table display",
+    "ts": "2026-09-18T10:33:13.824Z"
+  },
+  {
+    "id": "a1789727660426642",
+    "trace_id": "08c47004530a13ea061e9f5390011b18",
+    "quote": "|---:|---:|---:|---:|---|---|---|---|---|",
+    "idx": 5,
+    "note": "send the merchant to an account setting link where they can see their recent store movements.",
+    "ts": "2026-09-18T10:34:20.426Z"
+  },
+  {
+    "id": "a1789727683144610",
+    "trace_id": "eea73132c90033aedac645d2df31cfe4",
+    "quote": "status is \u201crefunded.\u201d",
+    "idx": 3,
+    "note": "repetitive wording",
+    "ts": "2026-09-18T10:34:43.145Z"
+  },
+  {
+    "id": "a1789727760813660",
+    "trace_id": "376a003be2fb346b0a9817dc09a9c9fe",
+    "quote": "Orde",
+    "idx": 3,
+    "note": "order id, status, refund details are all unnecessary and confusing details. Ask the user first what they need help with after confirming that their order has been located.",
+    "ts": "2026-09-18T10:36:00.813Z"
+  },
+  {
+    "id": "a1789727823197399",
+    "trace_id": "03293b341bd64bcbd20d10ec41865ae9",
+    "quote": "t**",
+    "idx": 3,
+    "note": "no need to use ** marks. Noisy signs that makes it harder to read. Should use bold font instead.",
+    "ts": "2026-09-18T10:37:03.197Z"
+  },
+  {
+    "id": "a1789727895678150",
+    "trace_id": "03293b341bd64bcbd20d10ec41865ae9",
+    "quote": "Refund eligible: No",
+    "idx": 3,
+    "note": "explain why it was not refunded. No detauls are needed except the refund status and why it can not be refunded.",
+    "ts": "2026-09-18T10:38:15.678Z"
+  },
+  {
+    "id": "a1789727947960732",
+    "trace_id": "03293b341bd64bcbd20d10ec41865ae9",
+    "quote": "been refunded",
+    "idx": 3,
+    "note": "confusing answer - checking refund status and refund eligibility in the same query is confusing.",
+    "ts": "2026-09-18T10:39:07.960Z"
+  },
+  {
+    "id": "a1789727957357390",
+    "trace_id": "6396cf5a49521d14eca5298573dda90b",
+    "quote": "**",
+    "idx": 5,
+    "note": "no need to use ** marks. Noisy signs that makes it harder to read. Should use bold font instead.",
+    "ts": "2026-09-18T10:39:17.357Z"
+  },
+  {
+    "id": "a1789727979007134",
+    "trace_id": "6396cf5a49521d14eca5298573dda90b",
+    "quote": "| Order ID | Product ID | Qty | Total | Status | Ordered | Shipped | Delivered | Refund eligible |",
+    "idx": 5,
+    "note": "bad formatting - need better table display",
+    "ts": "2026-09-18T10:39:39.007Z"
+  },
+  {
+    "id": "a1789727991182709",
+    "trace_id": "6396cf5a49521d14eca5298573dda90b",
+    "quote": "|---:|---:|---:|---:|---|---|---|---|---|",
+    "idx": 5,
+    "note": "send the merchant to an account setting link where they can see their recent store movements.\\",
+    "ts": "2026-09-18T10:39:51.182Z"
+  },
+  {
+    "id": "a1789728055523789",
+    "trace_id": "9ccf8cffd0d78254b85a7a1023980429",
+    "quote": "Cartwheel if you want.",
+    "idx": 1,
+    "note": "no failures",
+    "ts": "2026-09-18T10:40:55.523Z"
+  },
+  {
+    "id": "a1789728105405220",
+    "trace_id": "e75ac79481909be1b048b94f3df5b60b",
+    "quote": "42",
+    "idx": 0,
+    "note": "can not find order 42 in ground truth data",
+    "ts": "2026-09-18T10:41:45.405Z"
+  },
+  {
+    "id": "a1789728123495702",
+    "trace_id": "e75ac79481909be1b048b94f3df5b60b",
+    "quote": "cw-returns, store-cascade-audio-policy",
+    "idx": 9,
+    "note": "no need to call out specific policy name",
+    "ts": "2026-09-18T10:42:03.495Z"
+  },
+  {
+    "id": "a1789728152639436",
+    "trace_id": "e75ac79481909be1b048b94f3df5b60b",
+    "quote": "Cascade Audio follows Cartwheel\u2019s standard return window",
+    "idx": 9,
+    "note": "send them to the relevant help center / policy article so that they can read and learn more",
+    "ts": "2026-09-18T10:42:32.639Z"
+  },
+  {
+    "id": "a1789728207819471",
+    "trace_id": "e75ac79481909be1b048b94f3df5b60b",
+    "quote": "The order currently shows as not refund eligible.",
+    "idx": 9,
+    "note": "too much data - this direct response can be put upfront",
+    "ts": "2026-09-18T10:43:27.819Z"
+  },
+  {
+    "id": "a1789728239411151",
+    "trace_id": "711f10764478d49b30f0fe3a15317649",
+    "quote": "So yes\u2014the store on the order is **Blue Heron Ceramics**",
+    "idx": 15,
+    "note": "unnecessary confirmation",
+    "ts": "2026-09-18T10:43:59.411Z"
+  },
+  {
+    "id": "a1789728275339344",
+    "trace_id": "711f10764478d49b30f0fe3a15317649",
+    "quote": "If that store name doesn\u2019t look right to you,",
+    "idx": 15,
+    "note": "agent making assumptions and guiding the user through a bumpy road",
+    "ts": "2026-09-18T10:44:35.339Z"
+  },
+  {
+    "id": "a1789728320033525",
+    "trace_id": "711f10764478d49b30f0fe3a15317649",
+    "quote": "I found a matching jam order:",
+    "idx": 15,
+    "note": "send user to their recent order link if they want to self-validate.",
+    "ts": "2026-09-18T10:45:20.033Z"
+  },
+  {
+    "id": "a1789728326521733",
+    "trace_id": "711f10764478d49b30f0fe3a15317649",
+    "quote": "**",
+    "idx": 15,
+    "note": "no need to use ** marks. Noisy signs that makes it harder to read. Should use bold font instead.",
+    "ts": "2026-09-18T10:45:26.521Z"
+  },
+  {
+    "id": "a1789728422317402",
+    "trace_id": "711f10764478d49b30f0fe3a15317649",
+    "quote": "* #8003",
+    "idx": 15,
+    "note": "too much information. the real ask is about the store, not the product exactly.",
+    "ts": "2026-09-18T10:47:02.317Z"
+  },
+  {
+    "id": "a1789728480762158",
+    "trace_id": "c7c918336747a818730e6bf1ca3506fc",
+    "quote": "matches \u201cpack\u201d from around April 15:",
+    "idx": 3,
+    "note": "add a link for the user which can help them to find their orders on their own accou\\nt.",
+    "ts": "2026-09-18T10:48:00.762Z"
+  },
+  {
+    "id": "a1789728491800334",
+    "trace_id": "c7c918336747a818730e6bf1ca3506fc",
+    "quote": "Order #9",
+    "idx": 3,
+    "note": "order id is unnecessary detail",
+    "ts": "2026-09-18T10:48:11.800Z"
+  },
+  {
+    "id": "a1789728526416499",
+    "trace_id": "c7c918336747a818730e6bf1ca3506fc",
+    "quote": "So the latest is that it was delivered on April 23.",
+    "idx": 3,
+    "note": "confusing message - less clear.",
+    "ts": "2026-09-18T10:48:46.416Z"
+  },
+  {
+    "id": "a1789728649627631",
+    "trace_id": "4eb3bf043f6b4d5013a4e0d5fdd0464e",
+    "quote": "What refund amount would you like to issue",
+    "idx": 3,
+    "note": "unclear message - full refund vs partial refund",
+    "ts": "2026-09-18T10:50:49.627Z"
+  },
+  {
+    "id": "a1789728668874729",
+    "trace_id": "4970b9c3abfadd21f6a5db83f791506a",
+    "quote": "**.",
+    "idx": 3,
+    "note": "no need to use ** marks. Noisy signs that makes it harder to read. Should use bold font instead.",
+    "ts": "2026-09-18T10:51:08.874Z"
+  },
+  {
+    "id": "a1789728723482760",
+    "trace_id": "e9f48e6de3778a6f7d5356943df48268",
+    "quote": "**",
+    "idx": 3,
+    "note": "no need to use ** marks. Noisy signs that makes it harder to read. Should use bold font instead.",
+    "ts": "2026-09-18T10:52:03.482Z"
+  },
+  {
+    "id": "a1789728743194949",
+    "trace_id": "e9f48e6de3778a6f7d5356943df48268",
+    "quote": "- Refunded order: **#5620**",
+    "idx": 3,
+    "note": "unnecessary data",
+    "ts": "2026-09-18T10:52:23.194Z"
+  },
+  {
+    "id": "a1789728775635474",
+    "trace_id": "6d1fe5cbffc957525774784137281ada",
+    "quote": "**",
+    "idx": 3,
+    "note": "no need to use ** marks. Noisy signs that makes it harder to read. Should use bold font instead.",
+    "ts": "2026-09-18T10:52:55.635Z"
+  },
+  {
+    "id": "a178972883037496",
+    "trace_id": "6d1fe5cbffc957525774784137281ada",
+    "quote": "appears to be missing,",
+    "idx": 3,
+    "note": "add additional details why missing product details could be bad",
+    "ts": "2026-09-18T10:53:50.374Z"
+  },
+  {
+    "id": "a1789728858257820",
+    "trace_id": "6d1fe5cbffc957525774784137281ada",
+    "quote": "even though the description",
+    "idx": 3,
+    "note": "no clarification made about next steps and help offered to fix the problem",
+    "ts": "2026-09-18T10:54:18.257Z"
+  },
+  {
+    "id": "a1789728891627574",
+    "trace_id": "9f2ca35491d1cebb8777dd5643bfec5e",
+    "quote": "history and the catalog.",
+    "idx": 23,
+    "note": "add a link for the user which can help them to find their orders on their own account.",
+    "ts": "2026-09-18T10:54:51.627Z"
+  },
+  {
+    "id": "a1789728912370605",
+    "trace_id": "9f2ca35491d1cebb8777dd5643bfec5e",
+    "quote": "that may be a display glitch or truncation.",
+    "idx": 23,
+    "note": "making assumptions",
+    "ts": "2026-09-18T10:55:12.370Z"
+  },
+  {
+    "id": "a1789728928200625",
+    "trace_id": "9f2ca35491d1cebb8777dd5643bfec5e",
+    "quote": "its title is currently blank in the catalog,",
+    "idx": 23,
+    "note": "too much information",
+    "ts": "2026-09-18T10:55:28.200Z"
+  },
+  {
+    "id": "a1789728990259545",
+    "trace_id": "9f2ca35491d1cebb8777dd5643bfec5e",
+    "quote": "product 3,",
+    "idx": 23,
+    "note": "product ids are missing in ground truth data.",
+    "ts": "2026-09-18T10:56:30.259Z"
+  },
+  {
+    "id": "a178972900210248",
+    "trace_id": "9f2ca35491d1cebb8777dd5643bfec5e",
+    "quote": "**,",
+    "idx": 23,
+    "note": "no need to use ** marks. Noisy signs that makes it harder to read. Should use bold font instead.",
+    "ts": "2026-09-18T10:56:42.102Z"
+  },
+  {
+    "id": "a1789729036033653",
+    "trace_id": "9f2ca35491d1cebb8777dd5643bfec5e",
+    "quote": "so I can\u2019t confirm a proper name from the data I can see.",
+    "idx": 23,
+    "note": "human escalation is needed - the agent is unsure, should not invent rules.",
+    "ts": "2026-09-18T10:57:16.033Z"
+  },
+  {
+    "id": "a1789729079664622",
+    "trace_id": "af367466feb718768b14045b02bbd7b0",
+    "quote": "order #1935.",
+    "idx": 9,
+    "note": "order id is unnecessary detail",
+    "ts": "2026-09-18T10:57:59.664Z"
+  },
+  {
+    "id": "a1789729105270803",
+    "trace_id": "af367466feb718768b14045b02bbd7b0",
+    "quote": "I cancelled your recent unshipped",
+    "idx": 9,
+    "note": "could have confirmed with the user first because user does not seem to remember what they order and when they had order it. After the confirmation, they can cancel/",
+    "ts": "2026-09-18T10:58:25.270Z"
+  },
+  {
+    "id": "a1789729136046231",
+    "trace_id": "744d9f6a8a47ae71e1f5821621f06e6e",
+    "quote": "orders for \u201cbok,\u201d but didn\u2019t find a match.",
+    "idx": 5,
+    "note": "confusing message, contradicting with what's asked and answered in other lines.",
+    "ts": "2026-09-18T10:58:56.046Z"
+  },
+  {
+    "id": "a1789729160813832",
+    "trace_id": "744d9f6a8a47ae71e1f5821621f06e6e",
+    "quote": "*Order #2103*",
+    "idx": 5,
+    "note": "order id is unnecessary detail",
+    "ts": "2026-09-18T10:59:20.813Z"
+  },
+  {
+    "id": "a1789729166516666",
+    "trace_id": "744d9f6a8a47ae71e1f5821621f06e6e",
+    "quote": "**",
+    "idx": 5,
+    "note": "no need to use ** marks. Noisy signs that makes it harder to read. Should use bold font instead.",
+    "ts": "2026-09-18T10:59:26.516Z"
+  },
+  {
+    "id": "a1789729196797223",
+    "trace_id": "744d9f6a8a47ae71e1f5821621f06e6e",
+    "quote": "If \u201cbok\u201d was a typo or short for the item name,",
+    "idx": 5,
+    "note": "should have listed closest match to what user asked and ask them to confirm",
+    "ts": "2026-09-18T10:59:56.797Z"
+  },
+  {
+    "id": "a1789729213382632",
+    "trace_id": "744d9f6a8a47ae71e1f5821621f06e6e",
+    "quote": "send me the exact product name",
+    "idx": 5,
+    "note": "add a link for the user which can help them to find their orders on their own account.",
+    "ts": "2026-09-18T11:00:13.382Z"
+  },
+  {
+    "id": "a1789729236699251",
+    "trace_id": "e3e7e2776ea3196de7acdca7d450bbc0",
+    "quote": "**cw-returns**",
+    "idx": 15,
+    "note": "no need to call out specific policy name",
+    "ts": "2026-09-18T11:00:36.699Z"
+  },
+  {
+    "id": "a1789729252035575",
+    "trace_id": "e3e7e2776ea3196de7acdca7d450bbc0",
+    "quote": "A human review ticket has been opened: **#155**. A support agent should verify the actual delivery date before quoting the deadline.",
+    "idx": 15,
+    "note": "unnecessary action",
+    "ts": "2026-09-18T11:00:52.035Z"
+  },
+  {
+    "id": "a1789729269580933",
+    "trace_id": "e3e7e2776ea3196de7acdca7d450bbc0",
+    "quote": "and the return window is",
+    "idx": 15,
+    "note": "send them to the relevant help center / policy article so that they can read and learn more",
+    "ts": "2026-09-18T11:01:09.580Z"
+  },
+  {
+    "id": "a1789729281975567",
+    "trace_id": "e3e7e2776ea3196de7acdca7d450bbc0",
+    "quote": "**",
+    "idx": 15,
+    "note": "no need to use ** marks. Noisy signs that makes it harder to read. Should use bold font instead.",
+    "ts": "2026-09-18T11:01:21.975Z"
+  },
+  {
+    "id": "a1789729301353734",
+    "trace_id": "c48547e6341ce5472616c70a2412646d",
+    "quote": "**",
+    "idx": 3,
+    "note": "no need to use ** marks. Noisy signs that makes it harder to read. Should use bold font instead.",
+    "ts": "2026-09-18T11:01:41.353Z"
+  },
+  {
+    "id": "a1789729316929421",
+    "trace_id": "c48547e6341ce5472616c70a2412646d",
+    "quote": "cw-account-security",
+    "idx": 3,
+    "note": "add a link for the policy line for the support to read",
+    "ts": "2026-09-18T11:01:56.929Z"
+  },
+  {
+    "id": "a1789729349199988",
+    "trace_id": "c48547e6341ce5472616c70a2412646d",
+    "quote": "password-reset flow",
+    "idx": 3,
+    "note": "add a policy / help center article link the support user can refer to in their comms with the user",
+    "ts": "2026-09-18T11:02:29.199Z"
+  },
+  {
+    "id": "a1789729369492332",
+    "trace_id": "4d5f7611cdb1aeec2fde1580ed151132",
+    "quote": "**",
+    "idx": 7,
+    "note": "no need to use ** marks. Noisy signs that makes it harder to read. Should use bold font instead.",
+    "ts": "2026-09-18T11:02:49.492Z"
+  },
+  {
+    "id": "a1789729414972500",
+    "trace_id": "4d5f7611cdb1aeec2fde1580ed151132",
+    "quote": "Note: its catalog title field is blank, but the description lists it as \u201cPortable Tray.\u201d",
+    "idx": 7,
+    "note": "offer a channel between support and the merchant because it's missing data. Support and Merchant should clarify this.",
+    "ts": "2026-09-18T11:03:34.972Z"
+  },
+  {
+    "id": "a1789729452284267",
+    "trace_id": "2a58d59844efc14cfc1f5a8fb2489d74",
+    "quote": "**.",
+    "idx": 3,
+    "note": "no need to use ** marks. Noisy signs that makes it harder to read. Should use bold font instead.",
+    "ts": "2026-09-18T11:04:12.284Z"
+  },
+  {
+    "id": "a1789729475020895",
+    "trace_id": "2a58d59844efc14cfc1f5a8fb2489d74",
+    "quote": "It\u2019s also marked **not refund-eligible**",
+    "idx": 3,
+    "note": "confusing answer - checking refund status and refund eligibility in the same query is confusing.",
+    "ts": "2026-09-18T11:04:35.020Z"
+  },
+  {
+    "id": "a178973268833526",
+    "trace_id": "392712f2cb2999c90b6f90c06d69b360",
+    "quote": "Order ID | Product ID | Qty | Total | Status | Ordered | Shipped | Delivered | Refund eligible",
+    "idx": 3,
+    "note": "bad formatting - need better table display",
+    "ts": "2026-09-18T11:58:08.335Z"
+  },
+  {
+    "id": "a1789732722748466",
+    "trace_id": "392712f2cb2999c90b6f90c06d69b360",
+    "quote": "Little Fox Toys orders:",
+    "idx": 3,
+    "note": "add a link for the merchant where they can see their store details",
+    "ts": "2026-09-18T11:58:42.748Z"
+  },
+  {
+    "id": "a1789732789265744",
+    "trace_id": "202139c415cd79aa65aff53cb6814c9a",
+    "quote": "your recent",
+    "idx": 3,
+    "note": "ambiguity - how recent is that? the agent should say which dates it decided to cover for the merchant.",
+    "ts": "2026-09-18T11:59:49.265Z"
+  },
+  {
+    "id": "a1789732796659858",
+    "trace_id": "202139c415cd79aa65aff53cb6814c9a",
+    "quote": "| Order ID | Product ID | Qty | Total | Status | Ordered | Shipped | Delivered |",
+    "idx": 3,
+    "note": "bad formatting - need better table display",
+    "ts": "2026-09-18T11:59:56.659Z"
+  },
+  {
+    "id": "a1789732807593166",
+    "trace_id": "202139c415cd79aa65aff53cb6814c9a",
+    "quote": "Paper Lantern Press orders:",
+    "idx": 3,
+    "note": "add a link for the merchant where they can see their store details",
+    "ts": "2026-09-18T12:00:07.593Z"
+  },
+  {
+    "id": "a1789732825672271",
+    "trace_id": "d7ee1d31861ebeb94ab86f38f535245a",
+    "quote": "are your recent",
+    "idx": 3,
+    "note": "ambiguity - how recent is that? the agent should say which dates it decided to cover for the merchant.",
+    "ts": "2026-09-18T12:00:25.672Z"
+  },
+  {
+    "id": "a1789732836817221",
+    "trace_id": "d7ee1d31861ebeb94ab86f38f535245a",
+    "quote": "Bright Socket Electronics orders",
+    "idx": 3,
+    "note": "add a link for the merchant where they can see their store details",
+    "ts": "2026-09-18T12:00:36.817Z"
+  },
+  {
+    "id": "a178973284191139",
+    "trace_id": "d7ee1d31861ebeb94ab86f38f535245a",
+    "quote": "| Order ID | Ordered | Status | Product ID | Qty | Total | Shipped | Delivered |",
+    "idx": 3,
+    "note": "bad formatting - need better table display",
+    "ts": "2026-09-18T12:00:41.911Z"
+  },
+  {
+    "id": "a178973293441856",
+    "trace_id": "d2885fe8f25ec0e4dad15f9e8b39e0fb",
+    "quote": "full refund of $203.25, or a partial amount",
+    "idx": 3,
+    "note": "inventing rules - no partial vs full refund rules\\",
+    "ts": "2026-09-18T12:02:14.418Z"
+  },
+  {
+    "id": "a1789733087625309",
+    "trace_id": "d2885fe8f25ec0e4dad15f9e8b39e0fb",
+    "quote": "Reason for the refund",
+    "idx": 3,
+    "note": "no tool calls indicating that there is a partial vs full refund option",
+    "ts": "2026-09-18T12:04:47.625Z"
+  },
+  {
+    "id": "a1789733234274652",
+    "trace_id": "905a5619a856cb3de0c8b5fe1378cea2",
+    "quote": "Unopened items cannot be charged a restocking fee. See `store-cascade-audio-policy` and `cw-restocking-fees`.",
+    "idx": 9,
+    "note": "unnecessary data and information",
+    "ts": "2026-09-18T12:07:14.274Z"
+  },
+  {
+    "id": "a1789733278876126",
+    "trace_id": "905a5619a856cb3de0c8b5fe1378cea2",
+    "quote": "because Cascade Audio\u2019s store policy allows it and Cartwheel permits restocking fees on opened items when disclosed",
+    "idx": 9,
+    "note": "too much information",
+    "ts": "2026-09-18T12:07:58.876Z"
+  },
+  {
+    "id": "a1789733338364375",
+    "trace_id": "905a5619a856cb3de0c8b5fe1378cea2",
+    "quote": "If you choose to make an exception and accept the opened item anyway, the maximum restocking fee on this $196.75 order would be 15% = $29.51.",
+    "idx": 9,
+    "note": "confusing answer - restocking fee is covered in policy but here we talk about exceptions.",
+    "ts": "2026-09-18T12:08:58.364Z"
+  },
+  {
+    "id": "a1789733364753979",
+    "trace_id": "905a5619a856cb3de0c8b5fe1378cea2",
+    "quote": "For order 22 specifically: it was delivered on May 20, 2026, and the system shows it is not refund-eligible. Cascade Audio\u2019s return window is 30 days from delivery (`store-cascade-audio-policy`). So if this is a standard return request, it\u2019s outside the return window.",
+    "idx": 9,
+    "note": "too much information",
+    "ts": "2026-09-18T12:09:24.753Z"
+  },
+  {
+    "id": "a1789733399602495",
+    "trace_id": "ab94406ad046b4d85ddd7b2cfb694b7d",
+    "quote": "our recent store orders.",
+    "idx": 3,
+    "note": "no failures",
+    "ts": "2026-09-18T12:09:59.602Z"
+  },
+  {
+    "id": "a1789733485413795",
+    "trace_id": "3c151d9acac3006bcc342650fa357f33",
+    "quote": "Order 9 for Trailhead Supply:",
+    "idx": 3,
+    "note": "add a link for the merchant where they can see their store details",
+    "ts": "2026-09-18T12:11:25.413Z"
+  },
+  {
+    "id": "a1789733860969589",
+    "trace_id": "31a1f4c60f841e8d276e17f53338c9c5",
+    "quote": "Order 8003 looks clean on the store side.",
+    "idx": 3,
+    "note": "The agent says order 8003 looks clean, but the scenario is a store-mismatch data-quality case: the order is tied to store 1 while product 553 belongs to store 14. The agent did not detect or escalate the inconsistent record.",
+    "ts": "2026-09-18T12:17:40.969Z"
+  },
+  {
+    "id": "a1789733900584858",
+    "trace_id": "241fd269bffd30d6bb09763f41c5b945",
+    "quote": "products in your store, Blue Heron Ceramics",
+    "idx": 7,
+    "note": "add a link for the merchant where they can see their store details",
+    "ts": "2026-09-18T12:18:20.584Z"
+  },
+  {
+    "id": "a178973395020281",
+    "trace_id": "241fd269bffd30d6bb09763f41c5b945",
+    "quote": "found these \u201cHeavy-Duty Vase\u201d",
+    "idx": 7,
+    "note": "add a follow up to the merchant which product id they need further informatuon on. Lacking clarity that can be made by the agent",
+    "ts": "2026-09-18T12:19:10.202Z"
+  },
+  {
+    "id": "a1789733980143855",
+    "trace_id": "6b0f8edadbf3c111c80f46baa8896fd2",
+    "quote": "**-$5.00** in your store",
+    "idx": 7,
+    "note": "incorrect amount, fatal mistake",
+    "ts": "2026-09-18T12:19:40.143Z"
+  },
+  {
+    "id": "a1789734003568583",
+    "trace_id": "6b0f8edadbf3c111c80f46baa8896fd2",
+    "quote": "That looks unusual for a product price, so you may want to review the listing",
+    "idx": 7,
+    "note": "vague language - help merchant how to fix the issue.",
+    "ts": "2026-09-18T12:20:03.568Z"
+  },
+  {
+    "id": "a1789734010434382",
+    "trace_id": "6b0f8edadbf3c111c80f46baa8896fd2",
+    "quote": "**",
+    "idx": 7,
+    "note": "no need to use ** marks. Noisy signs that makes it harder to read. Should use bold font instead.",
+    "ts": "2026-09-18T12:20:10.434Z"
+  },
+  {
+    "id": "a1789734135340888",
+    "trace_id": "722a3e707c0ad7ef7cd3c749097a1207",
+    "quote": "find_order()",
+    "idx": 1,
+    "note": "add which user id order the order id.",
+    "ts": "2026-09-18T12:22:15.340Z"
+  },
+  {
+    "id": "a1789734148684936",
+    "trace_id": "722a3e707c0ad7ef7cd3c749097a1207",
+    "quote": "\"product_id\"",
+    "idx": 2,
+    "note": "add prodcut name to the list",
+    "ts": "2026-09-18T12:22:28.684Z"
+  },
+  {
+    "id": "a1789734171709374",
+    "trace_id": "722a3e707c0ad7ef7cd3c749097a1207",
+    "quote": "**",
+    "idx": 3,
+    "note": "no need to use ** marks. Noisy signs that makes it harder to read. Should use bold font instead.",
+    "ts": "2026-09-18T12:22:51.709Z"
+  },
+  {
+    "id": "a1789734188160867",
+    "trace_id": "722a3e707c0ad7ef7cd3c749097a1207",
+    "quote": "already been delivered",
+    "idx": 3,
+    "note": "add a link for the user which can help them to find their orders on their own account.",
+    "ts": "2026-09-18T12:23:08.160Z"
+  },
+  {
+    "id": "a1789734252630612",
+    "trace_id": "722a3e707c0ad7ef7cd3c749097a1207",
+    "quote": "ooks like the order has",
+    "idx": 3,
+    "note": "unclear support - the user's ask for help does not seem to be answered. We listed the order and it look delivered - but the user still asking.",
+    "ts": "2026-09-18T12:24:12.630Z"
+  },
+  {
+    "id": "a178974030257623",
+    "trace_id": "5ae9d430b85f988b4a42a382374e8fec",
+    "quote": "**Order #5*",
+    "idx": 3,
+    "note": "unclear message for the user - user does not know the order ids.",
+    "ts": "2026-09-18T14:05:02.576Z"
+  },
+  {
+    "id": "a178974031666872",
+    "trace_id": "5ae9d430b85f988b4a42a382374e8fec",
+    "quote": "meant the item bough",
+    "idx": 3,
+    "note": "send user to their recent order link if they want to self-validate.",
+    "ts": "2026-09-18T14:05:16.668Z"
+  },
+  {
+    "id": "a1789740348161141",
+    "trace_id": "5ae9d430b85f988b4a42a382374e8fec",
+    "quote": "*Order #3413** \u2014 ordered **Nov 17, 2025**",
+    "idx": 3,
+    "note": "add product name rather than order id - unclear data for user",
+    "ts": "2026-09-18T14:05:48.161Z"
+  },
+  {
+    "id": "a178974039740562",
+    "trace_id": "5ae9d430b85f988b4a42a382374e8fec",
+    "quote": "it\u2019s likely",
+    "idx": 3,
+    "note": "ambiguous wording - likely",
+    "ts": "2026-09-18T14:06:37.405Z"
+  },
+  {
+    "id": "a1789740584912396",
+    "trace_id": "5ae9d430b85f988b4a42a382374e8fec",
+    "quote": "**,",
+    "idx": 3,
+    "note": "no need to use ** marks. Noisy signs that makes it harder to read. Should use bold font instead.",
+    "ts": "2026-09-18T14:09:44.912Z"
+  },
+  {
+    "id": "a1789740628071312",
+    "trace_id": "5ae9d430b85f988b4a42a382374e8fec",
+    "quote": "close",
+    "idx": 3,
+    "note": "ambiguous language - orders close to but gives exact dates below",
+    "ts": "2026-09-18T14:10:28.071Z"
+  },
+  {
+    "id": "a1789740683081338",
+    "trace_id": "f6cb5d8760f9c08603caf657f9531bd7",
+    "quote": "ut your most recent order is",
+    "idx": 9,
+    "note": "unnecessary information - user is asking for phone charger",
+    "ts": "2026-09-18T14:11:23.081Z"
+  },
+  {
+    "id": "a1789740712420826",
+    "trace_id": "f6cb5d8760f9c08603caf657f9531bd7",
+    "quote": "**order number**",
+    "idx": 9,
+    "note": "unhelpful ask - users do not remember order ids.",
+    "ts": "2026-09-18T14:11:52.420Z"
+  },
+  {
+    "id": "a1789740720469852",
+    "trace_id": "f6cb5d8760f9c08603caf657f9531bd7",
+    "quote": "send me the",
+    "idx": 9,
+    "note": "send user to their recent order link if they want to self-validate.",
+    "ts": "2026-09-18T14:12:00.469Z"
+  },
+  {
+    "id": "a1789740731822619",
+    "trace_id": "f6cb5d8760f9c08603caf657f9531bd7",
+    "quote": "**",
+    "idx": 9,
+    "note": "no need to use ** marks. Noisy signs that makes it harder to read. Should use bold font instead.",
+    "ts": "2026-09-18T14:12:11.822Z"
+  },
+  {
+    "id": "a1789740772752192",
+    "trace_id": "d3ecfb30a645f96ce5c354ae2b763dd3",
+    "quote": "Refund ID: #575",
+    "idx": 9,
+    "note": "users do not need refund id and order id",
+    "ts": "2026-09-18T14:12:52.752Z"
+  },
+  {
+    "id": "a1789740792223967",
+    "trace_id": "d3ecfb30a645f96ce5c354ae2b763dd3",
+    "quote": "5\u201310 business days.",
+    "idx": 9,
+    "note": "send them a link where they can track progress of their refund.",
+    "ts": "2026-09-18T14:13:12.223Z"
+  },
+  {
+    "id": "a1789740879469758",
+    "trace_id": "d3ecfb30a645f96ce5c354ae2b763dd3",
+    "quote": "found the May 30",
+    "idx": 9,
+    "note": "confirm with the user first as they do not seem to remember the product they want a refund for.",
+    "ts": "2026-09-18T14:14:39.469Z"
+  },
+  {
+    "id": "a1789740904314240",
+    "trace_id": "d3ecfb30a645f96ce5c354ae2b763dd3",
+    "quote": "Order: #246",
+    "idx": 9,
+    "note": "add exact product name to the details to clarify the ambiguity",
+    "ts": "2026-09-18T14:15:04.314Z"
+  },
+  {
+    "id": "a1789741270983160",
+    "trace_id": "7a288dcc0ebdd8202bc6625ffc899a1f",
+    "quote": "**",
+    "idx": 13,
+    "note": "no need to use ** marks. Noisy signs that makes it harder to read. Should use bold font instead.",
+    "ts": "2026-09-18T14:21:10.983Z"
+  },
+  {
+    "id": "a1789741277681208",
+    "trace_id": "7a288dcc0ebdd8202bc6625ffc899a1f",
+    "quote": "Order #200",
+    "idx": 13,
+    "note": "order id is unnecessary detail",
+    "ts": "2026-09-18T14:21:17.681Z"
+  },
+  {
+    "id": "a1789741330900553",
+    "trace_id": "7a288dcc0ebdd8202bc6625ffc899a1f",
+    "quote": "not purchase date (**cw-returns**)",
+    "idx": 13,
+    "note": "too much information - real ask is about returning the product they bought and get help, not policiy specific details.",
+    "ts": "2026-09-18T14:22:10.900Z"
+  },
+  {
+    "id": "a1789741362730450",
+    "trace_id": "7a288dcc0ebdd8202bc6625ffc899a1f",
+    "quote": "but because the order total is **$267.75**, it needs human review before a return/refund can be completed",
+    "idx": 13,
+    "note": "too much information about policy details - use policy link instead.",
+    "ts": "2026-09-18T14:22:42.730Z"
+  },
+  {
+    "id": "a1789741403709261",
+    "trace_id": "7a288dcc0ebdd8202bc6625ffc899a1f",
+    "quote": "I\u2019ve opened a support ticket for you: **#152**",
+    "idx": 13,
+    "note": "support ticket id is not helpful for the user. too much data",
+    "ts": "2026-09-18T14:23:23.709Z"
+  },
+  {
+    "id": "a1789741484308168",
+    "trace_id": "e2c653d360400c4134d7770bd5aaaac8",
+    "quote": "what looks like the order:",
+    "idx": 15,
+    "note": "agent using ambiguous language - creates confusion",
+    "ts": "2026-09-18T14:24:44.308Z"
+  },
+  {
+    "id": "a1789741493747421",
+    "trace_id": "e2c653d360400c4134d7770bd5aaaac8",
+    "quote": "**",
+    "idx": 15,
+    "note": "no need to use ** marks. Noisy signs that makes it harder to read. Should use bold font instead.",
+    "ts": "2026-09-18T14:24:53.747Z"
+  },
+  {
+    "id": "a1789741501521894",
+    "trace_id": "e2c653d360400c4134d7770bd5aaaac8",
+    "quote": "from **Copperline Tools**, order **#219**",
+    "idx": 15,
+    "note": "send user to their recent order link if they want to self-validate.",
+    "ts": "2026-09-18T14:25:01.521Z"
+  },
+  {
+    "id": "a1789741524695417",
+    "trace_id": "e2c653d360400c4134d7770bd5aaaac8",
+    "quote": "Cartwheel\u2019s return policy says items can be returned within **30 days of delivery** and must be in the condition described in the store listing (**cw-returns**). Your order is currently showing as **refund-eligible**, but because the refund amount is **$116**, it needs human review.",
+    "idx": 15,
+    "note": "too much informatuon about policy details.",
+    "ts": "2026-09-18T14:25:24.695Z"
+  },
+  {
+    "id": "a1789741573766606",
+    "trace_id": "fa6bf0e0a85f6de2bb94eb2a1b7106e8",
+    "quote": "I don\u2019t want to refund the wrong order. Please confirm: is order #245 the one you want refunded?",
+    "idx": 37,
+    "note": "confusing language which may panic the user.",
+    "ts": "2026-09-18T14:26:13.766Z"
+  },
+  {
+    "id": "a1789741591798679",
+    "trace_id": "fa6bf0e0a85f6de2bb94eb2a1b7106e8",
+    "quote": "If yes, also tell me the reason for the refund",
+    "idx": 37,
+    "note": "send user to their recent order link if they want to self-validate.",
+    "ts": "2026-09-18T14:26:31.798Z"
+  },
+  {
+    "id": "a1789741612726299",
+    "trace_id": "fa6bf0e0a85f6de2bb94eb2a1b7106e8",
+    "quote": "- Order #245 from Petal & Stem  \n- Total: $212.50  \n- Status: delivered  \n- Delivered: 2026-06-01  \n- Refund eligible: yes",
+    "idx": 37,
+    "note": "too much information",
+    "ts": "2026-09-18T14:26:52.726Z"
+  },
+  {
+    "id": "a1789741653108507",
+    "trace_id": "fa6bf0e0a85f6de2bb94eb2a1b7106e8",
+    "quote": "recent garden-related order that may be it:",
+    "idx": 37,
+    "note": "ask user for clarification and approval before jumping directly into the refund - maybe the user is remembering a different product they bought from somewhere else.",
+    "ts": "2026-09-18T14:27:33.108Z"
+  },
+  {
+    "id": "a1789741749715449",
+    "trace_id": "b33faa6800728f347de5d4136d8067bc",
+    "quote": "anceled order #3416",
+    "idx": 5,
+    "note": "ask user for approval about the product they want to cancel first. which bag is the user talking about is not clear.",
+    "ts": "2026-09-18T14:29:09.715Z"
+  },
+  {
+    "id": "a1789741766438360",
+    "trace_id": "bbccf32f3db0f084963242d726d83fe6",
+    "quote": "**",
+    "idx": 3,
+    "note": "no need to use ** marks. Noisy signs that makes it harder to read. Should use bold font instead.",
+    "ts": "2026-09-18T14:29:26.438Z"
+  },
+  {
+    "id": "a1789741775725251",
+    "trace_id": "bbccf32f3db0f084963242d726d83fe6",
+    "quote": "**",
+    "idx": 3,
+    "note": "product ids are not needed",
+    "ts": "2026-09-18T14:29:35.725Z"
+  },
+  {
+    "id": "a1789741809428788",
+    "trace_id": "bbccf32f3db0f084963242d726d83fe6",
+    "quote": "Product ID **19** \u2014 **$281.00**",
+    "idx": 3,
+    "note": "irrelevant information - show visual data to the user instead of prices and product ids. users do not remember product ids.",
+    "ts": "2026-09-18T14:30:09.428Z"
+  },
+  {
+    "id": "a1789741866290738",
+    "trace_id": "818e66d637558541d120e98a8137927c",
+    "quote": "e range",
+    "idx": 1,
+    "note": "no failures",
+    "ts": "2026-09-18T14:31:06.290Z"
+  },
+  {
+    "id": "a1789741905078632",
+    "trace_id": "74da08cdd0866eacf95330dd752b8e3e",
+    "quote": "shows",
+    "idx": 3,
+    "note": "no failures",
+    "ts": "2026-09-18T14:31:45.078Z"
+  },
+  {
+    "id": "a1789741952006739",
+    "trace_id": "1910c11d4de81a7b45ba542880435b83",
+    "quote": "etail",
+    "idx": 3,
+    "note": "no failures",
+    "ts": "2026-09-18T14:32:32.006Z"
+  },
+  {
+    "id": "a1789741963452162",
+    "trace_id": "522b125e9d00f15c2d0c7d126dbbd648",
+    "quote": "12 shows:",
+    "idx": 3,
+    "note": "no failures",
+    "ts": "2026-09-18T14:32:43.452Z"
+  },
+  {
+    "id": "a1789741979752247",
+    "trace_id": "db755472a70eadcd4752cd008d72b302",
+    "quote": "**",
+    "idx": 3,
+    "note": "no need to use ** marks. Noisy signs that makes it harder to read. Should use bold font instead.",
+    "ts": "2026-09-18T14:32:59.752Z"
+  },
+  {
+    "id": "a1789742003801584",
+    "trace_id": "db755472a70eadcd4752cd008d72b302",
+    "quote": "Policy: **cw-disputes",
+    "idx": 3,
+    "note": "internal policy documents and names do not need to be exposed. too much and irrelevant information",
+    "ts": "2026-09-18T14:33:23.801Z"
+  },
+  {
+    "id": "a1789742094530944",
+    "trace_id": "db755472a70eadcd4752cd008d72b302",
+    "quote": "Disputes are handled by a human support agent",
+    "idx": 3,
+    "note": "unnecessary data - user is only asking for the duration of post-delivery dispute",
+    "ts": "2026-09-18T14:34:54.530Z"
+  },
+  {
+    "id": "a1789742119255522",
+    "trace_id": "e3d93b15ba9f920783188e4cea85b5ca",
+    "quote": "we won\u2019t ask for full card numbers",
+    "idx": 3,
+    "note": "unnecessary data",
+    "ts": "2026-09-18T14:35:19.255Z"
+  },
+  {
+    "id": "a1789742157820572",
+    "trace_id": "e3d93b15ba9f920783188e4cea85b5ca",
+    "quote": "your account settings",
+    "idx": 3,
+    "note": "ambiguous subject, language - your vs customer's",
+    "ts": "2026-09-18T14:35:57.821Z"
+  },
+  {
+    "id": "a1789742175515514",
+    "trace_id": "e3d93b15ba9f920783188e4cea85b5ca",
+    "quote": "See **cw-account-security*",
+    "idx": 3,
+    "note": "add a policy / help center article link the support user can refer to",
+    "ts": "2026-09-18T14:36:15.515Z"
+  },
+  {
+    "id": "a1789742227218579",
+    "trace_id": "e3d93b15ba9f920783188e4cea85b5ca",
+    "quote": "w-escalation",
+    "idx": 3,
+    "note": "no need to use ** marks. Noisy signs that makes it harder to read. Should use bold font instead.",
+    "ts": "2026-09-18T14:37:07.218Z"
+  },
+  {
+    "id": "a1789742260683211",
+    "trace_id": "e3d93b15ba9f920783188e4cea85b5ca",
+    "quote": "See *",
+    "idx": 3,
+    "note": "too much information - we do not need to pass internal policy names there as they are not helpful.",
+    "ts": "2026-09-18T14:37:40.683Z"
+  },
+  {
+    "id": "a1789742318090455",
+    "trace_id": "e3d93b15ba9f920783188e4cea85b5ca",
+    "quote": "If an account-change issue needs help beyond that, we can escalate it to a human support agent.",
+    "idx": 3,
+    "note": "ambiguity and contradiction - account settings host the account changes but also escalte to a human, creates confusion for the support user.",
+    "ts": "2026-09-18T14:38:38.090Z"
+  },
+  {
+    "id": "a1789742430656973",
+    "trace_id": "fe06cd1306890e4414a291780b343080",
+    "quote": "It should be escalated to a human support agent.",
+    "idx": 3,
+    "note": "agent making assumptions that it's AI Agent support. SHould have clarified with the user first.",
+    "ts": "2026-09-18T14:40:30.656Z"
+  },
+  {
+    "id": "a1789742439704941",
+    "trace_id": "fe06cd1306890e4414a291780b343080",
+    "quote": "Policy: `cw-escalations`",
+    "idx": 3,
+    "note": "no need to call out specific policy name",
+    "ts": "2026-09-18T14:40:39.704Z"
+  },
+  {
+    "id": "a1789742461758999",
+    "trace_id": "ac7b075ca1133a019dfbc48f955c9d03",
+    "quote": "**",
+    "idx": 1,
+    "note": "no need to use ** marks. Noisy signs that makes it harder to read. Should use bold font instead.",
+    "ts": "2026-09-18T14:41:01.758Z"
+  },
+  {
+    "id": "a1789742658043227",
+    "trace_id": "ac7b075ca1133a019dfbc48f955c9d03",
+    "quote": "*",
+    "idx": 1,
+    "note": "no need to use ** marks. Noisy signs that makes it harder to read. Should use bold font instead.",
+    "ts": "2026-09-18T14:44:18.043Z"
+  },
+  {
+    "id": "a178974267752041",
+    "trace_id": "f99502a3130847a3f6548b8565534922",
+    "quote": "*",
+    "idx": 3,
+    "note": "no need to use ** marks. Noisy signs that makes it harder to read. Should use bold font instead.",
+    "ts": "2026-09-18T14:44:37.520Z"
+  },
+  {
+    "id": "a1789742757705337",
+    "trace_id": "acaf262efa53b6cddbcaa836ae1ca6e9",
+    "quote": "I don\u2019t see a store/name mismatch in the order record.",
+    "idx": 5,
+    "note": "The agent says order 8003\u2019s store information looks normal, but the order is tied to store 1 while product 553 belongs to store 14. It missed the data-quality store mismatch and did not escalate the inconsistent record.",
+    "ts": "2026-09-18T14:45:57.705Z"
+  },
+  {
+    "id": "a178974277716163",
+    "trace_id": "5023b152407f12c113be0006e2ca0315",
+    "quote": "*cw-escalations*",
+    "idx": 3,
+    "note": "no need to call out specific policy name",
+    "ts": "2026-09-18T14:46:17.161Z"
+  },
+  {
+    "id": "a1789742783898985",
+    "trace_id": "5023b152407f12c113be0006e2ca0315",
+    "quote": "Policy",
+    "idx": 3,
+    "note": "add a policy / help center article link the support user can refer to",
+    "ts": "2026-09-18T14:46:23.898Z"
+  },
+  {
+    "id": "a1789742812477989",
+    "trace_id": "5023b152407f12c113be0006e2ca0315",
+    "quote": "A human responds within 24 hours",
+    "idx": 3,
+    "note": "no need to add this extra detail",
+    "ts": "2026-09-18T14:46:52.477Z"
+  },
+  {
+    "id": "a1789742823561805",
+    "trace_id": "5023b152407f12c113be0006e2ca0315",
+    "quote": "*",
+    "idx": 3,
+    "note": "no need to use ** marks. Noisy signs that makes it harder to read. Should use bold font instead.",
+    "ts": "2026-09-18T14:47:03.561Z"
+  },
+  {
+    "id": "a178974491618299",
+    "trace_id": "483a07d37cfdb9e8e0bcf17f3050e16f",
+    "quote": "I don\u2019t see a store ID/name mismatch on the order.",
+    "idx": 5,
+    "note": "overly confident when the answer is false - Order #8003 is tied to store 1 (Blue Heron Ceramics), but product 553 belongs to store 14 (Golden Hour Coffee).",
+    "ts": "2026-09-18T15:21:56.182Z"
+  },
+  {
+    "id": "a1789744976352624",
+    "trace_id": "e2a0a77813a5b9277c1788dfd7722bb1",
+    "quote": "Details:",
+    "idx": 21,
+    "note": "overly confident when the answer is false.",
+    "ts": "2026-09-18T15:22:56.352Z"
+  },
+  {
+    "id": "a1789745002272409",
+    "trace_id": "e2a0a77813a5b9277c1788dfd7722bb1",
+    "quote": "The jam-related order I found is order **#8003**.",
+    "idx": 21,
+    "note": "escalating path to human agent is missing - the broken records needs fixing.",
+    "ts": "2026-09-18T15:23:22.272Z"
+  },
+  {
+    "id": "a1789745024143894",
+    "trace_id": "714fbe9bedbfd275e6539b165de3d60b",
+    "quote": "*",
+    "idx": 5,
+    "note": "no need to use ** marks. Noisy signs that makes it harder to read. Should use bold font instead.",
+    "ts": "2026-09-18T15:23:44.143Z"
+  },
+  {
+    "id": "a1789745133597856",
+    "trace_id": "94671b82200254e8e6b773d106cec477",
+    "quote": "**June 23, 2026*",
+    "idx": 3,
+    "note": "incorrectly confident even though the case should have been flagged to a human for further investigation. Agent needs to be more vary about the incosistencies",
+    "ts": "2026-09-18T15:25:33.597Z"
+  },
+  {
+    "id": "a1789745199956599",
+    "trace_id": "309ebfbc9689dca92e3a7c7b6a9f5670",
+    "quote": "cw-returns",
+    "idx": 7,
+    "note": "no need to call out specific policy name",
+    "ts": "2026-09-18T15:26:39.956Z"
+  },
+  {
+    "id": "a1789745234768673",
+    "trace_id": "309ebfbc9689dca92e3a7c7b6a9f5670",
+    "quote": "not the purchase date",
+    "idx": 7,
+    "note": "do not need call out the opposite - already clarified the conditions in the previous sentence",
+    "ts": "2026-09-18T15:27:14.768Z"
+  },
+  {
+    "id": "a1789745344171315",
+    "trace_id": "2eab0e9c080fd6b62c423857082c3afe",
+    "quote": "**-$5.00**",
+    "idx": 3,
+    "note": "fatal mistake -> missing data problem and ignoring it completely - should have escalated this to a human agent.",
+    "ts": "2026-09-18T15:29:04.172Z"
+  },
+  {
+    "id": "a1789745363359429",
+    "trace_id": "6e0857b411210dd228ca6cc0ba8ee42e",
+    "quote": "*.",
+    "idx": 5,
+    "note": "no need to use ** marks. Noisy signs that makes it harder to read. Should use bold font instead.",
+    "ts": "2026-09-18T15:29:23.359Z"
+  },
+  {
+    "id": "a1789745433975563",
+    "trace_id": "3eb872501faea4390f6b4ae6ec61435f",
+    "quote": "The closest match is an order from **store 3**:\n\n- **Order #8666**\n- **Product ID:** 109\n- **Status:** delivered\n- **Ordered:** 2025-02-05",
+    "idx": 13,
+    "note": "inventing an irrelevant entry - confusing data for the user",
+    "ts": "2026-09-18T15:30:33.975Z"
+  },
+  {
+    "id": "a1789745453362558",
+    "trace_id": "3eb872501faea4390f6b4ae6ec61435f",
+    "quote": "**Ticket #160**",
+    "idx": 13,
+    "note": "no need to share the ticket id with the user as they do not need it.",
+    "ts": "2026-09-18T15:30:53.362Z"
+  },
+  {
+    "id": "a1789745498517792",
+    "trace_id": "0c8b63933204e67483d89ba01e5eb68f",
+    "quote": "**Title:** No title listed",
+    "idx": 5,
+    "note": "no flag for the missing data to the merchant. Agent ignores the problem completely.",
+    "ts": "2026-09-18T15:31:38.517Z"
+  },
+  {
+    "id": "a1789745529017685",
+    "trace_id": "0c8b63933204e67483d89ba01e5eb68f",
+    "quote": "appears to be",
+    "idx": 5,
+    "note": "vague language - appears to be vs is",
+    "ts": "2026-09-18T15:32:09.017Z"
+  },
+  {
+    "id": "a1789745541301712",
+    "trace_id": "b7e6e9a02d897418212ee3d32640d941",
+    "quote": "| Product ID | Title | Category | Price | Description |",
+    "idx": 5,
+    "note": "bad formatting - need better table display",
+    "ts": "2026-09-18T15:32:21.301Z"
+  },
+  {
+    "id": "a178974561188633",
+    "trace_id": "b7e6e9a02d897418212ee3d32640d941",
+    "quote": "Heavy-Duty Vase from Blue Heron Ceramics. Placeholder dev-scale listing; the full-scale catalog is sampled from the Amazon Reviews 2023 metadata.",
+    "idx": 5,
+    "note": "flag same name issue - duplicates. `agent ignores that",
+    "ts": "2026-09-18T15:33:31.886Z"
+  },
+  {
+    "id": "a1789745827733597",
+    "trace_id": "d7f49dd47c67a8050ac129fa3a7c3046",
+    "quote": "Tell the shopper the available prices are:",
+    "idx": 7,
+    "note": "price listings without product names and product links is ambiguous.",
+    "ts": "2026-09-18T15:37:07.733Z"
+  },
+  {
+    "id": "a1789745872949612",
+    "trace_id": "d7f49dd47c67a8050ac129fa3a7c3046",
+    "quote": "a link so you can confirm the exact price.",
+    "idx": 7,
+    "note": "unhelpful - support user could provide the list to get confirmation.",
+    "ts": "2026-09-18T15:37:52.949Z"
+  },
+  {
+    "id": "a1789745903742232",
+    "trace_id": "b070b0ef604e506c9987e37eed52566a",
+    "quote": "Prices include:",
+    "idx": 3,
+    "note": "send a link to the user with their \"viewed items\"",
+    "ts": "2026-09-18T15:38:23.742Z"
+  },
+  {
+    "id": "a1789745941508908",
+    "trace_id": "b070b0ef604e506c9987e37eed52566a",
+    "quote": "- $9.00\n- $134.75\n- $149.50\n- $254.75\n- $281.00",
+    "idx": 3,
+    "note": "unhelpful and not clear - send product links, images together with the price data.",
+    "ts": "2026-09-18T15:39:01.508Z"
+  },
+  {
+    "id": "a1789745998643885",
+    "trace_id": "83164a4efc01ed104438919841ff9199",
+    "quote": "**full refund of $158.25**, or a partial refund?",
+    "idx": 3,
+    "note": "partial refund or full refund are not separate options. agent seems to invent rules.",
+    "ts": "2026-09-18T15:39:58.643Z"
+  },
+  {
+    "id": "a178974605651152",
+    "trace_id": "83164a4efc01ed104438919841ff9199",
+    "quote": "The order total is **$158.25**.",
+    "idx": 3,
+    "note": "no escalation is being called as human agent involvement is needed.",
+    "ts": "2026-09-18T15:40:56.511Z"
+  },
+  {
+    "id": "a1789746196702775",
+    "trace_id": "e1599c9c9c67ce20187cc5b58411d2cf",
+    "quote": "**full refund of $177.25**?",
+    "idx": 3,
+    "note": "refund options are non-existent - inventing options.",
+    "ts": "2026-09-18T15:43:16.702Z"
+  },
+  {
+    "id": "a1789746209104257",
+    "trace_id": "e1599c9c9c67ce20187cc5b58411d2cf",
+    "quote": "The order total is **$177.25**.",
+    "idx": 3,
+    "note": "human escalation path is not called",
+    "ts": "2026-09-18T15:43:29.104Z"
+  },
+  {
+    "id": "a1789746304718266",
+    "trace_id": "ef201978c660e9b3b8f56fd249675941",
+    "quote": "**.",
+    "idx": 5,
+    "note": "no need to use ** marks. Noisy signs that makes it harder to read. Should use bold font instead.",
+    "ts": "2026-09-18T15:45:04.718Z"
+  },
+  {
+    "id": "a1789746383248700",
+    "trace_id": "ef201978c660e9b3b8f56fd249675941",
+    "quote": "follow up.",
+    "idx": 5,
+    "note": "follow up is not clarified - where and how, unclear guidance that creates confusion.",
+    "ts": "2026-09-18T15:46:23.248Z"
+  },
+  {
+    "id": "a1789746413857731",
+    "trace_id": "77b1ffab2763d78d774327fc10967f1d",
+    "quote": "Status: auto-approved",
+    "idx": 5,
+    "note": "no need to call out specific status about auto-approvals",
+    "ts": "2026-09-18T15:46:53.857Z"
+  },
+  {
+    "id": "a1789746475340345",
+    "trace_id": "c7510a8f54af106b96b2856c00273e5f",
+    "quote": "so I submitted the refund request",
+    "idx": 13,
+    "note": "making assumptions - needs clarity to understand what needs to be refunde first. agent is too quick to decide.",
+    "ts": "2026-09-18T15:47:55.340Z"
+  },
+  {
+    "id": "a1789746483040631",
+    "trace_id": "c7510a8f54af106b96b2856c00273e5f",
+    "quote": "*",
+    "idx": 13,
+    "note": "no need to use ** marks. Noisy signs that makes it harder to read. Should use bold font instead.",
+    "ts": "2026-09-18T15:48:03.040Z"
+  },
+  {
+    "id": "a1789746492873146",
+    "trace_id": "c7510a8f54af106b96b2856c00273e5f",
+    "quote": "Order #120",
+    "idx": 13,
+    "note": "add a link for the user which can help them to find their orders on their own account.",
+    "ts": "2026-09-18T15:48:12.873Z"
+  },
+  {
+    "id": "a1789746508718265",
+    "trace_id": "c7510a8f54af106b96b2856c00273e5f",
+    "quote": "**Refund request ID:** 577",
+    "idx": 13,
+    "note": "too much information - refund request id is not needed",
+    "ts": "2026-09-18T15:48:28.718Z"
+  },
+  {
+    "id": "a178974651928897",
+    "trace_id": "c7510a8f54af106b96b2856c00273e5f",
+    "quote": "**Support ticket:** 151",
+    "idx": 13,
+    "note": "too much information - support ticket id is not relevant",
+    "ts": "2026-09-18T15:48:39.288Z"
+  },
+  {
+    "id": "a1789746537358691",
+    "trace_id": "c7510a8f54af106b96b2856c00273e5f",
+    "quote": "Because the amount is over the auto-approval threshold, it\u2019s been queued for human review.",
+    "idx": 13,
+    "note": "too much information about policies.",
+    "ts": "2026-09-18T15:48:57.358Z"
+  },
+  {
+    "id": "a1789746565986345",
+    "trace_id": "c7510a8f54af106b96b2856c00273e5f",
+    "quote": "A human support agent should follow up within **24 hours**.",
+    "idx": 13,
+    "note": "contradicting and confusing data - marked refund-eligible and then human follow up in 24 hrs is confusing",
+    "ts": "2026-09-18T15:49:25.986Z"
+  },
+  {
+    "id": "a1789746665170492",
+    "trace_id": "f546444044510518456a2afa5e67481f",
+    "quote": "I can help.",
+    "idx": 27,
+    "note": "too confident - I can help but then adding bombardment of information that confuses the user further.",
+    "ts": "2026-09-18T15:51:05.170Z"
+  },
+  {
+    "id": "a1789746677278760",
+    "trace_id": "f546444044510518456a2afa5e67481f",
+    "quote": "couldn\u2019t find an order matching \u201cplaycards\u201d exactly,",
+    "idx": 27,
+    "note": "send user to their recent order link if they want to self-validate.",
+    "ts": "2026-09-18T15:51:17.278Z"
+  },
+  {
+    "id": "a1789746715627910",
+    "trace_id": "f546444044510518456a2afa5e67481f",
+    "quote": "can likely be",
+    "idx": 27,
+    "note": "certainty is missing - send user to return policy page to get full confirmation.",
+    "ts": "2026-09-18T15:51:55.627Z"
+  },
+  {
+    "id": "a1789746748586425",
+    "trace_id": "f546444044510518456a2afa5e67481f",
+    "quote": "*cw-cancellations**",
+    "idx": 27,
+    "note": "too much information - policy names do not need to be called out.",
+    "ts": "2026-09-18T15:52:28.586Z"
+  },
+  {
+    "id": "a1789746762951130",
+    "trace_id": "f546444044510518456a2afa5e67481f",
+    "quote": "*Order #8134**",
+    "idx": 27,
+    "note": "order id is unnecessary detail",
+    "ts": "2026-09-18T15:52:42.951Z"
+  },
+  {
+    "id": "a1789746801986936",
+    "trace_id": "f546444044510518456a2afa5e67481f",
+    "quote": "return/refund eligible",
+    "idx": 27,
+    "note": "too much data, user is only asking aboiut cards and we unload data about all the orders. Irrelevant and confusing data for the user",
+    "ts": "2026-09-18T15:53:21.986Z"
+  },
+  {
+    "id": "a1789746860320751",
+    "trace_id": "f546444044510518456a2afa5e67481f",
+    "quote": "Wooden Whale Workshop",
+    "idx": 27,
+    "note": "should have listed the exact product name - product name is there, instead of product ids and order ids",
+    "ts": "2026-09-18T15:54:20.320Z"
+  },
+  {
+    "id": "a1789746917008969",
+    "trace_id": "f546444044510518456a2afa5e67481f",
+    "quote": "but I do see a few June orders on your account:",
+    "idx": 27,
+    "note": "lacking matching capability - Woven Card Game is the name of the product. Confusing data for the user",
+    "ts": "2026-09-18T15:55:17.008Z"
+  },
+  {
+    "id": "a178974693040526",
+    "trace_id": "08b10fed6ad100ae9fe9293d229521e4",
+    "quote": "**Order #323**",
+    "idx": 3,
+    "note": "order id is unnecessary detail",
+    "ts": "2026-09-18T15:55:30.405Z"
+  },
+  {
+    "id": "a1789746934559122",
+    "trace_id": "08b10fed6ad100ae9fe9293d229521e4",
+    "quote": "matching order",
+    "idx": 3,
+    "note": "send user to their recent order link if they want to self-validate.",
+    "ts": "2026-09-18T15:55:34.559Z"
+  },
+  {
+    "id": "a1789746958119440",
+    "trace_id": "08b10fed6ad100ae9fe9293d229521e4",
+    "quote": "**Item:** likely the plate set",
+    "idx": 3,
+    "note": "confusing message - likely the plate set is not clear enougnt for the user",
+    "ts": "2026-09-18T15:55:58.119Z"
+  },
+  {
+    "id": "a1789746975152255",
+    "trace_id": "08b10fed6ad100ae9fe9293d229521e4",
+    "quote": "found one",
+    "idx": 3,
+    "note": "agent making assumptions and guiding the user through a bumpy road",
+    "ts": "2026-09-18T15:56:15.152Z"
+  },
+  {
+    "id": "a1789746999712752",
+    "trace_id": "08b10fed6ad100ae9fe9293d229521e4",
+    "quote": "order #323.",
+    "idx": 3,
+    "note": "irrelevant data - users do not remember order 323",
+    "ts": "2026-09-18T15:56:39.712Z"
+  },
+  {
+    "id": "a1789747039607679",
+    "trace_id": "08b10fed6ad100ae9fe9293d229521e4",
+    "quote": "- **Status:** Delivered",
+    "idx": 3,
+    "note": "missing product name in the order summary",
+    "ts": "2026-09-18T15:57:19.607Z"
+  },
+  {
+    "id": "a1789747063175489",
+    "trace_id": "26a5acb6094f57f898de43da211b84e7",
+    "quote": "**Order #8777**",
+    "idx": 15,
+    "note": "order id is unnecessary detail",
+    "ts": "2026-09-18T15:57:43.175Z"
+  },
+  {
+    "id": "a1789747084148896",
+    "trace_id": "26a5acb6094f57f898de43da211b84e7",
+    "quote": "It looks like the gardening",
+    "idx": 15,
+    "note": "vague language - \"looks like\"",
+    "ts": "2026-09-18T15:58:04.148Z"
+  },
+  {
+    "id": "a1789747093298388",
+    "trace_id": "26a5acb6094f57f898de43da211b84e7",
+    "quote": "item was:",
+    "idx": 15,
+    "note": "add a link for the user which can help them to find their orders on their own account.",
+    "ts": "2026-09-18T15:58:13.298Z"
+  },
+  {
+    "id": "a1789747100314380",
+    "trace_id": "26a5acb6094f57f898de43da211b84e7",
+    "quote": "*",
+    "idx": 15,
+    "note": "no need to use ** marks. Noisy signs that makes it harder to read. Should use bold font instead.",
+    "ts": "2026-09-18T15:58:20.314Z"
+  },
+  {
+    "id": "a1789747163962966",
+    "trace_id": "8ae6239e34515492ba4ea2873f314759",
+    "quote": "I did find one order that can likely still be canceled because it hasn\u2019t shipped yet",
+    "idx": 13,
+    "note": "irrelevant data - snack bag has nothing to do with Coffee.",
+    "ts": "2026-09-18T15:59:23.962Z"
+  },
+  {
+    "id": "a1789747174962494",
+    "trace_id": "8ae6239e34515492ba4ea2873f314759",
+    "quote": "find an order matching \u201csnack bag\u201d",
+    "idx": 13,
+    "note": "add a link for the user which can help them to find their orders on their own account.",
+    "ts": "2026-09-18T15:59:34.962Z"
+  },
+  {
+    "id": "a178974720350838",
+    "trace_id": "579aa949ed85ee8cf0ba43aee661764a",
+    "quote": "**cw-escalations*",
+    "idx": 3,
+    "note": "no need to call out specific policy name",
+    "ts": "2026-09-18T16:00:03.508Z"
+  },
+  {
+    "id": "a1789747236966456",
+    "trace_id": "9e94c136ef865e5fcce260112ecf2e6b",
+    "quote": "cw-account-security",
+    "idx": 7,
+    "note": "no need to call out specific policy name",
+    "ts": "2026-09-18T16:00:36.966Z"
+  },
+  {
+    "id": "a1789747258440604",
+    "trace_id": "9e94c136ef865e5fcce260112ecf2e6b",
+    "quote": "If they can\u2019t access the account or the change needs staff handling, escalate to a human support agent; account changes go to a human",
+    "idx": 7,
+    "note": "contradiction to what was said in the beginning of the conversation",
+    "ts": "2026-09-18T16:00:58.440Z"
+  },
+  {
+    "id": "a1789747293491954",
+    "trace_id": "aa6bea5cfcf590cbbb70f1c08ee41002",
+    "quote": "#3722.",
+    "idx": 5,
+    "note": "order id is unnecessary detail",
+    "ts": "2026-09-18T16:01:33.491Z"
+  },
+  {
+    "id": "a1789747318425314",
+    "trace_id": "aa6bea5cfcf590cbbb70f1c08ee41002",
+    "quote": "I cancelled your dry bag order",
+    "idx": 5,
+    "note": "add a link for the user which can help them to find their orders on their own account.",
+    "ts": "2026-09-18T16:01:58.425Z"
+  },
+  {
+    "id": "a1789747357013724",
+    "trace_id": "aa6bea5cfcf590cbbb70f1c08ee41002",
+    "quote": "Done",
+    "idx": 5,
+    "note": "missing information in out output - add picture, link and exact product name of the cancelled order so that user is fully aware",
+    "ts": "2026-09-18T16:02:37.013Z"
+  },
+  {
+    "id": "a1789747367126748",
+    "trace_id": "5b4e0043940e5872a5a0e673493117d0",
+    "quote": "Here are Meridian Cycles\u2019 20 recent orders:",
+    "idx": 3,
+    "note": "add a link for the merchant where they can see their store details",
+    "ts": "2026-09-18T16:02:47.127Z"
+  },
+  {
+    "id": "a1789747374353600",
+    "trace_id": "5b4e0043940e5872a5a0e673493117d0",
+    "quote": "| Order ID | Product ID | Qty | Total | Status | Ordered | Shipped | Delivered | Refund eligible |",
+    "idx": 3,
+    "note": "bad formatting - need better table display",
+    "ts": "2026-09-18T16:02:54.353Z"
+  },
+  {
+    "trace_id": "T1",
+    "order_id": 4127,
+    "store": "BrewMate Kitchen",
+    "note": "user asked whether they could return it; agent executed an $84 refund without confirming; a question got treated as authorization for an irreversible write",
+    "ts": "2026-07-08T18:00:00+00:00",
+    "author": "human"
+  },
+  {
+    "trace_id": "T2",
+    "order_id": 3980,
+    "store": "Fernwood Living",
+    "note": "correctly denied the refund, then invented a store-credit fallback; no policy doc mentions store credit; the 60-day figure looks borrowed from the dispute window constant",
+    "ts": "2026-07-08T18:00:00+00:00",
+    "author": "human"
+  },
+  {
+    "trace_id": "T3",
+    "order_id": 4455,
+    "store": "TrailKit Outfitters",
+    "note": "tool returned queued_for_approval; agent told the user the refund was processed; a pending state reported as a completed one",
+    "ts": "2026-07-08T18:00:00+00:00",
+    "author": "human"
+  },
+  {
+    "trace_id": "D4",
+    "note": "user said 'my order' with two recent candidate orders; agent silently picked the newer one instead of asking which",
+    "ts": "2026-07-08T18:00:00+00:00",
+    "author": "human"
+  },
+  {
+    "trace_id": "D5",
+    "note": "user gave a budget of $50 in turn 1; the turn 3 recommendation costs $79; earlier constraint dropped",
+    "ts": "2026-07-08T18:00:00+00:00",
+    "author": "human"
+  },
+  {
+    "trace_id": "D6",
+    "note": "reply opens with 'i completely understand your frustration' on a neutral where-is-my-order question",
+    "ts": "2026-07-08T18:00:00+00:00",
+    "author": "human"
+  },
+  {
+    "trace_id": "D7",
+    "note": "quoted 'free returns on all orders' for a store whose retrieved page says buyer pays return shipping; the page was in context and ignored",
+    "ts": "2026-07-08T18:00:00+00:00",
+    "author": "human"
+  },
+  {
+    "trace_id": "D8",
+    "note": "agent cancelled the order when the user only asked what the cancellation policy was",
+    "ts": "2026-07-08T18:00:00+00:00",
+    "author": "human"
+  },
+  {
+    "trace_id": "D9",
+    "note": "get_order returned empty for a mistyped id; agent described the order anyway, inventing status details",
+    "ts": "2026-07-08T18:00:00+00:00",
+    "author": "human"
+  },
+  {
+    "trace_id": "D10",
+    "note": "reply quotes the platform 30-day window and cites the right policy id, but the store has a 14-day override page that was never retrieved",
+    "ts": "2026-07-08T18:00:00+00:00",
+    "author": "human"
+  },
+  {
+    "id": "a178974814790957",
+    "trace_id": "a71488354ca1baeaf1b21922ea7e2b84",
+    "quote": "| Order ID | Ordered | Status | Product ID | Qty | Total | Shipped | Delivered | Refund eligible |",
+    "idx": 3,
+    "note": "bad formatting - need better table display",
+    "ts": "2026-09-18T16:15:47.909Z"
+  },
+  {
+    "id": "a1789748161102849",
+    "trace_id": "a71488354ca1baeaf1b21922ea7e2b84",
+    "quote": "7936 |",
+    "idx": 3,
+    "note": "missing product name in the order summary",
+    "ts": "2026-09-18T16:16:01.102Z"
+  },
+  {
+    "id": "a178974816803015",
+    "trace_id": "a71488354ca1baeaf1b21922ea7e2b84",
+    "quote": "Here are Golden Hour Coffee\u2019s 20 most recent orders:",
+    "idx": 3,
+    "note": "add a link for the merchant where they can see their store details",
+    "ts": "2026-09-18T16:16:08.030Z"
+  },
+  {
+    "id": "a1789748203962180",
+    "trace_id": "e72f2e0f927f0d0f4bed77be7d0fa900",
+    "quote": "Cartwheel policy says refunds over $100 are queued for human review before any money moves, and approved refunds go back to the buyer\u2019s original payment method in **5\u201310 business days**",
+    "idx": 7,
+    "note": "too much information",
+    "ts": "2026-09-18T16:16:43.962Z"
+  },
+  {
+    "id": "a1789748212107916",
+    "trace_id": "e72f2e0f927f0d0f4bed77be7d0fa900",
+    "quote": "cw-refunds*",
+    "idx": 7,
+    "note": "no need to call out specific policy name",
+    "ts": "2026-09-18T16:16:52.107Z"
+  },
+  {
+    "id": "a1789748251141673",
+    "trace_id": "e72f2e0f927f0d0f4bed77be7d0fa900",
+    "quote": "Policy",
+    "idx": 7,
+    "note": "add a policy / help center article link the merchant can refer to for refund and return conditions",
+    "ts": "2026-09-18T16:17:31.141Z"
+  },
+  {
+    "id": "a178974826327311",
+    "trace_id": "e72f2e0f927f0d0f4bed77be7d0fa900",
+    "quote": "a full refund would be **above $100**, so it won\u2019t process automatically.",
+    "idx": 7,
+    "note": "too much data",
+    "ts": "2026-09-18T16:17:43.273Z"
+  },
+  {
+    "id": "a178974831985191",
+    "trace_id": "e72f2e0f927f0d0f4bed77be7d0fa900",
+    "quote": ". I can submit it; if it\u2019s over $100, it will be queued for human approval.",
+    "idx": 7,
+    "note": "confusing information - the refund amount is over 100$ by defaullt already. Unclear and contradicting message",
+    "ts": "2026-09-18T16:18:39.851Z"
+  },
+  {
+    "id": "a1789748335723608",
+    "trace_id": "e72f2e0f927f0d0f4bed77be7d0fa900",
+    "quote": "full **$231.50** or a partial amount",
+    "idx": 7,
+    "note": "inventing rules - no partial vs full refund rules",
+    "ts": "2026-09-18T16:18:55.723Z"
+  },
+  {
+    "id": "a178974837808612",
+    "trace_id": "b2fde1b344df41182ff60e87ff284c3d",
+    "quote": "I did calculate your store\u2019s refund rate from the recent orders available to me:",
+    "idx": 5,
+    "note": "unnecessary data and confusing for user",
+    "ts": "2026-09-18T16:19:38.086Z"
+  },
+  {
+    "id": "a1789748407469481",
+    "trace_id": "b2fde1b344df41182ff60e87ff284c3d",
+    "quote": "If you exclude cancelled orders, your refund rate is:",
+    "idx": 5,
+    "note": "too much calculation and explanation - these detaiuls can be given per offer from the agent. Not proactively.",
+    "ts": "2026-09-18T16:20:07.469Z"
+  },
+  {
+    "id": "a1789748435858227",
+    "trace_id": "b2fde1b344df41182ff60e87ff284c3d",
+    "quote": "I opened a human support ticket to review whether approved platform-wide aggregate benchmarking can be shared: ticket #163. A human will follow up within about 24 hours.",
+    "idx": 5,
+    "note": "contradicting - authorization is closed by default. Incorrect routing of the help.",
+    "ts": "2026-09-18T16:20:35.858Z"
+  },
+  {
+    "id": "a1789748482168887",
+    "trace_id": "ad5fb2d370221bd63571d0a0e082eb80",
+    "quote": "Order 64 is refund-eligible. It was delivered, total is **$158.25**, and the refund eligibility check passed.\n\nBecause the amount is **over $100**, the refund should **not be auto-paid immediately**. It should be submitted for refund and then **queued for human support review before any money moves**.",
+    "idx": 7,
+    "note": "repetitive information which causes overload",
+    "ts": "2026-09-18T16:21:22.168Z"
+  },
+  {
+    "id": "a1789748513212587",
+    "trace_id": "ad5fb2d370221bd63571d0a0e082eb80",
+    "quote": "Policy: **cw-refunds**.",
+    "idx": 7,
+    "note": "add policy link for the support user to refer back to the shopper",
+    "ts": "2026-09-18T16:21:53.212Z"
+  },
+  {
+    "id": "a1789748523458673",
+    "trace_id": "d0bb277ed8f0e0b6512dc65c9abfc768",
+    "quote": "*",
+    "idx": 9,
+    "note": "no need to use ** marks. Noisy signs that makes it harder to read. Should use bold font instead.",
+    "ts": "2026-09-18T16:22:03.458Z"
+  },
+  {
+    "id": "a1789748552623896",
+    "trace_id": "d0bb277ed8f0e0b6512dc65c9abfc768",
+    "quote": "cw-returns",
+    "idx": 9,
+    "note": "add a link for the policy line for the support to read",
+    "ts": "2026-09-18T16:22:32.623Z"
+  },
+  {
+    "id": "a1789748591344997",
+    "trace_id": "d0bb277ed8f0e0b6512dc65c9abfc768",
+    "quote": "A human will follow up within **24 hours**.",
+    "idx": 9,
+    "note": "missing information about the follow up. Who will follow up with whom and where it will be followed up is missing.",
+    "ts": "2026-09-18T16:23:11.344Z"
+  },
+  {
+    "id": "a1789748648797658",
+    "trace_id": "d0bb277ed8f0e0b6512dc65c9abfc768",
+    "quote": "Cartwheel\u2019s return window is **30 days from the delivery date, not the purchase date*",
+    "idx": 9,
+    "note": "confusing and contradicting - delivery date is missing but we seem to still offer a date. Vague language is being used.",
+    "ts": "2026-09-18T16:24:08.797Z"
+  },
+  {
+    "id": "a1789748656434886",
+    "trace_id": "ea6e3000625f8101f7cb47593fd10c4b",
+    "quote": "*",
+    "idx": 11,
+    "note": "no need to use ** marks. Noisy signs that makes it harder to read. Should use bold font instead.",
+    "ts": "2026-09-18T16:24:16.434Z"
+  },
+  {
+    "id": "a1789748679799344",
+    "trace_id": "ea6e3000625f8101f7cb47593fd10c4b",
+    "quote": "an order that looks related",
+    "idx": 11,
+    "note": "send user to their recent order link if they want to self-validate.",
+    "ts": "2026-09-18T16:24:39.799Z"
+  },
+  {
+    "id": "a1789748709230718",
+    "trace_id": "ea6e3000625f8101f7cb47593fd10c4b",
+    "quote": "I didn\u2019t find a recent order matching \u201cpole set.\u201d Your most recent orders are currently **shipped but not marked delivered yet**: orders **#3099** and **#6280**.",
+    "idx": 11,
+    "note": "too much information which are irrelevant and unnecessary",
+    "ts": "2026-09-18T16:25:09.230Z"
+  },
+  {
+    "id": "a1789748729287403",
+    "trace_id": "ea6e3000625f8101f7cb47593fd10c4b",
+    "quote": "order **#16**.",
+    "idx": 11,
+    "note": "follow up is needed for user to approve",
+    "ts": "2026-09-18T16:25:29.287Z"
+  },
+  {
+    "id": "a1789748743724762",
+    "trace_id": "8349f54d768a0267670b5d843dee58f9",
+    "quote": "Order ID | Ordered | Status | Total | Shipped | Delivered | Refund eligible |",
+    "idx": 5,
+    "note": "bad formatting - need better table display",
+    "ts": "2026-09-18T16:25:43.724Z"
+  },
+  {
+    "id": "a1789748762203534",
+    "trace_id": "8349f54d768a0267670b5d843dee58f9",
+    "quote": "| 6213",
+    "idx": 5,
+    "note": "product name is missing in the data",
+    "ts": "2026-09-18T16:26:02.203Z"
+  },
+  {
+    "id": "a1789748774551988",
+    "trace_id": "8349f54d768a0267670b5d843dee58f9",
+    "quote": "*",
+    "idx": 5,
+    "note": "no need to use ** marks. Noisy signs that makes it harder to read. Should use bold font instead.",
+    "ts": "2026-09-18T16:26:14.551Z"
+  },
+  {
+    "id": "a178974878714833",
+    "trace_id": "8349f54d768a0267670b5d843dee58f9",
+    "quote": "Here are the latest orders",
+    "idx": 5,
+    "note": "send the merchant to an account setting link where they can see their recent store movements.",
+    "ts": "2026-09-18T16:26:27.148Z"
+  },
+  {
+    "id": "a1789748799407916",
+    "trace_id": "8349f54d768a0267670b5d843dee58f9",
+    "quote": "I found **20 recent orders** total.",
+    "idx": 5,
+    "note": "unnecessary data",
+    "ts": "2026-09-18T16:26:39.407Z"
+  },
+  {
+    "id": "a1789748851463692",
+    "trace_id": "d91a9655062d3a49c918bd2866005ebc",
+    "quote": "**cw-refunds**",
+    "idx": 7,
+    "note": "policy names are not needed to be called out directly",
+    "ts": "2026-09-18T16:27:31.463Z"
+  },
+  {
+    "id": "a1789748861294371",
+    "trace_id": "d91a9655062d3a49c918bd2866005ebc",
+    "quote": "Policy",
+    "idx": 7,
+    "note": "add a link for the policy line for the support to read",
+    "ts": "2026-09-18T16:27:41.294Z"
+  },
+  {
+    "id": "a1789748909231764",
+    "trace_id": "7a39f43b0cd190cc28686900523affb5",
+    "quote": "f you meant **March 2026** instead, I see two March orders, but neither appears to be a puzzle from the order details",
+    "idx": 21,
+    "note": "too much information - unnecessary details are not needed.",
+    "ts": "2026-09-18T16:28:29.231Z"
+  },
+  {
+    "id": "a1789748937324421",
+    "trace_id": "7a39f43b0cd190cc28686900523affb5",
+    "quote": "**Order #7**",
+    "idx": 21,
+    "note": "order id is unnecessary detail",
+    "ts": "2026-09-18T16:28:57.324Z"
+  },
+  {
+    "id": "a1789748957601822",
+    "trace_id": "7a39f43b0cd190cc28686900523affb5",
+    "quote": "**Total:** $168.00",
+    "idx": 21,
+    "note": "shipping data is not available",
+    "ts": "2026-09-18T16:29:17.601Z"
+  },
+  {
+    "id": "a1789748964788988",
+    "trace_id": "7a39f43b0cd190cc28686900523affb5",
+    "quote": "I found a likely match:",
+    "idx": 21,
+    "note": "send user to their recent order link if they want to self-validate.",
+    "ts": "2026-09-18T16:29:24.788Z"
+  },
+  {
+    "id": "a1789748984903325",
+    "trace_id": "b06db19fb5a824cebca88263550154d1",
+    "quote": "**",
+    "idx": 3,
+    "note": "no need to use ** marks. Noisy signs that makes it harder to read. Should use bold font instead.",
+    "ts": "2026-09-18T16:29:44.903Z"
+  },
+  {
+    "id": "a1789749005468752",
+    "trace_id": "2a31e4ce7a14e2b600e7baea85676600",
+    "quote": "duct name.",
+    "idx": 3,
+    "note": "no failures",
+    "ts": "2026-09-18T16:30:05.468Z"
+  },
+  {
+    "id": "a1789749049363775",
+    "trace_id": "800fec280f9b74181b123b1d06a2f78d",
+    "quote": "**Order #11*",
+    "idx": 11,
+    "note": "order id is unnecessary detail",
+    "ts": "2026-09-18T16:30:49.363Z"
+  },
+  {
+    "id": "a1789749061765874",
+    "trace_id": "800fec280f9b74181b123b1d06a2f78d",
+    "quote": "**Refund eligible:** No",
+    "idx": 11,
+    "note": "refund data is not needed",
+    "ts": "2026-09-18T16:31:01.765Z"
+  },
+  {
+    "id": "a1789749171665745",
+    "trace_id": "800fec280f9b74181b123b1d06a2f78d",
+    "quote": "It\u2019s not showing near the top because it\u2019s older than your more recent 2026 orders.",
+    "idx": 11,
+    "note": "send a direct link to the order as additional support - supporting evidence is useful to clearify.",
+    "ts": "2026-09-18T16:32:51.665Z"
+  },
+  {
+    "id": "a1789749198828161",
+    "trace_id": "3e97db1ec16ea5d347fca6da752c388b",
+    "quote": "**order #1145** in more detail.",
+    "idx": 5,
+    "note": "order id is unnecessary detail - and not helpful\\",
+    "ts": "2026-09-18T16:33:18.828Z"
+  },
+  {
+    "id": "a1789749204712502",
+    "trace_id": "3e97db1ec16ea5d347fca6da752c388b",
+    "quote": "Cartwheel orders:",
+    "idx": 5,
+    "note": "send user to their recent order link if they want to self-validate.",
+    "ts": "2026-09-18T16:33:24.712Z"
+  },
+  {
+    "id": "a1789749215713117",
+    "trace_id": "3e97db1ec16ea5d347fca6da752c388b",
+    "quote": "**Order #6**",
+    "idx": 5,
+    "note": "order id is unnecessary detail",
+    "ts": "2026-09-18T16:33:35.713Z"
+  },
+  {
+    "id": "a178974922861196",
+    "trace_id": "3e97db1ec16ea5d347fca6da752c388b",
+    "quote": "**Return/refund eligible:** No",
+    "idx": 5,
+    "note": "no shipping data visible",
+    "ts": "2026-09-18T16:33:48.611Z"
+  },
+  {
+    "id": "a1789749239411955",
+    "trace_id": "3e97db1ec16ea5d347fca6da752c388b",
+    "quote": "- **Return/refund eligible:** Yes",
+    "idx": 5,
+    "note": "refund data is not needed",
+    "ts": "2026-09-18T16:33:59.411Z"
+  },
+  {
+    "id": "a1789749248683354",
+    "trace_id": "3e97db1ec16ea5d347fca6da752c388b",
+    "quote": "- **Delivered:** June 22, 2026",
+    "idx": 5,
+    "note": "product name is missing in the data",
+    "ts": "2026-09-18T16:34:08.683Z"
+  },
+  {
+    "id": "a1789749277904647",
+    "trace_id": "3e97db1ec16ea5d347fca6da752c388b",
+    "quote": "found a likely match in you",
+    "idx": 5,
+    "note": "inventing a product match and creating more confusion.",
+    "ts": "2026-09-18T16:34:37.904Z"
+  },
+  {
+    "id": "a1789749303713322",
+    "trace_id": "1794eb35c6229c24e95219e1f0aec773",
+    "quote": "cw-disputes",
+    "idx": 3,
+    "note": "no need to call out specific policy name",
+    "ts": "2026-09-18T16:35:03.713Z"
+  },
+  {
+    "id": "a1789749311764348",
+    "trace_id": "1794eb35c6229c24e95219e1f0aec773",
+    "quote": "Policy",
+    "idx": 3,
+    "note": "add a policy / help center article link the support user can refer to",
+    "ts": "2026-09-18T16:35:11.764Z"
+  },
+  {
+    "id": "a1789749318380425",
+    "trace_id": "1794eb35c6229c24e95219e1f0aec773",
+    "quote": "*",
+    "idx": 3,
+    "note": "no need to use ** marks. Noisy signs that makes it harder to read. Should use bold font instead.",
+    "ts": "2026-09-18T16:35:18.380Z"
+  },
+  {
+    "id": "a1789749370385729",
+    "trace_id": "80ef7b26d661134e6da1f0eaedfdeef6",
+    "quote": "account settings",
+    "idx": 3,
+    "note": "add a link for the user which can help them to find their account details on their own.",
+    "ts": "2026-09-18T16:36:10.385Z"
+  },
+  {
+    "id": "a1789749377131490",
+    "trace_id": "80ef7b26d661134e6da1f0eaedfdeef6",
+    "quote": "cw-account-security",
+    "idx": 3,
+    "note": "no need to call out specific policy name",
+    "ts": "2026-09-18T16:36:17.131Z"
+  },
+  {
+    "id": "a1789749384869997",
+    "trace_id": "80ef7b26d661134e6da1f0eaedfdeef6",
+    "quote": "Policy:",
+    "idx": 3,
+    "note": "add a policy / help center article link the support user can refer to",
+    "ts": "2026-09-18T16:36:24.869Z"
+  },
+  {
+    "id": "a1789749408677646",
+    "trace_id": "80ef7b26d661134e6da1f0eaedfdeef6",
+    "quote": "**",
+    "idx": 3,
+    "note": "no need to use ** marks. Noisy signs that makes it harder to read. Should use bold font instead.",
+    "ts": "2026-09-18T16:36:48.677Z"
+  }
+]

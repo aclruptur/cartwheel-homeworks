@@ -1,0 +1,500 @@
+{
+  "homework_part": "module_2_hw4_parts_b_to_e",
+  "created_at": "2026-09-18T17:11:44.143664+00:00",
+  "reviewed_trace_count": 100,
+  "modes": [
+    {
+      "mode": "unhandled_data_quality_or_record_inconsistency",
+      "definition": "The source order/product/policy record is missing, corrupted, contradictory, or otherwise inconsistent, and the assistant treats the record as normal or gives an unsupported answer instead of flagging/escalating it.",
+      "binary_rule": "Fail when the trace contains source-record inconsistency or missing critical source data and the assistant does not clearly flag/escalate it. Pass when no such defect appears, or the assistant explicitly flags/escalates the defect without normalizing it.",
+      "positive_traces": [
+        {
+          "trace_id": "31a1f4c60f841e8d276e17f53338c9c5",
+          "scenario_id": "support-0188",
+          "role": "merchant",
+          "evidence": "unhandled_data_quality_or_record_inconsistency: part_b_batch_2 note 17: The agent says order 8003 looks clean, but the scenario is a store-mismatch data-quality case: the order is tied to store 1 while product 553 belongs to store 14. The agent did not detect or escalate the inconsistent record."
+        },
+        {
+          "trace_id": "acaf262efa53b6cddbcaa836ae1ca6e9",
+          "scenario_id": "support-0186",
+          "role": "support",
+          "evidence": "unhandled_data_quality_or_record_inconsistency: part_b_batch_2 note 77: The agent says order 8003\u2019s store information looks normal, but the order is tied to store 1 while product 553 belongs to store 14. It missed the data-quality store mismatch and did not escalate the inconsistent record."
+        },
+        {
+          "trace_id": "483a07d37cfdb9e8e0bcf17f3050e16f",
+          "scenario_id": "support-0189",
+          "role": "support",
+          "evidence": "unhandled_data_quality_or_record_inconsistency: part_b_batch_3 note 01: overly confident when the answer is false - Order #8003 is tied to store 1 (Blue Heron Ceramics), but product 553 belongs to store 14 (Golden Hour Coffee)."
+        }
+      ],
+      "close_negative_traces": [
+        {
+          "trace_id": "366acfa3511aa64e7f7e70303993289d",
+          "scenario_id": "support-0145",
+          "role": "support",
+          "evidence": ""
+        },
+        {
+          "trace_id": "016e3cc0f7504d6656aa564509d639ec",
+          "scenario_id": "support-0131",
+          "role": "support",
+          "evidence": ""
+        },
+        {
+          "trace_id": "fe47fec4e03cf55aa5df32fc9268fb60",
+          "scenario_id": "support-0217",
+          "role": "support",
+          "evidence": ""
+        }
+      ],
+      "originating_human_annotations": [
+        {
+          "trace_id": "31a1f4c60f841e8d276e17f53338c9c5",
+          "annotation_excerpt": "unhandled_data_quality_or_record_inconsistency: part_b_batch_2 note 17: The agent says order 8003 looks clean, but the scenario is a store-mismatch data-quality case: the order is tied to store 1 while product 553 belongs to store 14. The agent did not detect or escalate the inconsistent record."
+        },
+        {
+          "trace_id": "acaf262efa53b6cddbcaa836ae1ca6e9",
+          "annotation_excerpt": "unhandled_data_quality_or_record_inconsistency: part_b_batch_2 note 77: The agent says order 8003\u2019s store information looks normal, but the order is tied to store 1 while product 553 belongs to store 14. It missed the data-quality store mismatch and did not escalate the inconsistent record."
+        },
+        {
+          "trace_id": "483a07d37cfdb9e8e0bcf17f3050e16f",
+          "annotation_excerpt": "unhandled_data_quality_or_record_inconsistency: part_b_batch_3 note 01: overly confident when the answer is false - Order #8003 is tied to store 1 (Blue Heron Ceramics), but product 553 belongs to store 14 (Golden Hour Coffee)."
+        }
+      ],
+      "nearest_neighbor_boundary": "Nearest neighbor: confusing_or_unsupported_answer. Use this mode when the source record itself is missing, corrupted, or internally inconsistent and the assistant normalizes it; use confusing_or_unsupported_answer when the record is usable but the answer misstates or overclaims what it means.",
+      "likely_evaluator_type": "LLM judge with tool/database context; some subcases can be code-assisted by checking inconsistent fields.",
+      "requirement_source": [
+        "RESP-3",
+        "ESC-4"
+      ]
+    },
+    {
+      "mode": "missing_actionable_next_step",
+      "definition": "The answer requires the user or a human support process to continue, but omits the concrete path, reference, owner, tracking destination, or follow-up step needed to proceed.",
+      "binary_rule": "Fail when the response leaves out a concrete reference, link, account path, policy/help-center page, owner, ticket/status location, or next handoff step needed for the user role to continue. Pass when no next step is needed or the response gives a clear enough path.",
+      "merged_from": [
+        "missing_actionable_reference",
+        "missing_human_review_followup_path"
+      ],
+      "positive_traces": [
+        {
+          "trace_id": "366acfa3511aa64e7f7e70303993289d",
+          "scenario_id": "support-0145",
+          "role": "support",
+          "evidence": "missing_actionable_reference: part_b_batch_1 note 02: calling policy name is not necessary. Add policy link as a reference."
+        },
+        {
+          "trace_id": "fe47fec4e03cf55aa5df32fc9268fb60",
+          "scenario_id": "support-0217",
+          "role": "support",
+          "evidence": "missing_actionable_reference: part_b_batch_1 note 11: send them to the relevant help center / policy article so that they can read and learn more"
+        },
+        {
+          "trace_id": "ef201978c660e9b3b8f56fd249675941",
+          "scenario_id": "support-0095",
+          "role": "merchant",
+          "evidence": "missing_human_review_followup_path: part_b_batch_3 note 25: follow up is not clarified - where and how, unclear guidance that creates confusion."
+        }
+      ],
+      "close_negative_traces": [
+        {
+          "trace_id": "016e3cc0f7504d6656aa564509d639ec",
+          "scenario_id": "support-0131",
+          "role": "support",
+          "evidence": ""
+        },
+        {
+          "trace_id": "3879d32468ca34fb9e43df6f162197a2",
+          "scenario_id": "support-0165",
+          "role": "support",
+          "evidence": ""
+        },
+        {
+          "trace_id": "c8f92db31ccff89e08b51949908df3fe",
+          "scenario_id": "support-0058",
+          "role": "shopper",
+          "evidence": ""
+        }
+      ],
+      "originating_human_annotations": [
+        {
+          "trace_id": "366acfa3511aa64e7f7e70303993289d",
+          "annotation_excerpt": "missing_actionable_reference: part_b_batch_1 note 02: calling policy name is not necessary. Add policy link as a reference."
+        },
+        {
+          "trace_id": "fe47fec4e03cf55aa5df32fc9268fb60",
+          "annotation_excerpt": "missing_actionable_reference: part_b_batch_1 note 11: send them to the relevant help center / policy article so that they can read and learn more"
+        },
+        {
+          "trace_id": "ef201978c660e9b3b8f56fd249675941",
+          "annotation_excerpt": "missing_human_review_followup_path: part_b_batch_3 note 25: follow up is not clarified - where and how, unclear guidance that creates confusion."
+        }
+      ],
+      "nearest_neighbor_boundary": "Nearest neighbor: identifier_heavy_or_missing_item_context. Use this mode when the missing piece is a path, link, owner, ticket, policy page, or handoff step; use identifier_heavy_or_missing_item_context when the problem is recognizing which item/order/refund is being discussed.",
+      "likely_evaluator_type": "LLM judge",
+      "requirement_source": [
+        "PURPOSE-1",
+        "SCOPE-1",
+        "ESC-1",
+        "ESC-3",
+        "ESC-4",
+        "RESP-5"
+      ]
+    },
+    {
+      "mode": "identifier_heavy_or_missing_item_context",
+      "definition": "The answer relies on raw order IDs/product IDs/refund IDs/bare prices, or omits product names/images/links/context, making it hard for the user to recognize the item, order, refund, or cancellation.",
+      "binary_rule": "Fail when the response centers internal IDs or lacks user-recognizable item/order context. Pass when the answer gives enough user-facing context to identify the object.",
+      "positive_traces": [
+        {
+          "trace_id": "722a3e707c0ad7ef7cd3c749097a1207",
+          "scenario_id": "support-0002",
+          "role": "shopper",
+          "evidence": "identifier_heavy_or_missing_item_context: part_b_batch_2 note 23: add which user id order the order id. | part_b_batch_2 note 24: add prodcut name to the list"
+        },
+        {
+          "trace_id": "5ae9d430b85f988b4a42a382374e8fec",
+          "scenario_id": "support-0005",
+          "role": "shopper",
+          "evidence": "identifier_heavy_or_missing_item_context: part_b_batch_2 note 28: unclear message for the user - user does not know the order ids. | part_b_batch_2 note 30: add product name rather than order id - unclear data for user"
+        },
+        {
+          "trace_id": "d3ecfb30a645f96ce5c354ae2b763dd3",
+          "scenario_id": "support-0025",
+          "role": "shopper",
+          "evidence": "identifier_heavy_or_missing_item_context: part_b_batch_2 note 38: users do not need refund id and order id | part_b_batch_2 note 41: add exact product name to the details to clarify the ambiguity"
+        }
+      ],
+      "close_negative_traces": [
+        {
+          "trace_id": "366acfa3511aa64e7f7e70303993289d",
+          "scenario_id": "support-0145",
+          "role": "support",
+          "evidence": ""
+        },
+        {
+          "trace_id": "fe47fec4e03cf55aa5df32fc9268fb60",
+          "scenario_id": "support-0217",
+          "role": "support",
+          "evidence": ""
+        },
+        {
+          "trace_id": "379b97d2d2ab40d9f88dda2d9da2b217",
+          "scenario_id": "support-0222",
+          "role": "merchant",
+          "evidence": ""
+        }
+      ],
+      "originating_human_annotations": [
+        {
+          "trace_id": "722a3e707c0ad7ef7cd3c749097a1207",
+          "annotation_excerpt": "identifier_heavy_or_missing_item_context: part_b_batch_2 note 23: add which user id order the order id. | part_b_batch_2 note 24: add prodcut name to the list"
+        },
+        {
+          "trace_id": "5ae9d430b85f988b4a42a382374e8fec",
+          "annotation_excerpt": "identifier_heavy_or_missing_item_context: part_b_batch_2 note 28: unclear message for the user - user does not know the order ids. | part_b_batch_2 note 30: add product name rather than order id - unclear data for user"
+        },
+        {
+          "trace_id": "d3ecfb30a645f96ce5c354ae2b763dd3",
+          "annotation_excerpt": "identifier_heavy_or_missing_item_context: part_b_batch_2 note 38: users do not need refund id and order id | part_b_batch_2 note 41: add exact product name to the details to clarify the ambiguity"
+        }
+      ],
+      "nearest_neighbor_boundary": "Nearest neighbor: unnecessary_detail_overload. Use this mode when the answer lacks user-recognizable product/order context or over-relies on internal IDs; use unnecessary_detail_overload when the answer contains too much otherwise valid information.",
+      "likely_evaluator_type": "LLM judge; code checks can flag raw-id-heavy text as a retrieval aid.",
+      "requirement_source": [
+        "RESP-5"
+      ]
+    },
+    {
+      "mode": "unnecessary_detail_overload",
+      "definition": "The answer includes extra policy mechanics, calculations, statuses, IDs, records, or long lists that distract from the current ask.",
+      "binary_rule": "Fail when the response includes material extra detail that makes the answer harder to use. Pass when the response stays focused on the task even if it includes necessary facts.",
+      "positive_traces": [
+        {
+          "trace_id": "d2fdbbb39bb1aa2c13674d5e379037af",
+          "scenario_id": "support-0027",
+          "role": "shopper",
+          "evidence": "unnecessary_detail_overload: part_b_batch_1 note 03: no need to give detail on the return policy if the item is not found\\"
+        },
+        {
+          "trace_id": "39c29018745ef39229596313743c2e67",
+          "scenario_id": "support-0166",
+          "role": "support",
+          "evidence": "unnecessary_detail_overload: part_b_batch_1 note 26: no need to give product details as the user is asking about refund."
+        },
+        {
+          "trace_id": "376a003be2fb346b0a9817dc09a9c9fe",
+          "scenario_id": "support-0246",
+          "role": "shopper",
+          "evidence": "unnecessary_detail_overload: part_b_batch_1 note 32: order id, status, refund details are all unnecessary and confusing details. Ask the user first what they need help with after confirming that their order has been located."
+        }
+      ],
+      "close_negative_traces": [
+        {
+          "trace_id": "366acfa3511aa64e7f7e70303993289d",
+          "scenario_id": "support-0145",
+          "role": "support",
+          "evidence": ""
+        },
+        {
+          "trace_id": "fe47fec4e03cf55aa5df32fc9268fb60",
+          "scenario_id": "support-0217",
+          "role": "support",
+          "evidence": ""
+        },
+        {
+          "trace_id": "3879d32468ca34fb9e43df6f162197a2",
+          "scenario_id": "support-0165",
+          "role": "support",
+          "evidence": ""
+        }
+      ],
+      "originating_human_annotations": [
+        {
+          "trace_id": "d2fdbbb39bb1aa2c13674d5e379037af",
+          "annotation_excerpt": "unnecessary_detail_overload: part_b_batch_1 note 03: no need to give detail on the return policy if the item is not found\\"
+        },
+        {
+          "trace_id": "39c29018745ef39229596313743c2e67",
+          "annotation_excerpt": "unnecessary_detail_overload: part_b_batch_1 note 26: no need to give product details as the user is asking about refund."
+        },
+        {
+          "trace_id": "376a003be2fb346b0a9817dc09a9c9fe",
+          "annotation_excerpt": "unnecessary_detail_overload: part_b_batch_1 note 32: order id, status, refund details are all unnecessary and confusing details. Ask the user first what they need help with after confirming that their order has been located."
+        }
+      ],
+      "nearest_neighbor_boundary": "Nearest neighbor: presentation_formatting_noise. Use this mode when the content is too long or irrelevant; use presentation_formatting_noise when the content may be right-sized but rendered with visible markup or poor layout.",
+      "likely_evaluator_type": "LLM judge",
+      "requirement_source": [
+        "RESP-5"
+      ]
+    },
+    {
+      "mode": "missing_clarification_or_disambiguation",
+      "definition": "The assistant proceeds with a likely match, action, or answer before clarifying an ambiguous product, order, timeframe, user intent, or support context.",
+      "binary_rule": "Fail when the trace needed a clarifying question or confirmation before proceeding. Pass when the target/action was clear or the assistant appropriately asks for confirmation.",
+      "positive_traces": [
+        {
+          "trace_id": "c8f92db31ccff89e08b51949908df3fe",
+          "scenario_id": "support-0058",
+          "role": "shopper",
+          "evidence": "missing_clarification_or_disambiguation: part_b_batch_1 note 22: use exact product name instead - users do not remember or know the order ids | part_b_batch_1 note 23: could have confirmed with the user first because user does not seem to remember what they order and when they had order it. After the confirmation, they can cancel/"
+        },
+        {
+          "trace_id": "376a003be2fb346b0a9817dc09a9c9fe",
+          "scenario_id": "support-0246",
+          "role": "shopper",
+          "evidence": "missing_clarification_or_disambiguation: part_b_batch_1 note 32: order id, status, refund details are all unnecessary and confusing details. Ask the user first what they need help with after confirming that their order has been located."
+        },
+        {
+          "trace_id": "711f10764478d49b30f0fe3a15317649",
+          "scenario_id": "support-0190",
+          "role": "shopper",
+          "evidence": "missing_clarification_or_disambiguation: part_b_batch_1 note 45: agent making assumptions and guiding the user through a bumpy road"
+        }
+      ],
+      "close_negative_traces": [
+        {
+          "trace_id": "366acfa3511aa64e7f7e70303993289d",
+          "scenario_id": "support-0145",
+          "role": "support",
+          "evidence": ""
+        },
+        {
+          "trace_id": "016e3cc0f7504d6656aa564509d639ec",
+          "scenario_id": "support-0131",
+          "role": "support",
+          "evidence": ""
+        },
+        {
+          "trace_id": "fe47fec4e03cf55aa5df32fc9268fb60",
+          "scenario_id": "support-0217",
+          "role": "support",
+          "evidence": ""
+        }
+      ],
+      "originating_human_annotations": [
+        {
+          "trace_id": "c8f92db31ccff89e08b51949908df3fe",
+          "annotation_excerpt": "missing_clarification_or_disambiguation: part_b_batch_1 note 22: use exact product name instead - users do not remember or know the order ids | part_b_batch_1 note 23: could have confirmed with the user first because user does not seem to remember what they order and when they had order it. After the confirmation, they can cancel/"
+        },
+        {
+          "trace_id": "376a003be2fb346b0a9817dc09a9c9fe",
+          "annotation_excerpt": "missing_clarification_or_disambiguation: part_b_batch_1 note 32: order id, status, refund details are all unnecessary and confusing details. Ask the user first what they need help with after confirming that their order has been located."
+        },
+        {
+          "trace_id": "711f10764478d49b30f0fe3a15317649",
+          "annotation_excerpt": "missing_clarification_or_disambiguation: part_b_batch_1 note 45: agent making assumptions and guiding the user through a bumpy road"
+        }
+      ],
+      "nearest_neighbor_boundary": "Nearest neighbor: confusing_or_unsupported_answer. Use this mode when the assistant should ask a question before proceeding; use confusing_or_unsupported_answer when it proceeds and the resulting answer is internally inconsistent or unsupported.",
+      "likely_evaluator_type": "LLM judge",
+      "requirement_source": [
+        "ESC-4",
+        "RESP-3",
+        "RESP-5"
+      ]
+    },
+    {
+      "mode": "confusing_or_unsupported_answer",
+      "definition": "The response gives a conflicting, misleading, unclear, or unsupported interpretation of status, policy, authorization, matching evidence, refund options, or next steps.",
+      "binary_rule": "Fail when the text leaves the user with a contradictory or materially confusing interpretation, or asserts an option/outcome that the available policy or tool evidence does not support. Pass when the answer is supported and any issue is only missing links, excess detail, or formatting without contradiction.",
+      "merged_from": [
+        "confusing_or_contradictory_answer",
+        "unsupported_or_invented_refund_option"
+      ],
+      "positive_traces": [
+        {
+          "trace_id": "d2fdbbb39bb1aa2c13674d5e379037af",
+          "scenario_id": "support-0027",
+          "role": "shopper",
+          "evidence": "confusing_or_contradictory_answer: part_b_batch_1 note 05: contradiction to what was said in the beginning of the conversation"
+        },
+        {
+          "trace_id": "379b97d2d2ab40d9f88dda2d9da2b217",
+          "scenario_id": "support-0222",
+          "role": "merchant",
+          "evidence": "confusing_or_contradictory_answer: part_b_batch_1 note 13: confusing message, contradicting with what's asked and answered in other lines."
+        },
+        {
+          "trace_id": "e72f2e0f927f0d0f4bed77be7d0fa900",
+          "scenario_id": "support-0099",
+          "role": "merchant",
+          "evidence": "confusing_or_contradictory_answer: part_b_batch_4 note 08: confusing information - the refund amount is over 100$ by defaullt already. Unclear and contradicting message | unsupported_or_invented_refund_option: part_b_batch_4 note 09: inventing rules - no partial vs full refund rules"
+        }
+      ],
+      "close_negative_traces": [
+        {
+          "trace_id": "366acfa3511aa64e7f7e70303993289d",
+          "scenario_id": "support-0145",
+          "role": "support",
+          "evidence": ""
+        },
+        {
+          "trace_id": "016e3cc0f7504d6656aa564509d639ec",
+          "scenario_id": "support-0131",
+          "role": "support",
+          "evidence": ""
+        },
+        {
+          "trace_id": "fe47fec4e03cf55aa5df32fc9268fb60",
+          "scenario_id": "support-0217",
+          "role": "support",
+          "evidence": ""
+        }
+      ],
+      "originating_human_annotations": [
+        {
+          "trace_id": "d2fdbbb39bb1aa2c13674d5e379037af",
+          "annotation_excerpt": "confusing_or_contradictory_answer: part_b_batch_1 note 05: contradiction to what was said in the beginning of the conversation"
+        },
+        {
+          "trace_id": "379b97d2d2ab40d9f88dda2d9da2b217",
+          "annotation_excerpt": "confusing_or_contradictory_answer: part_b_batch_1 note 13: confusing message, contradicting with what's asked and answered in other lines."
+        },
+        {
+          "trace_id": "e72f2e0f927f0d0f4bed77be7d0fa900",
+          "annotation_excerpt": "confusing_or_contradictory_answer: part_b_batch_4 note 08: confusing information - the refund amount is over 100$ by defaullt already. Unclear and contradicting message | unsupported_or_invented_refund_option: part_b_batch_4 note 09: inventing rules - no partial vs full refund rules"
+        }
+      ],
+      "nearest_neighbor_boundary": "Nearest neighbor: unhandled_data_quality_or_record_inconsistency. Use this mode when the answer misleads, contradicts itself, or asserts unsupported policy/refund/status options; use data-quality mode when the root evidence is an inconsistent source record that should have been flagged.",
+      "likely_evaluator_type": "LLM judge with tool/policy evidence; specific write-success claims can be code checked.",
+      "requirement_source": [
+        "RESP-2",
+        "RESP-3",
+        "RESP-5",
+        "TOOL-7",
+        "ESC-1"
+      ]
+    },
+    {
+      "mode": "presentation_formatting_noise",
+      "definition": "Visible Markdown markers, badly rendered tables, or other presentation choices make the response harder to read.",
+      "binary_rule": "Fail when formatting/presentation noise is present. Pass when no formatting issue was noted.",
+      "positive_traces": [
+        {
+          "trace_id": "366acfa3511aa64e7f7e70303993289d",
+          "scenario_id": "support-0145",
+          "role": "support",
+          "evidence": "presentation_formatting_noise: part_b_batch_1 note 01: no need to use ** marks. Noisy signs that makes it harder to read. Should use bold font instead."
+        },
+        {
+          "trace_id": "3879d32468ca34fb9e43df6f162197a2",
+          "scenario_id": "support-0165",
+          "role": "support",
+          "evidence": "presentation_formatting_noise: part_b_batch_1 note 14: no need to use ** marks. Noisy signs that makes it harder to read. Should use bold font instead."
+        },
+        {
+          "trace_id": "a8d38a551dce6c17faa55af6d1704108",
+          "scenario_id": "support-0241",
+          "role": "merchant",
+          "evidence": "presentation_formatting_noise: part_b_batch_1 note 15: no need to use ** marks. Noisy signs that makes it harder to read. Should use bold font instead. | part_b_batch_1 note 18: no need to use ** marks. Noisy signs that makes it harder to read. Should use bold font instead."
+        }
+      ],
+      "close_negative_traces": [
+        {
+          "trace_id": "d2fdbbb39bb1aa2c13674d5e379037af",
+          "scenario_id": "support-0027",
+          "role": "shopper",
+          "evidence": ""
+        },
+        {
+          "trace_id": "016e3cc0f7504d6656aa564509d639ec",
+          "scenario_id": "support-0131",
+          "role": "support",
+          "evidence": ""
+        },
+        {
+          "trace_id": "fe47fec4e03cf55aa5df32fc9268fb60",
+          "scenario_id": "support-0217",
+          "role": "support",
+          "evidence": ""
+        }
+      ],
+      "originating_human_annotations": [
+        {
+          "trace_id": "366acfa3511aa64e7f7e70303993289d",
+          "annotation_excerpt": "presentation_formatting_noise: part_b_batch_1 note 01: no need to use ** marks. Noisy signs that makes it harder to read. Should use bold font instead."
+        },
+        {
+          "trace_id": "3879d32468ca34fb9e43df6f162197a2",
+          "annotation_excerpt": "presentation_formatting_noise: part_b_batch_1 note 14: no need to use ** marks. Noisy signs that makes it harder to read. Should use bold font instead."
+        },
+        {
+          "trace_id": "a8d38a551dce6c17faa55af6d1704108",
+          "annotation_excerpt": "presentation_formatting_noise: part_b_batch_1 note 15: no need to use ** marks. Noisy signs that makes it harder to read. Should use bold font instead. | part_b_batch_1 note 18: no need to use ** marks. Noisy signs that makes it harder to read. Should use bold font instead."
+        }
+      ],
+      "nearest_neighbor_boundary": "Nearest neighbor: unnecessary_detail_overload. Use this mode when readability is harmed by visible Markdown markers, table rendering, or layout; use overload when the wording includes unnecessary content even if formatting is clean.",
+      "likely_evaluator_type": "Code check for visible Markdown/table artifacts, with LLM judge for broader readability.",
+      "requirement_source": [
+        "RESP-5"
+      ]
+    }
+  ],
+  "merged_modes": [
+    {
+      "new_mode": "missing_actionable_next_step",
+      "merged_from": [
+        "missing_actionable_reference",
+        "missing_human_review_followup_path"
+      ],
+      "reason": "Both failures leave the user without a usable next step; one covers references/links and the other covers human handoff ownership or tracking."
+    },
+    {
+      "new_mode": "confusing_or_unsupported_answer",
+      "merged_from": [
+        "confusing_or_contradictory_answer",
+        "unsupported_or_invented_refund_option"
+      ],
+      "reason": "Unsupported refund-option claims are a specific form of unsupported or misleading answer, and the narrow refund mode had too few failures to stand alone for judge work."
+    }
+  ],
+  "construction_notes": [
+    "Open-code annotations from Batches 1-4 were grouped during axial coding.",
+    "Batch 4 produced no genuinely new candidate mode, so the taxonomy was treated as stable for a draft structured pass.",
+    "After review, two narrow low-count modes were merged into broader product-actionable modes: missing_actionable_reference + missing_human_review_followup_path -> missing_actionable_next_step; confusing_or_contradictory_answer + unsupported_or_invented_refund_option -> confusing_or_unsupported_answer.",
+    "Labels are draft structured judgments seeded from human notes: Fail means at least one saved note mapped to that mode for the trace; Pass means no saved note mapped to that mode.",
+    "Workshop Part C added no new mode: accepted one data-quality support example, revised the local-only tool-span limitation, and rejected treating policy identifiers as automatic formatting noise."
+  ]
+}

@@ -63,7 +63,11 @@ def _scenario_id(record: Any) -> str | None:
 
 
 def export_scenario_traces(
-    scenario_ids: set[str], client: Any, *, page_size: int = 100
+    scenario_ids: set[str],
+    client: Any,
+    *,
+    page_size: int = 100,
+    scenarios_by_id: dict[str, dict[str, Any]] | None = None,
 ) -> list[dict[str, Any]]:
     """Fetch full trace records whose metadata carries a selected scenario id."""
     matches: list[dict[str, Any]] = []
@@ -84,6 +88,8 @@ def export_scenario_traces(
                 continue
             if isinstance(record, dict):
                 record.setdefault("cartwheel_scenario_id", scenario_id)
+                if scenarios_by_id and scenario_id in scenarios_by_id:
+                    record.setdefault("expected", scenarios_by_id[scenario_id].get("expected"))
             matches.append(record)
         if len(batch) < page_size:
             break
@@ -105,10 +111,13 @@ def main() -> None:
     records = load_jsonl(args.scenarios)
     validate_scenarios(records)
     scenario_ids = {record["id"] for record in records}
+    scenarios_by_id = {record["id"]: record for record in records}
     load_env()
     from langfuse import Langfuse
 
-    traces = export_scenario_traces(scenario_ids, Langfuse())
+    traces = export_scenario_traces(
+        scenario_ids, Langfuse(), scenarios_by_id=scenarios_by_id
+    )
     exported_ids = {trace.get("cartwheel_scenario_id") for trace in traces}
     missing = sorted(scenario_ids - exported_ids)
     if missing and not args.allow_missing:

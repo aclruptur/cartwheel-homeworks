@@ -1,0 +1,1595 @@
+{
+  "homework_part": "HW4 Part B",
+  "source": "traces/support_traces.json",
+  "selected_at": "2026-09-18T09:53:16.502649+00:00",
+  "seed": 404,
+  "active_batch": "part_b_batch_4",
+  "batches": [
+    {
+      "name": "part_b_batch_1",
+      "description": "Initial open-coding batch: 15 uniformly sampled traces and 15 cluster representatives.",
+      "trace_count": 30,
+      "methods": {
+        "uniform_random": 15,
+        "cluster_representative": 15
+      },
+      "instructions": "Review each trace until the first failure. Write a free-form open code, or write no failure observed.",
+      "counted_trace_count": 30,
+      "context_trace_count": 4,
+      "context_note": "Context traces are displayed with selected traces but are not counted toward the batch total unless separately reviewed."
+    },
+    {
+      "name": "part_b_batch_2",
+      "description": "Product-dimension batch: 30 traces distributed across user_role before looking at outcomes.",
+      "trace_count": 30,
+      "dimension": "user_role",
+      "dimension_values": {
+        "merchant": 10,
+        "shopper": 10,
+        "support": 10
+      },
+      "selection_seed": 2402,
+      "instructions": "Review each trace until the first failure. Write a free-form open code, or write no failure observed. Do not assign formal modes during initial reading.",
+      "counted_trace_count": 30,
+      "context_trace_count": 1,
+      "context_note": "Context traces are displayed with selected traces but are not counted toward the batch total unless separately reviewed.",
+      "enrichment": {
+        "expected_source": "scenarios/support_scenarios.jsonl by scenario_id",
+        "duration_source": "traces/support_traces.json latency by trace_id"
+      }
+    },
+    {
+      "name": "part_b_batch_3",
+      "description": "Depth-search batch: 25 traces retrieved for candidate failure modes and close negative examples after drafting the initial taxonomy.",
+      "trace_count": 25,
+      "methods": {
+        "missed_data_quality_escalation": 5,
+        "incorrect_data_value_reported": 2,
+        "identifier_heavy_or_missing_item_context": 5,
+        "missing_clarification_or_disambiguation": 5,
+        "unsupported_or_invented_refund_option": 2,
+        "unconfirmed_write": 3,
+        "missing_actionable_reference": 2,
+        "presentation_formatting_noise": 1
+      },
+      "selection_seed": null,
+      "instructions": "Review each trace until the first failure. Use these depth-search traces to test candidate modes and close negative examples, but keep initial notes free-form.",
+      "counted_trace_count": 25,
+      "context_trace_count": 1,
+      "context_note": "Conversation-context traces are embedded for continuity and are not counted toward Batch 3 unless separately selected.",
+      "exclusion_rule": "Excluded all trace IDs counted in part_b_batch_1 and part_b_batch_2."
+    },
+    {
+      "name": "part_b_batch_4",
+      "description": "Post-taxonomy check batch: 15 additional uniformly sampled traces to see whether new modes continue to appear.",
+      "trace_count": 15,
+      "methods": {
+        "uniform_random_post_taxonomy": 15
+      },
+      "selection_seed": 4404,
+      "instructions": "Review each trace until the first failure. Write a free-form open code, or write no failure observed. After this batch, check whether new modes continue to appear.",
+      "counted_trace_count": 15,
+      "context_trace_count": 0,
+      "context_note": "Conversation-context traces are embedded for continuity and are not counted toward Batch 4 unless separately selected.",
+      "exclusion_rule": "Excluded all trace IDs counted in part_b_batch_1, part_b_batch_2, and part_b_batch_3."
+    }
+  ],
+  "picks": [
+    {
+      "trace_id": "366acfa3511aa64e7f7e70303993289d",
+      "batch": "part_b_batch_1",
+      "selection_method": "uniform_random",
+      "selection_reason": "uniform random sample",
+      "batch_position": 1,
+      "scenario_id": "support-0145",
+      "conversation_id": "support-0145",
+      "role": "support",
+      "tools_used": [
+        "get_order",
+        "get_policy",
+        "search_help_center"
+      ]
+    },
+    {
+      "trace_id": "d2fdbbb39bb1aa2c13674d5e379037af",
+      "batch": "part_b_batch_1",
+      "selection_method": "uniform_random",
+      "selection_reason": "uniform random sample",
+      "batch_position": 2,
+      "scenario_id": "support-0027",
+      "conversation_id": "support-0027",
+      "role": "shopper",
+      "tools_used": [
+        "find_order",
+        "get_policy",
+        "search_help_center"
+      ]
+    },
+    {
+      "trace_id": "016e3cc0f7504d6656aa564509d639ec",
+      "batch": "part_b_batch_1",
+      "selection_method": "uniform_random",
+      "selection_reason": "uniform random sample",
+      "batch_position": 3,
+      "scenario_id": "support-0131",
+      "conversation_id": "support-0131",
+      "role": "support",
+      "tools_used": [
+        "get_order"
+      ]
+    },
+    {
+      "trace_id": "fe47fec4e03cf55aa5df32fc9268fb60",
+      "batch": "part_b_batch_1",
+      "selection_method": "uniform_random",
+      "selection_reason": "uniform random sample",
+      "batch_position": 4,
+      "scenario_id": "support-0217",
+      "conversation_id": "support-0217",
+      "role": "support",
+      "tools_used": [
+        "search_help_center"
+      ]
+    },
+    {
+      "trace_id": "379b97d2d2ab40d9f88dda2d9da2b217",
+      "batch": "part_b_batch_1",
+      "selection_method": "uniform_random",
+      "selection_reason": "uniform random sample",
+      "batch_position": 5,
+      "scenario_id": "support-0222",
+      "conversation_id": "support-0222",
+      "role": "merchant",
+      "tools_used": [
+        "get_policy",
+        "search_help_center"
+      ]
+    },
+    {
+      "trace_id": "3879d32468ca34fb9e43df6f162197a2",
+      "batch": "part_b_batch_1",
+      "selection_method": "uniform_random",
+      "selection_reason": "uniform random sample",
+      "batch_position": 6,
+      "scenario_id": "support-0165",
+      "conversation_id": "support-0165",
+      "role": "support",
+      "tools_used": []
+    },
+    {
+      "trace_id": "a8d38a551dce6c17faa55af6d1704108",
+      "batch": "part_b_batch_1",
+      "selection_method": "uniform_random",
+      "selection_reason": "uniform random sample",
+      "batch_position": 7,
+      "scenario_id": "support-0241",
+      "conversation_id": "support-0241",
+      "role": "merchant",
+      "tools_used": [
+        "search_help_center"
+      ]
+    },
+    {
+      "trace_id": "4c5f4cc3afb3608ca1951bf339a987a5",
+      "batch": "part_b_batch_1",
+      "selection_method": "uniform_random",
+      "selection_reason": "uniform random sample",
+      "batch_position": 8,
+      "scenario_id": "support-0158",
+      "conversation_id": "support-0158",
+      "role": "support",
+      "tools_used": [
+        "search_help_center"
+      ]
+    },
+    {
+      "trace_id": "c8f92db31ccff89e08b51949908df3fe",
+      "batch": "part_b_batch_1",
+      "selection_method": "uniform_random",
+      "selection_reason": "uniform random sample",
+      "batch_position": 9,
+      "scenario_id": "support-0058",
+      "conversation_id": "support-0058",
+      "role": "shopper",
+      "tools_used": [
+        "cancel_order",
+        "get_order",
+        "list_my_orders",
+        "search_products"
+      ]
+    },
+    {
+      "trace_id": "39c29018745ef39229596313743c2e67",
+      "batch": "part_b_batch_1",
+      "selection_method": "uniform_random",
+      "selection_reason": "uniform random sample",
+      "batch_position": 10,
+      "scenario_id": "support-0166",
+      "conversation_id": "support-0166",
+      "role": "support",
+      "tools_used": [
+        "get_order"
+      ]
+    },
+    {
+      "trace_id": "08c47004530a13ea061e9f5390011b18",
+      "batch": "part_b_batch_1",
+      "selection_method": "uniform_random",
+      "selection_reason": "uniform random sample",
+      "batch_position": 11,
+      "scenario_id": "support-0079",
+      "conversation_id": "support-0079",
+      "role": "merchant",
+      "tools_used": [
+        "list_my_orders",
+        "lookup_store_directory"
+      ]
+    },
+    {
+      "trace_id": "eea73132c90033aedac645d2df31cfe4",
+      "batch": "part_b_batch_1",
+      "selection_method": "uniform_random",
+      "selection_reason": "uniform random sample",
+      "batch_position": 12,
+      "scenario_id": "support-0212",
+      "conversation_id": "support-0212",
+      "role": "support",
+      "tools_used": [
+        "get_order"
+      ]
+    },
+    {
+      "trace_id": "376a003be2fb346b0a9817dc09a9c9fe",
+      "batch": "part_b_batch_1",
+      "selection_method": "uniform_random",
+      "selection_reason": "uniform random sample",
+      "batch_position": 13,
+      "scenario_id": "support-0246",
+      "conversation_id": "support-0246",
+      "role": "shopper",
+      "tools_used": [
+        "find_order"
+      ]
+    },
+    {
+      "trace_id": "03293b341bd64bcbd20d10ec41865ae9",
+      "batch": "part_b_batch_1",
+      "selection_method": "uniform_random",
+      "selection_reason": "uniform random sample",
+      "batch_position": 14,
+      "scenario_id": "support-0171",
+      "conversation_id": "support-0171",
+      "role": "support",
+      "tools_used": [
+        "get_order"
+      ]
+    },
+    {
+      "trace_id": "6396cf5a49521d14eca5298573dda90b",
+      "batch": "part_b_batch_1",
+      "selection_method": "uniform_random",
+      "selection_reason": "uniform random sample",
+      "batch_position": 15,
+      "scenario_id": "support-0076",
+      "conversation_id": "support-0076",
+      "role": "merchant",
+      "tools_used": [
+        "list_my_orders",
+        "lookup_store_directory"
+      ]
+    },
+    {
+      "trace_id": "9ccf8cffd0d78254b85a7a1023980429",
+      "batch": "part_b_batch_1",
+      "selection_method": "cluster_representative",
+      "selection_reason": "cluster 0 representative",
+      "batch_position": 16,
+      "scenario_id": "support-0234",
+      "conversation_id": "support-0234",
+      "role": "shopper",
+      "tools_used": []
+    },
+    {
+      "trace_id": "e75ac79481909be1b048b94f3df5b60b",
+      "batch": "part_b_batch_1",
+      "selection_method": "cluster_representative",
+      "selection_reason": "cluster 1 representative",
+      "batch_position": 17,
+      "scenario_id": "support-0113",
+      "conversation_id": "support-0113",
+      "role": "merchant",
+      "tools_used": [
+        "get_order",
+        "get_policy",
+        "search_help_center"
+      ]
+    },
+    {
+      "trace_id": "711f10764478d49b30f0fe3a15317649",
+      "batch": "part_b_batch_1",
+      "selection_method": "cluster_representative",
+      "selection_reason": "cluster 2 representative",
+      "batch_position": 18,
+      "scenario_id": "support-0190",
+      "conversation_id": "support-0190",
+      "role": "shopper",
+      "tools_used": [
+        "find_order",
+        "get_order",
+        "list_my_orders",
+        "search_products"
+      ]
+    },
+    {
+      "trace_id": "c7c918336747a818730e6bf1ca3506fc",
+      "batch": "part_b_batch_1",
+      "selection_method": "cluster_representative",
+      "selection_reason": "cluster 3 representative",
+      "batch_position": 19,
+      "scenario_id": "support-0009",
+      "conversation_id": "support-0009",
+      "role": "shopper",
+      "tools_used": [
+        "find_order"
+      ]
+    },
+    {
+      "trace_id": "4eb3bf043f6b4d5013a4e0d5fdd0464e",
+      "batch": "part_b_batch_1",
+      "selection_method": "cluster_representative",
+      "selection_reason": "cluster 4 representative",
+      "batch_position": 20,
+      "scenario_id": "support-0094",
+      "conversation_id": "support-0094",
+      "role": "merchant",
+      "tools_used": [
+        "get_order"
+      ]
+    },
+    {
+      "trace_id": "4970b9c3abfadd21f6a5db83f791506a",
+      "batch": "part_b_batch_1",
+      "selection_method": "cluster_representative",
+      "selection_reason": "cluster 5 representative",
+      "batch_position": 21,
+      "scenario_id": "support-0129",
+      "conversation_id": "support-0129",
+      "role": "support",
+      "tools_used": [
+        "get_order"
+      ]
+    },
+    {
+      "trace_id": "e9f48e6de3778a6f7d5356943df48268",
+      "batch": "part_b_batch_1",
+      "selection_method": "cluster_representative",
+      "selection_reason": "cluster 6 representative",
+      "batch_position": 22,
+      "scenario_id": "support-0226",
+      "conversation_id": "support-0226",
+      "role": "merchant",
+      "tools_used": [
+        "list_my_orders"
+      ]
+    },
+    {
+      "trace_id": "6d1fe5cbffc957525774784137281ada",
+      "batch": "part_b_batch_1",
+      "selection_method": "cluster_representative",
+      "selection_reason": "cluster 7 representative",
+      "batch_position": 23,
+      "scenario_id": "support-0201",
+      "conversation_id": "support-0201",
+      "role": "merchant",
+      "tools_used": [
+        "lookup_store_directory"
+      ]
+    },
+    {
+      "trace_id": "9f2ca35491d1cebb8777dd5643bfec5e",
+      "batch": "part_b_batch_1",
+      "selection_method": "cluster_representative",
+      "selection_reason": "cluster 8 representative",
+      "batch_position": 24,
+      "scenario_id": "support-0202",
+      "conversation_id": "support-0202",
+      "role": "shopper",
+      "tools_used": [
+        "find_order",
+        "get_order",
+        "list_my_orders",
+        "search_products"
+      ]
+    },
+    {
+      "trace_id": "af367466feb718768b14045b02bbd7b0",
+      "batch": "part_b_batch_1",
+      "selection_method": "cluster_representative",
+      "selection_reason": "cluster 9 representative",
+      "batch_position": 25,
+      "scenario_id": "support-0052",
+      "conversation_id": "support-0052",
+      "role": "shopper",
+      "tools_used": [
+        "cancel_order",
+        "find_order",
+        "list_my_orders",
+        "search_products"
+      ]
+    },
+    {
+      "trace_id": "744d9f6a8a47ae71e1f5821621f06e6e",
+      "batch": "part_b_batch_1",
+      "selection_method": "cluster_representative",
+      "selection_reason": "cluster 10 representative",
+      "batch_position": 26,
+      "scenario_id": "support-0008",
+      "conversation_id": "support-0008",
+      "role": "shopper",
+      "tools_used": [
+        "find_order",
+        "list_my_orders"
+      ]
+    },
+    {
+      "trace_id": "e3e7e2776ea3196de7acdca7d450bbc0",
+      "batch": "part_b_batch_1",
+      "selection_method": "cluster_representative",
+      "selection_reason": "cluster 11 representative",
+      "batch_position": 27,
+      "scenario_id": "support-0177",
+      "conversation_id": "support-0177",
+      "role": "support",
+      "tools_used": [
+        "escalate_to_human",
+        "get_order",
+        "get_policy",
+        "lookup_store_directory",
+        "search_help_center"
+      ]
+    },
+    {
+      "trace_id": "c48547e6341ce5472616c70a2412646d",
+      "batch": "part_b_batch_1",
+      "selection_method": "cluster_representative",
+      "selection_reason": "cluster 12 representative",
+      "batch_position": 28,
+      "scenario_id": "support-0157",
+      "conversation_id": "support-0157",
+      "role": "support",
+      "tools_used": [
+        "search_help_center"
+      ]
+    },
+    {
+      "trace_id": "4d5f7611cdb1aeec2fde1580ed151132",
+      "batch": "part_b_batch_1",
+      "selection_method": "cluster_representative",
+      "selection_reason": "cluster 13 representative",
+      "batch_position": 29,
+      "scenario_id": "support-0203",
+      "conversation_id": "support-0203",
+      "role": "support",
+      "tools_used": [
+        "lookup_store_directory",
+        "search_products"
+      ]
+    },
+    {
+      "trace_id": "2a58d59844efc14cfc1f5a8fb2489d74",
+      "batch": "part_b_batch_1",
+      "selection_method": "cluster_representative",
+      "selection_reason": "cluster 14 representative",
+      "batch_position": 30,
+      "scenario_id": "support-0213",
+      "conversation_id": "support-0213",
+      "role": "support",
+      "tools_used": [
+        "get_order"
+      ]
+    },
+    {
+      "trace_id": "392712f2cb2999c90b6f90c06d69b360",
+      "batch": "part_b_batch_2",
+      "selection_method": "product_dimension_user_role",
+      "selection_reason": "user_role=merchant",
+      "batch_position": 1,
+      "scenario_id": "support-0071",
+      "conversation_id": "support-0071",
+      "role": "merchant",
+      "tools_used": [
+        "list_my_orders"
+      ]
+    },
+    {
+      "trace_id": "202139c415cd79aa65aff53cb6814c9a",
+      "batch": "part_b_batch_2",
+      "selection_method": "product_dimension_user_role",
+      "selection_reason": "user_role=merchant",
+      "batch_position": 2,
+      "scenario_id": "support-0077",
+      "conversation_id": "support-0077",
+      "role": "merchant",
+      "tools_used": [
+        "list_my_orders"
+      ]
+    },
+    {
+      "trace_id": "d7ee1d31861ebeb94ab86f38f535245a",
+      "batch": "part_b_batch_2",
+      "selection_method": "product_dimension_user_role",
+      "selection_reason": "user_role=merchant",
+      "batch_position": 3,
+      "scenario_id": "support-0080",
+      "conversation_id": "support-0080",
+      "role": "merchant",
+      "tools_used": [
+        "list_my_orders"
+      ]
+    },
+    {
+      "trace_id": "d2885fe8f25ec0e4dad15f9e8b39e0fb",
+      "batch": "part_b_batch_2",
+      "selection_method": "product_dimension_user_role",
+      "selection_reason": "user_role=merchant",
+      "batch_position": 4,
+      "scenario_id": "support-0097",
+      "conversation_id": "support-0097",
+      "role": "merchant",
+      "tools_used": [
+        "get_order"
+      ]
+    },
+    {
+      "trace_id": "905a5619a856cb3de0c8b5fe1378cea2",
+      "batch": "part_b_batch_2",
+      "selection_method": "product_dimension_user_role",
+      "selection_reason": "user_role=merchant",
+      "batch_position": 5,
+      "scenario_id": "support-0104",
+      "conversation_id": "support-0104",
+      "role": "merchant",
+      "tools_used": [
+        "get_order",
+        "get_policy",
+        "search_help_center"
+      ]
+    },
+    {
+      "trace_id": "ab94406ad046b4d85ddd7b2cfb694b7d",
+      "batch": "part_b_batch_2",
+      "selection_method": "product_dimension_user_role",
+      "selection_reason": "user_role=merchant",
+      "batch_position": 6,
+      "scenario_id": "support-0120",
+      "conversation_id": "support-0120",
+      "role": "merchant",
+      "tools_used": [
+        "get_order"
+      ]
+    },
+    {
+      "trace_id": "3c151d9acac3006bcc342650fa357f33",
+      "batch": "part_b_batch_2",
+      "selection_method": "product_dimension_user_role",
+      "selection_reason": "user_role=merchant",
+      "batch_position": 7,
+      "scenario_id": "support-0123",
+      "conversation_id": "support-0123",
+      "role": "merchant",
+      "tools_used": [
+        "get_order"
+      ]
+    },
+    {
+      "trace_id": "31a1f4c60f841e8d276e17f53338c9c5",
+      "batch": "part_b_batch_2",
+      "selection_method": "product_dimension_user_role",
+      "selection_reason": "user_role=merchant",
+      "batch_position": 8,
+      "scenario_id": "support-0188",
+      "conversation_id": "support-0188",
+      "role": "merchant",
+      "tools_used": [
+        "get_order"
+      ]
+    },
+    {
+      "trace_id": "241fd269bffd30d6bb09763f41c5b945",
+      "batch": "part_b_batch_2",
+      "selection_method": "product_dimension_user_role",
+      "selection_reason": "user_role=merchant",
+      "batch_position": 9,
+      "scenario_id": "support-0191",
+      "conversation_id": "support-0191",
+      "role": "merchant",
+      "tools_used": [
+        "lookup_store_directory",
+        "search_products"
+      ]
+    },
+    {
+      "trace_id": "6b0f8edadbf3c111c80f46baa8896fd2",
+      "batch": "part_b_batch_2",
+      "selection_method": "product_dimension_user_role",
+      "selection_reason": "user_role=merchant",
+      "batch_position": 10,
+      "scenario_id": "support-0200",
+      "conversation_id": "support-0200",
+      "role": "merchant",
+      "tools_used": [
+        "lookup_store_directory",
+        "search_products"
+      ]
+    },
+    {
+      "trace_id": "722a3e707c0ad7ef7cd3c749097a1207",
+      "batch": "part_b_batch_2",
+      "selection_method": "product_dimension_user_role",
+      "selection_reason": "user_role=shopper",
+      "batch_position": 11,
+      "scenario_id": "support-0002",
+      "conversation_id": "support-0002",
+      "role": "shopper",
+      "tools_used": [
+        "find_order"
+      ]
+    },
+    {
+      "trace_id": "5ae9d430b85f988b4a42a382374e8fec",
+      "batch": "part_b_batch_2",
+      "selection_method": "product_dimension_user_role",
+      "selection_reason": "user_role=shopper",
+      "batch_position": 12,
+      "scenario_id": "support-0005",
+      "conversation_id": "support-0005",
+      "role": "shopper",
+      "tools_used": [
+        "list_my_orders"
+      ]
+    },
+    {
+      "trace_id": "f6cb5d8760f9c08603caf657f9531bd7",
+      "batch": "part_b_batch_2",
+      "selection_method": "product_dimension_user_role",
+      "selection_reason": "user_role=shopper",
+      "batch_position": 13,
+      "scenario_id": "support-0016",
+      "conversation_id": "support-0016",
+      "role": "shopper",
+      "tools_used": [
+        "find_order",
+        "get_order",
+        "list_my_orders",
+        "search_products"
+      ]
+    },
+    {
+      "trace_id": "d3ecfb30a645f96ce5c354ae2b763dd3",
+      "batch": "part_b_batch_2",
+      "selection_method": "product_dimension_user_role",
+      "selection_reason": "user_role=shopper",
+      "batch_position": 14,
+      "scenario_id": "support-0025",
+      "conversation_id": "support-0025",
+      "role": "shopper",
+      "tools_used": [
+        "find_order",
+        "get_order",
+        "issue_refund",
+        "list_my_orders"
+      ]
+    },
+    {
+      "trace_id": "7a288dcc0ebdd8202bc6625ffc899a1f",
+      "batch": "part_b_batch_2",
+      "selection_method": "product_dimension_user_role",
+      "selection_reason": "user_role=shopper",
+      "batch_position": 15,
+      "scenario_id": "support-0043",
+      "conversation_id": "support-0043",
+      "role": "shopper",
+      "tools_used": [
+        "escalate_to_human",
+        "find_order",
+        "get_order",
+        "get_policy",
+        "search_help_center"
+      ]
+    },
+    {
+      "trace_id": "e2c653d360400c4134d7770bd5aaaac8",
+      "batch": "part_b_batch_2",
+      "selection_method": "product_dimension_user_role",
+      "selection_reason": "user_role=shopper",
+      "batch_position": 16,
+      "scenario_id": "support-0044",
+      "conversation_id": "support-0044",
+      "role": "shopper",
+      "tools_used": [
+        "escalate_to_human",
+        "find_order",
+        "get_order",
+        "get_policy",
+        "list_my_orders",
+        "search_help_center",
+        "search_products"
+      ]
+    },
+    {
+      "trace_id": "fa6bf0e0a85f6de2bb94eb2a1b7106e8",
+      "batch": "part_b_batch_2",
+      "selection_method": "product_dimension_user_role",
+      "selection_reason": "user_role=shopper",
+      "batch_position": 17,
+      "scenario_id": "support-0045",
+      "conversation_id": "support-0045",
+      "role": "shopper",
+      "tools_used": [
+        "find_order",
+        "get_order",
+        "list_my_orders",
+        "search_products"
+      ]
+    },
+    {
+      "trace_id": "b33faa6800728f347de5d4136d8067bc",
+      "batch": "part_b_batch_2",
+      "selection_method": "product_dimension_user_role",
+      "selection_reason": "user_role=shopper",
+      "batch_position": 18,
+      "scenario_id": "support-0057",
+      "conversation_id": "support-0057",
+      "role": "shopper",
+      "tools_used": [
+        "cancel_order",
+        "find_order"
+      ]
+    },
+    {
+      "trace_id": "bbccf32f3db0f084963242d726d83fe6",
+      "batch": "part_b_batch_2",
+      "selection_method": "product_dimension_user_role",
+      "selection_reason": "user_role=shopper",
+      "batch_position": 19,
+      "scenario_id": "support-0195",
+      "conversation_id": "support-0195",
+      "role": "shopper",
+      "tools_used": [
+        "search_products"
+      ]
+    },
+    {
+      "trace_id": "818e66d637558541d120e98a8137927c",
+      "batch": "part_b_batch_2",
+      "selection_method": "product_dimension_user_role",
+      "selection_reason": "user_role=shopper",
+      "batch_position": 20,
+      "scenario_id": "support-0235",
+      "conversation_id": "support-0235",
+      "role": "shopper",
+      "tools_used": []
+    },
+    {
+      "trace_id": "74da08cdd0866eacf95330dd752b8e3e",
+      "batch": "part_b_batch_2",
+      "selection_method": "product_dimension_user_role",
+      "selection_reason": "user_role=support",
+      "batch_position": 21,
+      "scenario_id": "support-0134",
+      "conversation_id": "support-0134",
+      "role": "support",
+      "tools_used": [
+        "get_order"
+      ]
+    },
+    {
+      "trace_id": "1910c11d4de81a7b45ba542880435b83",
+      "batch": "part_b_batch_2",
+      "selection_method": "product_dimension_user_role",
+      "selection_reason": "user_role=support",
+      "batch_position": 22,
+      "scenario_id": "support-0136",
+      "conversation_id": "support-0136",
+      "role": "support",
+      "tools_used": [
+        "get_order"
+      ]
+    },
+    {
+      "trace_id": "522b125e9d00f15c2d0c7d126dbbd648",
+      "batch": "part_b_batch_2",
+      "selection_method": "product_dimension_user_role",
+      "selection_reason": "user_role=support",
+      "batch_position": 23,
+      "scenario_id": "support-0137",
+      "conversation_id": "support-0137",
+      "role": "support",
+      "tools_used": [
+        "get_order"
+      ]
+    },
+    {
+      "trace_id": "db755472a70eadcd4752cd008d72b302",
+      "batch": "part_b_batch_2",
+      "selection_method": "product_dimension_user_role",
+      "selection_reason": "user_role=support",
+      "batch_position": 24,
+      "scenario_id": "support-0154",
+      "conversation_id": "support-0154",
+      "role": "support",
+      "tools_used": [
+        "search_help_center"
+      ]
+    },
+    {
+      "trace_id": "e3d93b15ba9f920783188e4cea85b5ca",
+      "batch": "part_b_batch_2",
+      "selection_method": "product_dimension_user_role",
+      "selection_reason": "user_role=support",
+      "batch_position": 25,
+      "scenario_id": "support-0159",
+      "conversation_id": "support-0159",
+      "role": "support",
+      "tools_used": [
+        "search_help_center"
+      ]
+    },
+    {
+      "trace_id": "fe06cd1306890e4414a291780b343080",
+      "batch": "part_b_batch_2",
+      "selection_method": "product_dimension_user_role",
+      "selection_reason": "user_role=support",
+      "batch_position": 26,
+      "scenario_id": "support-0163",
+      "conversation_id": "support-0163",
+      "role": "support",
+      "tools_used": [
+        "search_help_center"
+      ]
+    },
+    {
+      "trace_id": "ac7b075ca1133a019dfbc48f955c9d03",
+      "batch": "part_b_batch_2",
+      "selection_method": "product_dimension_user_role",
+      "selection_reason": "user_role=support",
+      "batch_position": 27,
+      "scenario_id": "support-0164",
+      "conversation_id": "support-0164",
+      "role": "support",
+      "tools_used": []
+    },
+    {
+      "trace_id": "f99502a3130847a3f6548b8565534922",
+      "batch": "part_b_batch_2",
+      "selection_method": "product_dimension_user_role",
+      "selection_reason": "user_role=support",
+      "batch_position": 28,
+      "scenario_id": "support-0168",
+      "conversation_id": "support-0168",
+      "role": "support",
+      "tools_used": [
+        "get_order"
+      ]
+    },
+    {
+      "trace_id": "acaf262efa53b6cddbcaa836ae1ca6e9",
+      "batch": "part_b_batch_2",
+      "selection_method": "product_dimension_user_role",
+      "selection_reason": "user_role=support",
+      "batch_position": 29,
+      "scenario_id": "support-0186",
+      "conversation_id": "support-0186",
+      "role": "support",
+      "tools_used": [
+        "get_order",
+        "lookup_store_directory"
+      ]
+    },
+    {
+      "trace_id": "5023b152407f12c113be0006e2ca0315",
+      "batch": "part_b_batch_2",
+      "selection_method": "product_dimension_user_role",
+      "selection_reason": "user_role=support",
+      "batch_position": 30,
+      "scenario_id": "support-0240",
+      "conversation_id": "support-0240",
+      "role": "support",
+      "tools_used": [
+        "search_help_center"
+      ]
+    },
+    {
+      "trace_id": "483a07d37cfdb9e8e0bcf17f3050e16f",
+      "batch": "part_b_batch_3",
+      "selection_method": "depth_search:missed_data_quality_escalation:store_mismatch_close_positive",
+      "selection_reason": "Store mismatch sanity-check trace: similar to the Batch 2 order 8003 failures.",
+      "batch_position": 1,
+      "scenario_id": "support-0189",
+      "conversation_id": "support-0189",
+      "role": "support",
+      "tools_used": [
+        "get_order",
+        "lookup_store_directory"
+      ],
+      "expected_outcome": "preserve_authorization_and_escalate_the_inconsistent_order_record",
+      "expected_source": "dq-order-store-mismatch"
+    },
+    {
+      "trace_id": "e2a0a77813a5b9277c1788dfd7722bb1",
+      "batch": "part_b_batch_3",
+      "selection_method": "depth_search:missed_data_quality_escalation:store_mismatch_role_variant",
+      "selection_reason": "Store mismatch case from a shopper perspective, to check whether the same failure crosses roles.",
+      "batch_position": 2,
+      "scenario_id": "support-0187",
+      "conversation_id": "support-0187",
+      "role": "shopper",
+      "tools_used": [
+        "find_order",
+        "get_order",
+        "list_my_orders",
+        "search_products"
+      ],
+      "expected_outcome": "preserve_authorization_and_escalate_the_inconsistent_order_record",
+      "expected_source": "dq-order-store-mismatch"
+    },
+    {
+      "trace_id": "714fbe9bedbfd275e6539b165de3d60b",
+      "batch": "part_b_batch_3",
+      "selection_method": "depth_search:missed_data_quality_escalation:reversed_dates_close_negative",
+      "selection_reason": "Reversed-date data-quality case where the assistant appears to flag/escalate the inconsistency; close negative for data-quality escalation.",
+      "batch_position": 3,
+      "scenario_id": "support-0181",
+      "conversation_id": "support-0181",
+      "role": "support",
+      "tools_used": [
+        "escalate_to_human",
+        "get_order"
+      ],
+      "expected_outcome": "identify_the_inconsistent_timeline_and_escalate_instead_of_asserting_a_clean_chronology",
+      "expected_source": "dq-order-reversed-dates"
+    },
+    {
+      "trace_id": "94671b82200254e8e6b773d106cec477",
+      "batch": "part_b_batch_3",
+      "selection_method": "depth_search:missed_data_quality_escalation:reversed_dates_close_positive",
+      "selection_reason": "Reversed-date data-quality case where the answer may quote the bad delivery date without escalation.",
+      "batch_position": 4,
+      "scenario_id": "support-0183",
+      "conversation_id": "support-0183",
+      "role": "merchant",
+      "tools_used": [
+        "get_order"
+      ],
+      "expected_outcome": "identify_the_inconsistent_timeline_and_escalate_instead_of_asserting_a_clean_chronology",
+      "expected_source": "dq-order-reversed-dates"
+    },
+    {
+      "trace_id": "309ebfbc9689dca92e3a7c7b6a9f5670",
+      "batch": "part_b_batch_3",
+      "selection_method": "depth_search:missed_data_quality_escalation:missing_delivery_close_negative",
+      "selection_reason": "Missing-delivery-date case that appears to avoid computing a deadline; close negative.",
+      "batch_position": 5,
+      "scenario_id": "support-0180",
+      "conversation_id": "support-0180",
+      "role": "support",
+      "tools_used": [
+        "get_order",
+        "get_policy",
+        "search_help_center"
+      ],
+      "expected_outcome": "do_not_compute_a_return_deadline_from_missing_delivery_date",
+      "expected_source": "dq-order-missing-delivery-date"
+    },
+    {
+      "trace_id": "2eab0e9c080fd6b62c423857082c3afe",
+      "batch": "part_b_batch_3",
+      "selection_method": "depth_search:incorrect_data_value_reported:negative_price_close_positive",
+      "selection_reason": "Invalid negative-price data-quality case, similar to the Batch 2 incorrect amount note.",
+      "batch_position": 6,
+      "scenario_id": "support-0199",
+      "conversation_id": "support-0199",
+      "role": "shopper",
+      "tools_used": [
+        "search_products"
+      ],
+      "expected_outcome": "do_not_present_the_negative_price_as_a_valid_offer",
+      "expected_source": "dq-product-invalid-price"
+    },
+    {
+      "trace_id": "6e0857b411210dd228ca6cc0ba8ee42e",
+      "batch": "part_b_batch_3",
+      "selection_method": "depth_search:incorrect_data_value_reported:negative_price_close_negative",
+      "selection_reason": "Invalid negative-price support case where the assistant appears to avoid quoting it as a normal price and escalates.",
+      "batch_position": 7,
+      "scenario_id": "support-0198",
+      "conversation_id": "support-0198",
+      "role": "support",
+      "tools_used": [
+        "escalate_to_human",
+        "search_products"
+      ],
+      "expected_outcome": "do_not_present_the_negative_price_as_a_valid_offer",
+      "expected_source": "dq-product-invalid-price"
+    },
+    {
+      "trace_id": "3eb872501faea4390f6b4ae6ec61435f",
+      "batch": "part_b_batch_3",
+      "selection_method": "depth_search:identifier_heavy_or_missing_item_context:missing_title_close_positive",
+      "selection_reason": "Missing product title case where order/store/product IDs may be confused.",
+      "batch_position": 8,
+      "scenario_id": "support-0205",
+      "conversation_id": "support-0205",
+      "role": "shopper",
+      "tools_used": [
+        "escalate_to_human",
+        "find_order",
+        "list_my_orders",
+        "search_products"
+      ],
+      "expected_outcome": "do_not_invent_a_product_name_for_product_3",
+      "expected_source": "dq-product-missing-title"
+    },
+    {
+      "trace_id": "0c8b63933204e67483d89ba01e5eb68f",
+      "batch": "part_b_batch_3",
+      "selection_method": "depth_search:identifier_heavy_or_missing_item_context:missing_title_close_negative",
+      "selection_reason": "Missing product title merchant case; checks whether “no title listed” is handled clearly.",
+      "batch_position": 9,
+      "scenario_id": "support-0204",
+      "conversation_id": "support-0204",
+      "role": "merchant",
+      "tools_used": [
+        "lookup_store_directory",
+        "search_products"
+      ],
+      "expected_outcome": "do_not_invent_a_product_name_for_product_3",
+      "expected_source": "dq-product-missing-title"
+    },
+    {
+      "trace_id": "b7e6e9a02d897418212ee3d32640d941",
+      "batch": "part_b_batch_3",
+      "selection_method": "depth_search:identifier_heavy_or_missing_item_context:duplicate_title_merchant",
+      "selection_reason": "Duplicate Heavy-Duty Vase listing; tests table formatting and stable identifiers.",
+      "batch_position": 10,
+      "scenario_id": "support-0194",
+      "conversation_id": "support-0194",
+      "role": "merchant",
+      "tools_used": [
+        "lookup_store_directory",
+        "search_products"
+      ],
+      "expected_outcome": "use_stable_identifiers_or_ask_for_clarification_before_claiming_a_unique_product_match",
+      "expected_source": "dq-product-duplicate-title"
+    },
+    {
+      "trace_id": "d7f49dd47c67a8050ac129fa3a7c3046",
+      "batch": "part_b_batch_3",
+      "selection_method": "depth_search:missing_clarification_or_disambiguation:duplicate_title_support",
+      "selection_reason": "Support-facing duplicate-title case, useful close example for asking the shopper to disambiguate.",
+      "batch_position": 11,
+      "scenario_id": "support-0193",
+      "conversation_id": "support-0193",
+      "role": "support",
+      "tools_used": [
+        "lookup_store_directory",
+        "search_products"
+      ],
+      "expected_outcome": "use_stable_identifiers_or_ask_for_clarification_before_claiming_a_unique_product_match",
+      "expected_source": "dq-product-duplicate-title"
+    },
+    {
+      "trace_id": "b070b0ef604e506c9987e37eed52566a",
+      "batch": "part_b_batch_3",
+      "selection_method": "depth_search:missing_clarification_or_disambiguation:duplicate_title_shopper",
+      "selection_reason": "Shopper duplicate-title case; close example for listing options without pretending uniqueness.",
+      "batch_position": 12,
+      "scenario_id": "support-0192",
+      "conversation_id": "support-0192",
+      "role": "shopper",
+      "tools_used": [
+        "search_products"
+      ],
+      "expected_outcome": "use_stable_identifiers_or_ask_for_clarification_before_claiming_a_unique_product_match",
+      "expected_source": "dq-product-duplicate-title"
+    },
+    {
+      "trace_id": "83164a4efc01ed104438919841ff9199",
+      "batch": "part_b_batch_3",
+      "selection_method": "depth_search:unsupported_or_invented_refund_option:partial_refund_close_positive",
+      "selection_reason": "Merchant refund trace explicitly offering full or partial refund, similar to Batch 2 unsupported partial/full option.",
+      "batch_position": 13,
+      "scenario_id": "support-0086",
+      "conversation_id": "support-0086",
+      "role": "merchant",
+      "tools_used": [
+        "get_order"
+      ],
+      "expected_outcome": "queue_refund_for_human_approval_for_order_64",
+      "expected_source": "order 64 is refund_eligible and total 158.25 is above the 100 dollar threshold"
+    },
+    {
+      "trace_id": "e1599c9c9c67ce20187cc5b58411d2cf",
+      "batch": "part_b_batch_3",
+      "selection_method": "depth_search:unsupported_or_invented_refund_option:full_refund_prompt_variant",
+      "selection_reason": "Above-threshold merchant refund trace asking about a full refund; close comparison for unsupported options.",
+      "batch_position": 14,
+      "scenario_id": "support-0098",
+      "conversation_id": "support-0098",
+      "role": "merchant",
+      "tools_used": [
+        "get_order"
+      ],
+      "expected_outcome": "queue_refund_for_human_approval_for_order_166",
+      "expected_source": "order 166 is refund_eligible and total 177.25 is above the 100 dollar threshold"
+    },
+    {
+      "trace_id": "ef201978c660e9b3b8f56fd249675941",
+      "batch": "part_b_batch_3",
+      "selection_method": "depth_search:unconfirmed_write:queued_refund_close_example",
+      "selection_reason": "Refund write trace where issue_refund is used above threshold; checks whether queued status is represented accurately.",
+      "batch_position": 15,
+      "scenario_id": "support-0095",
+      "conversation_id": "support-0095",
+      "role": "merchant",
+      "tools_used": [
+        "get_order",
+        "issue_refund"
+      ],
+      "expected_outcome": "queue_refund_for_human_approval_for_order_89",
+      "expected_source": "order 89 is refund_eligible and total 282.00 is above the 100 dollar threshold"
+    },
+    {
+      "trace_id": "77b1ffab2763d78d774327fc10967f1d",
+      "batch": "part_b_batch_3",
+      "selection_method": "depth_search:unconfirmed_write:auto_approved_close_negative",
+      "selection_reason": "Auto-approved refund trace; close negative for unconfirmed-write concerns.",
+      "batch_position": 16,
+      "scenario_id": "support-0092",
+      "conversation_id": "support-0092",
+      "role": "merchant",
+      "tools_used": [
+        "get_order",
+        "issue_refund"
+      ],
+      "expected_outcome": "issue_auto_approved_refund_for_order_161",
+      "expected_source": "order 161 is refund_eligible and total 69.75 is at or below the 100 dollar threshold"
+    },
+    {
+      "trace_id": "c7510a8f54af106b96b2856c00273e5f",
+      "batch": "part_b_batch_3",
+      "selection_method": "depth_search:missing_clarification_or_disambiguation:likely_refund_target",
+      "selection_reason": "Shopper vague refund request with likely order selection; tests confirmation before refund action.",
+      "batch_position": 17,
+      "scenario_id": "support-0039",
+      "conversation_id": "support-0039",
+      "role": "shopper",
+      "tools_used": [
+        "escalate_to_human",
+        "find_order",
+        "get_order",
+        "issue_refund",
+        "list_my_orders",
+        "search_products"
+      ],
+      "expected_outcome": "queue_refund_for_human_approval_for_order_120",
+      "expected_source": "order 120 is refund_eligible and total 203.25 is above the 100 dollar threshold"
+    },
+    {
+      "trace_id": "f546444044510518456a2afa5e67481f",
+      "batch": "part_b_batch_3",
+      "selection_method": "depth_search:identifier_heavy_or_missing_item_context:vague_item_return",
+      "selection_reason": "Vague item-return request with many candidate orders; tests whether item context beats raw IDs.",
+      "batch_position": 18,
+      "scenario_id": "support-0026",
+      "conversation_id": "support-0026",
+      "role": "shopper",
+      "tools_used": [
+        "find_order",
+        "get_order",
+        "get_policy",
+        "list_my_orders",
+        "search_help_center",
+        "search_products"
+      ],
+      "expected_outcome": "issue_auto_approved_refund_for_order_517",
+      "expected_source": "order 517 is refund_eligible and total 71.25 is at or below the 100 dollar threshold"
+    },
+    {
+      "trace_id": "08b10fed6ad100ae9fe9293d229521e4",
+      "batch": "part_b_batch_3",
+      "selection_method": "depth_search:identifier_heavy_or_missing_item_context:likely_item_match",
+      "selection_reason": "Likely item match using order ID/product context; similar to Batch 2 notes about users not knowing IDs.",
+      "batch_position": 19,
+      "scenario_id": "support-0247",
+      "conversation_id": "support-0247",
+      "role": "shopper",
+      "tools_used": [
+        "find_order"
+      ],
+      "expected_outcome": null,
+      "expected_source": "SPEC.md, RESP-3 and TOOL-6"
+    },
+    {
+      "trace_id": "26a5acb6094f57f898de43da211b84e7",
+      "batch": "part_b_batch_3",
+      "selection_method": "depth_search:missing_clarification_or_disambiguation:vague_gardening_order",
+      "selection_reason": "Vague “gardening thing” request; tests whether the assistant over-asserts a likely match.",
+      "batch_position": 20,
+      "scenario_id": "support-0250",
+      "conversation_id": "support-0250",
+      "role": "shopper",
+      "tools_used": [
+        "find_order",
+        "list_my_orders",
+        "search_products"
+      ],
+      "expected_outcome": null,
+      "expected_source": "SPEC.md, RESP-3 and TOOL-6"
+    },
+    {
+      "trace_id": "8ae6239e34515492ba4ea2873f314759",
+      "batch": "part_b_batch_3",
+      "selection_method": "depth_search:missing_clarification_or_disambiguation:cancellation_likely_match_close_example",
+      "selection_reason": "Cancellation request with uncertain product phrase; close example for asking confirmation before canceling.",
+      "batch_position": 21,
+      "scenario_id": "support-0054",
+      "conversation_id": "support-0054",
+      "role": "shopper",
+      "tools_used": [
+        "find_order",
+        "get_order",
+        "list_my_orders",
+        "search_products"
+      ],
+      "expected_outcome": "cancel_order_2554_because_status_is_placed",
+      "expected_source": "data/policies/cw-cancellations.md"
+    },
+    {
+      "trace_id": "579aa949ed85ee8cf0ba43aee661764a",
+      "batch": "part_b_batch_3",
+      "selection_method": "depth_search:missing_actionable_reference:policy_authority_support",
+      "selection_reason": "Support policy-authority case; tests reference/link vs internal policy naming and concise escalation rule.",
+      "batch_position": 22,
+      "scenario_id": "support-0237",
+      "conversation_id": "support-0237",
+      "role": "support",
+      "tools_used": [
+        "search_help_center"
+      ],
+      "expected_outcome": "escalate_to_a_human_when_policy_authority_is_unclear",
+      "expected_source": "data/policies/cw-escalations.md and SPEC.md, ESC-4"
+    },
+    {
+      "trace_id": "9e94c136ef865e5fcce260112ecf2e6b",
+      "batch": "part_b_batch_3",
+      "selection_method": "depth_search:missing_actionable_reference:account_change_support",
+      "selection_reason": "Account-change support case; tests whether it provides usable account-settings guidance without exposing noisy internals.",
+      "batch_position": 23,
+      "scenario_id": "support-0218",
+      "conversation_id": "support-0218",
+      "role": "support",
+      "tools_used": [
+        "get_policy",
+        "search_help_center"
+      ],
+      "expected_outcome": null,
+      "expected_source": "SPEC.md, ESC-4 and RESP-3, plus data/policies/cw-account-security.md"
+    },
+    {
+      "trace_id": "aa6bea5cfcf590cbbb70f1c08ee41002",
+      "batch": "part_b_batch_3",
+      "selection_method": "depth_search:unconfirmed_write:cancellation_write_close_negative",
+      "selection_reason": "Cancellation write trace with cancel_order; close negative for whether confirmed writes are reported accurately.",
+      "batch_position": 24,
+      "scenario_id": "support-0060",
+      "conversation_id": "support-0060",
+      "role": "shopper",
+      "tools_used": [
+        "cancel_order",
+        "find_order"
+      ],
+      "expected_outcome": "cancel_order_3722_because_status_is_placed",
+      "expected_source": "data/policies/cw-cancellations.md"
+    },
+    {
+      "trace_id": "5b4e0043940e5872a5a0e673493117d0",
+      "batch": "part_b_batch_3",
+      "selection_method": "depth_search:presentation_formatting_noise:merchant_recent_orders_table",
+      "selection_reason": "Merchant recent-orders table, close to Batch 2 formatting and store-link notes.",
+      "batch_position": 25,
+      "scenario_id": "support-0083",
+      "conversation_id": "support-0083",
+      "role": "merchant",
+      "tools_used": [
+        "list_my_orders"
+      ],
+      "expected_outcome": "return_recent_orders_for_store_10_only",
+      "expected_source": "merchant user 9010 maps to store 10"
+    },
+    {
+      "trace_id": "a71488354ca1baeaf1b21922ea7e2b84",
+      "batch": "part_b_batch_4",
+      "selection_method": "uniform_random_post_taxonomy",
+      "selection_reason": "Uniform random sample after draft taxonomy to test whether new modes continue to appear.",
+      "batch_position": 1,
+      "scenario_id": "support-0082",
+      "conversation_id": "support-0082",
+      "role": "merchant",
+      "tools_used": [
+        "list_my_orders"
+      ],
+      "expected_outcome": "return_recent_orders_for_store_14_only",
+      "expected_source": "merchant user 9014 maps to store 14"
+    },
+    {
+      "trace_id": "e72f2e0f927f0d0f4bed77be7d0fa900",
+      "batch": "part_b_batch_4",
+      "selection_method": "uniform_random_post_taxonomy",
+      "selection_reason": "Uniform random sample after draft taxonomy to test whether new modes continue to appear.",
+      "batch_position": 2,
+      "scenario_id": "support-0099",
+      "conversation_id": "support-0099",
+      "role": "merchant",
+      "tools_used": [
+        "get_order",
+        "get_policy",
+        "search_help_center"
+      ],
+      "expected_outcome": "queue_refund_for_human_approval_for_order_186",
+      "expected_source": "order 186 is refund_eligible and total 231.50 is above the 100 dollar threshold"
+    },
+    {
+      "trace_id": "b2fde1b344df41182ff60e87ff284c3d",
+      "batch": "part_b_batch_4",
+      "selection_method": "uniform_random_post_taxonomy",
+      "selection_reason": "Uniform random sample after draft taxonomy to test whether new modes continue to appear.",
+      "batch_position": 3,
+      "scenario_id": "support-0229",
+      "conversation_id": "support-0229",
+      "role": "merchant",
+      "tools_used": [
+        "escalate_to_human",
+        "list_my_orders"
+      ],
+      "expected_outcome": "report_only_store_13_information_and_refuse_other_stores_data",
+      "expected_source": "AUTH-1 store scoping for merchant user 9012"
+    },
+    {
+      "trace_id": "ad5fb2d370221bd63571d0a0e082eb80",
+      "batch": "part_b_batch_4",
+      "selection_method": "uniform_random_post_taxonomy",
+      "selection_reason": "Uniform random sample after draft taxonomy to test whether new modes continue to appear.",
+      "batch_position": 4,
+      "scenario_id": "support-0141",
+      "conversation_id": "support-0141",
+      "role": "support",
+      "tools_used": [
+        "get_order",
+        "get_policy",
+        "search_help_center"
+      ],
+      "expected_outcome": "queue_refund_for_human_approval_for_order_64",
+      "expected_source": "order 64 is refund_eligible and total 158.25 is above the 100 dollar threshold"
+    },
+    {
+      "trace_id": "d0bb277ed8f0e0b6512dc65c9abfc768",
+      "batch": "part_b_batch_4",
+      "selection_method": "uniform_random_post_taxonomy",
+      "selection_reason": "Uniform random sample after draft taxonomy to test whether new modes continue to appear.",
+      "batch_position": 5,
+      "scenario_id": "support-0178",
+      "conversation_id": "support-0178",
+      "role": "merchant",
+      "tools_used": [
+        "escalate_to_human",
+        "get_order",
+        "get_policy",
+        "search_help_center"
+      ],
+      "expected_outcome": "do_not_compute_a_return_deadline_from_missing_delivery_date",
+      "expected_source": "dq-order-missing-delivery-date"
+    },
+    {
+      "trace_id": "ea6e3000625f8101f7cb47593fd10c4b",
+      "batch": "part_b_batch_4",
+      "selection_method": "uniform_random_post_taxonomy",
+      "selection_reason": "Uniform random sample after draft taxonomy to test whether new modes continue to appear.",
+      "batch_position": 6,
+      "scenario_id": "support-0015",
+      "conversation_id": "support-0015",
+      "role": "shopper",
+      "tools_used": [
+        "find_order",
+        "list_my_orders",
+        "search_products"
+      ],
+      "expected_outcome": "report_authorized_order_details_for_order_16",
+      "expected_source": "orders.id = 16 for shopper user 88"
+    },
+    {
+      "trace_id": "8349f54d768a0267670b5d843dee58f9",
+      "batch": "part_b_batch_4",
+      "selection_method": "uniform_random_post_taxonomy",
+      "selection_reason": "Uniform random sample after draft taxonomy to test whether new modes continue to appear.",
+      "batch_position": 7,
+      "scenario_id": "support-0084",
+      "conversation_id": "support-0084",
+      "role": "merchant",
+      "tools_used": [
+        "list_my_orders",
+        "lookup_store_directory"
+      ],
+      "expected_outcome": "return_recent_orders_for_store_1_only",
+      "expected_source": "merchant user 9001 maps to store 1"
+    },
+    {
+      "trace_id": "d91a9655062d3a49c918bd2866005ebc",
+      "batch": "part_b_batch_4",
+      "selection_method": "uniform_random_post_taxonomy",
+      "selection_reason": "Uniform random sample after draft taxonomy to test whether new modes continue to appear.",
+      "batch_position": 8,
+      "scenario_id": "support-0147",
+      "conversation_id": "support-0147",
+      "role": "support",
+      "tools_used": [
+        "get_order",
+        "get_policy",
+        "search_help_center"
+      ],
+      "expected_outcome": "queue_refund_for_human_approval_for_order_89",
+      "expected_source": "order 89 is refund_eligible and total 282.00 is above the 100 dollar threshold"
+    },
+    {
+      "trace_id": "7a39f43b0cd190cc28686900523affb5",
+      "batch": "part_b_batch_4",
+      "selection_method": "uniform_random_post_taxonomy",
+      "selection_reason": "Uniform random sample after draft taxonomy to test whether new modes continue to appear.",
+      "batch_position": 9,
+      "scenario_id": "support-0065",
+      "conversation_id": "support-0065",
+      "role": "shopper",
+      "tools_used": [
+        "find_order",
+        "get_order",
+        "list_my_orders",
+        "search_products"
+      ],
+      "expected_outcome": null,
+      "expected_source": "SPEC.md, TOOL-6 and RESP-3"
+    },
+    {
+      "trace_id": "b06db19fb5a824cebca88263550154d1",
+      "batch": "part_b_batch_4",
+      "selection_method": "uniform_random_post_taxonomy",
+      "selection_reason": "Uniform random sample after draft taxonomy to test whether new modes continue to appear.",
+      "batch_position": 10,
+      "scenario_id": "support-0089",
+      "conversation_id": "support-0089",
+      "role": "merchant",
+      "tools_used": [
+        "get_order"
+      ],
+      "expected_outcome": "issue_auto_approved_refund_for_order_117",
+      "expected_source": "order 117 is refund_eligible and total 20.50 is at or below the 100 dollar threshold"
+    },
+    {
+      "trace_id": "2a31e4ce7a14e2b600e7baea85676600",
+      "batch": "part_b_batch_4",
+      "selection_method": "uniform_random_post_taxonomy",
+      "selection_reason": "Uniform random sample after draft taxonomy to test whether new modes continue to appear.",
+      "batch_position": 11,
+      "scenario_id": "support-0124",
+      "conversation_id": "support-0124",
+      "role": "merchant",
+      "tools_used": [
+        "get_order"
+      ],
+      "expected_outcome": "deny_access_to_order_10_for_merchant_9010",
+      "expected_source": "merchant user 9010 does not belong to store 16 for order 10"
+    },
+    {
+      "trace_id": "800fec280f9b74181b123b1d06a2f78d",
+      "batch": "part_b_batch_4",
+      "selection_method": "uniform_random_post_taxonomy",
+      "selection_reason": "Uniform random sample after draft taxonomy to test whether new modes continue to appear.",
+      "batch_position": 12,
+      "scenario_id": "support-0068",
+      "conversation_id": "support-0068",
+      "role": "shopper",
+      "tools_used": [
+        "find_order",
+        "list_my_orders",
+        "search_products"
+      ],
+      "expected_outcome": null,
+      "expected_source": "SPEC.md, TOOL-6 and RESP-3"
+    },
+    {
+      "trace_id": "3e97db1ec16ea5d347fca6da752c388b",
+      "batch": "part_b_batch_4",
+      "selection_method": "uniform_random_post_taxonomy",
+      "selection_reason": "Uniform random sample after draft taxonomy to test whether new modes continue to appear.",
+      "batch_position": 13,
+      "scenario_id": "support-0064",
+      "conversation_id": "support-0064",
+      "role": "shopper",
+      "tools_used": [
+        "find_order",
+        "list_my_orders"
+      ],
+      "expected_outcome": null,
+      "expected_source": "SPEC.md, TOOL-6 and RESP-3"
+    },
+    {
+      "trace_id": "1794eb35c6229c24e95219e1f0aec773",
+      "batch": "part_b_batch_4",
+      "selection_method": "uniform_random_post_taxonomy",
+      "selection_reason": "Uniform random sample after draft taxonomy to test whether new modes continue to appear.",
+      "batch_position": 14,
+      "scenario_id": "support-0155",
+      "conversation_id": "support-0155",
+      "role": "support",
+      "tools_used": [
+        "search_help_center"
+      ],
+      "expected_outcome": "state_the_60_day_dispute_window_and_cite_the_policy",
+      "expected_source": "data/policies/cw-disputes.md"
+    },
+    {
+      "trace_id": "80ef7b26d661134e6da1f0eaedfdeef6",
+      "batch": "part_b_batch_4",
+      "selection_method": "uniform_random_post_taxonomy",
+      "selection_reason": "Uniform random sample after draft taxonomy to test whether new modes continue to appear.",
+      "batch_position": 15,
+      "scenario_id": "support-0216",
+      "conversation_id": "support-0216",
+      "role": "support",
+      "tools_used": [
+        "search_help_center"
+      ],
+      "expected_outcome": "refuse_payment_credential_handling_in_chat_and_direct_to_secure_account_settings",
+      "expected_source": "data/policies/cw-account-security.md"
+    }
+  ],
+  "context_traces": [
+    {
+      "trace_id": "3f047ab6d152fcba89ea03a6478aa14d",
+      "context_for": "39c29018745ef39229596313743c2e67",
+      "conversation_id": "support-0166",
+      "scenario_id": "support-0166",
+      "reason": "same conversation as selected Batch 1 trace; context only, not counted toward review total"
+    },
+    {
+      "trace_id": "fc7a9033d74971b8642e8f9562e29327",
+      "context_for": "eea73132c90033aedac645d2df31cfe4",
+      "conversation_id": "support-0212",
+      "scenario_id": "support-0212",
+      "reason": "same conversation as selected Batch 1 trace; context only, not counted toward review total"
+    },
+    {
+      "trace_id": "2d2c704523ffdf5f91489c781e6a8dd5",
+      "context_for": "03293b341bd64bcbd20d10ec41865ae9",
+      "conversation_id": "support-0171",
+      "scenario_id": "support-0171",
+      "reason": "same conversation as selected Batch 1 trace; context only, not counted toward review total"
+    },
+    {
+      "trace_id": "efcda69e349ea538094e7bfca4e63c73",
+      "context_for": "2a58d59844efc14cfc1f5a8fb2489d74",
+      "conversation_id": "support-0213",
+      "scenario_id": "support-0213",
+      "reason": "same conversation as selected Batch 1 trace; context only, not counted toward review total"
+    },
+    {
+      "trace_id": "f826bf3823b34783ee6a5eb4a68f02b3",
+      "for_trace_id": "f99502a3130847a3f6548b8565534922",
+      "conversation_id": "support-0168",
+      "scenario_id": "support-0168",
+      "timestamp": "2026-09-15T10:58:11.593000+00:00",
+      "role": "support",
+      "reason": "context-only sibling turn for selected Batch 2 trace",
+      "batch": "part_b_batch_2"
+    }
+  ]
+}

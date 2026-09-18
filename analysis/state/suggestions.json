@@ -1,1 +1,17 @@
-[]
+{
+  "suggestions": [],
+  "history": [
+    {
+      "id": "workshop-policy-id-formatting-noise-001",
+      "source": "raindrop_workshop_part_c",
+      "status": "rejected",
+      "suggested_mode": "presentation_formatting_noise",
+      "suggestion": "Treat every explicit policy identifier in an assistant answer as formatting or presentation noise.",
+      "decision": "rejected",
+      "boundary": "Policy identifiers are not automatically formatting noise. They can be useful for support users or policy-authority questions; only visible Markdown markers, broken tables, or layout/readability artifacts belong in presentation_formatting_noise.",
+      "example_trace_or_run": "cli-support-9503-1789750646-1",
+      "related_report": "analysis/report/workshop_notes.md",
+      "decided_at": "2026-09-18T17:17:48.775465+00:00"
+    }
+  ]
+}

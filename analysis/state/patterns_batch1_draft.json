@@ -1,0 +1,751 @@
+{
+  "homework_part": "HW4 Part B",
+  "batch": "part_b_batch_1",
+  "generated_at": "2026-09-18T11:20:31.862327+00:00",
+  "basis": "Human open-code annotations from the 30 counted Batch 1 traces. Candidate modes are grouped at the annotation level, not by attaching every note from a trace to every mode.",
+  "reviewed_trace_count": 30,
+  "annotation_note_count": 82,
+  "candidate_modes": [
+    {
+      "mode": "presentation_formatting_noise",
+      "definition": "The response presentation makes the answer harder to read through visible Markdown markers, poor table/list formatting, or repetitive wording.",
+      "boundary": "Include visible ** markers, table/list formatting complaints, and repetitive wording. Exclude tone or word-choice notes such as \u201coverride\u201d being too strong unless the reviewer explicitly ties them to readability/formatting.",
+      "requirement_source": "SPEC.md RESP-5: direct and respectful language; this may become a clearer formatting/display requirement.",
+      "supporting_annotation_count": 22,
+      "supporting_trace_count": 19,
+      "supporting_annotations": [
+        {
+          "note_index": 1,
+          "trace_id": "366acfa3511aa64e7f7e70303993289d",
+          "order_id": null,
+          "store": null,
+          "note": "no need to use ** marks. Noisy signs that makes it harder to read. Should use bold font instead.",
+          "ts": "2026-09-18T10:05:15.741Z"
+        },
+        {
+          "note_index": 14,
+          "trace_id": "3879d32468ca34fb9e43df6f162197a2",
+          "order_id": null,
+          "store": null,
+          "note": "no need to use ** marks. Noisy signs that makes it harder to read. Should use bold font instead.",
+          "ts": "2026-09-18T10:19:53.192Z"
+        },
+        {
+          "note_index": 15,
+          "trace_id": "a8d38a551dce6c17faa55af6d1704108",
+          "order_id": null,
+          "store": null,
+          "note": "no need to use ** marks. Noisy signs that makes it harder to read. Should use bold font instead.",
+          "ts": "2026-09-18T10:20:13.605Z"
+        },
+        {
+          "note_index": 18,
+          "trace_id": "a8d38a551dce6c17faa55af6d1704108",
+          "order_id": null,
+          "store": null,
+          "note": "no need to use ** marks. Noisy signs that makes it harder to read. Should use bold font instead.",
+          "ts": "2026-09-18T10:21:42.657Z"
+        },
+        {
+          "note_index": 19,
+          "trace_id": "4c5f4cc3afb3608ca1951bf339a987a5",
+          "order_id": null,
+          "store": null,
+          "note": "no need to use ** marks. Noisy signs that makes it harder to read. Should use bold font instead.",
+          "ts": "2026-09-18T10:22:19.090Z"
+        },
+        {
+          "note_index": 25,
+          "trace_id": "39c29018745ef39229596313743c2e67",
+          "order_id": null,
+          "store": null,
+          "note": "no need to use ** marks. Noisy signs that makes it harder to read. Should use bold font instead.",
+          "ts": "2026-09-18T10:30:50.256Z"
+        },
+        {
+          "note_index": 28,
+          "trace_id": "08c47004530a13ea061e9f5390011b18",
+          "order_id": null,
+          "store": null,
+          "note": "no need to use ** marks. Noisy signs that makes it harder to read. Should use bold font instead.",
+          "ts": "2026-09-18T10:32:26.956Z"
+        },
+        {
+          "note_index": 29,
+          "trace_id": "08c47004530a13ea061e9f5390011b18",
+          "order_id": null,
+          "store": null,
+          "note": "bad formatting - need better table display",
+          "ts": "2026-09-18T10:33:13.824Z"
+        },
+        {
+          "note_index": 31,
+          "trace_id": "eea73132c90033aedac645d2df31cfe4",
+          "order_id": null,
+          "store": null,
+          "note": "repetitive wording",
+          "ts": "2026-09-18T10:34:43.145Z"
+        },
+        {
+          "note_index": 33,
+          "trace_id": "03293b341bd64bcbd20d10ec41865ae9",
+          "order_id": null,
+          "store": null,
+          "note": "no need to use ** marks. Noisy signs that makes it harder to read. Should use bold font instead.",
+          "ts": "2026-09-18T10:37:03.197Z"
+        },
+        {
+          "note_index": 36,
+          "trace_id": "6396cf5a49521d14eca5298573dda90b",
+          "order_id": null,
+          "store": null,
+          "note": "no need to use ** marks. Noisy signs that makes it harder to read. Should use bold font instead.",
+          "ts": "2026-09-18T10:39:17.357Z"
+        },
+        {
+          "note_index": 37,
+          "trace_id": "6396cf5a49521d14eca5298573dda90b",
+          "order_id": null,
+          "store": null,
+          "note": "bad formatting - need better table display",
+          "ts": "2026-09-18T10:39:39.007Z"
+        },
+        {
+          "note_index": 47,
+          "trace_id": "711f10764478d49b30f0fe3a15317649",
+          "order_id": null,
+          "store": null,
+          "note": "no need to use ** marks. Noisy signs that makes it harder to read. Should use bold font instead.",
+          "ts": "2026-09-18T10:45:26.521Z"
+        },
+        {
+          "note_index": 53,
+          "trace_id": "4970b9c3abfadd21f6a5db83f791506a",
+          "order_id": null,
+          "store": null,
+          "note": "no need to use ** marks. Noisy signs that makes it harder to read. Should use bold font instead.",
+          "ts": "2026-09-18T10:51:08.874Z"
+        },
+        {
+          "note_index": 54,
+          "trace_id": "e9f48e6de3778a6f7d5356943df48268",
+          "order_id": null,
+          "store": null,
+          "note": "no need to use ** marks. Noisy signs that makes it harder to read. Should use bold font instead.",
+          "ts": "2026-09-18T10:52:03.482Z"
+        },
+        {
+          "note_index": 56,
+          "trace_id": "6d1fe5cbffc957525774784137281ada",
+          "order_id": null,
+          "store": null,
+          "note": "no need to use ** marks. Noisy signs that makes it harder to read. Should use bold font instead.",
+          "ts": "2026-09-18T10:52:55.635Z"
+        },
+        {
+          "note_index": 63,
+          "trace_id": "9f2ca35491d1cebb8777dd5643bfec5e",
+          "order_id": null,
+          "store": null,
+          "note": "no need to use ** marks. Noisy signs that makes it harder to read. Should use bold font instead.",
+          "ts": "2026-09-18T10:56:42.102Z"
+        },
+        {
+          "note_index": 69,
+          "trace_id": "744d9f6a8a47ae71e1f5821621f06e6e",
+          "order_id": null,
+          "store": null,
+          "note": "no need to use ** marks. Noisy signs that makes it harder to read. Should use bold font instead.",
+          "ts": "2026-09-18T10:59:26.516Z"
+        },
+        {
+          "note_index": 75,
+          "trace_id": "e3e7e2776ea3196de7acdca7d450bbc0",
+          "order_id": null,
+          "store": null,
+          "note": "no need to use ** marks. Noisy signs that makes it harder to read. Should use bold font instead.",
+          "ts": "2026-09-18T11:01:21.975Z"
+        },
+        {
+          "note_index": 76,
+          "trace_id": "c48547e6341ce5472616c70a2412646d",
+          "order_id": null,
+          "store": null,
+          "note": "no need to use ** marks. Noisy signs that makes it harder to read. Should use bold font instead.",
+          "ts": "2026-09-18T11:01:41.353Z"
+        },
+        {
+          "note_index": 79,
+          "trace_id": "4d5f7611cdb1aeec2fde1580ed151132",
+          "order_id": null,
+          "store": null,
+          "note": "no need to use ** marks. Noisy signs that makes it harder to read. Should use bold font instead.",
+          "ts": "2026-09-18T11:02:49.492Z"
+        },
+        {
+          "note_index": 81,
+          "trace_id": "2a58d59844efc14cfc1f5a8fb2489d74",
+          "order_id": null,
+          "store": null,
+          "note": "no need to use ** marks. Noisy signs that makes it harder to read. Should use bold font instead.",
+          "ts": "2026-09-18T11:04:12.284Z"
+        }
+      ]
+    },
+    {
+      "mode": "missing_actionable_reference",
+      "definition": "The reply gives guidance but omits the concrete reference/path the user or support agent can follow, such as a help-center article, policy link, account-settings path, or order-history self-service link.",
+      "boundary": "Include notes that ask for a link, article, policy line, account-settings path, or self-service order link. Exclude \u201cno need to call out policy name\u201d when it does not also ask for a usable reference. Exclude excessive policy detail; that belongs under unnecessary_detail_overload.",
+      "requirement_source": "SPEC.md RESP-1 for policy identifiers and RESP-5 for useful responses; link/path expectations may need a SPEC revision.",
+      "supporting_annotation_count": 17,
+      "supporting_trace_count": 15,
+      "supporting_annotations": [
+        {
+          "note_index": 2,
+          "trace_id": "366acfa3511aa64e7f7e70303993289d",
+          "order_id": null,
+          "store": null,
+          "note": "calling policy name is not necessary. Add policy link as a reference.",
+          "ts": "2026-09-18T10:06:11.769Z"
+        },
+        {
+          "note_index": 7,
+          "trace_id": "d2fdbbb39bb1aa2c13674d5e379037af",
+          "order_id": null,
+          "store": null,
+          "note": "add a link for the user which can help them to find their orders on their own account.",
+          "ts": "2026-09-18T10:09:38.057Z"
+        },
+        {
+          "note_index": 11,
+          "trace_id": "fe47fec4e03cf55aa5df32fc9268fb60",
+          "order_id": null,
+          "store": null,
+          "note": "send them to the relevant help center / policy article so that they can read and learn more",
+          "ts": "2026-09-18T10:14:12.168Z"
+        },
+        {
+          "note_index": 12,
+          "trace_id": "379b97d2d2ab40d9f88dda2d9da2b217",
+          "order_id": null,
+          "store": null,
+          "note": "add a link for the policy line for the support to read",
+          "ts": "2026-09-18T10:18:17.021Z"
+        },
+        {
+          "note_index": 16,
+          "trace_id": "a8d38a551dce6c17faa55af6d1704108",
+          "order_id": null,
+          "store": null,
+          "note": "add link to the policy or help center link the user can read.",
+          "ts": "2026-09-18T10:20:57.538Z"
+        },
+        {
+          "note_index": 20,
+          "trace_id": "4c5f4cc3afb3608ca1951bf339a987a5",
+          "order_id": null,
+          "store": null,
+          "note": "add a policy / help center article link the support user can refer to",
+          "ts": "2026-09-18T10:22:38.522Z"
+        },
+        {
+          "note_index": 21,
+          "trace_id": "4c5f4cc3afb3608ca1951bf339a987a5",
+          "order_id": null,
+          "store": null,
+          "note": "missing instruction - add a section how users can find their account settings or add a help center article page that guides users",
+          "ts": "2026-09-18T10:23:35.169Z"
+        },
+        {
+          "note_index": 30,
+          "trace_id": "08c47004530a13ea061e9f5390011b18",
+          "order_id": null,
+          "store": null,
+          "note": "send the merchant to an account setting link where they can see their recent store movements.",
+          "ts": "2026-09-18T10:34:20.426Z"
+        },
+        {
+          "note_index": 38,
+          "trace_id": "6396cf5a49521d14eca5298573dda90b",
+          "order_id": null,
+          "store": null,
+          "note": "send the merchant to an account setting link where they can see their recent store movements.\\",
+          "ts": "2026-09-18T10:39:51.182Z"
+        },
+        {
+          "note_index": 42,
+          "trace_id": "e75ac79481909be1b048b94f3df5b60b",
+          "order_id": null,
+          "store": null,
+          "note": "send them to the relevant help center / policy article so that they can read and learn more",
+          "ts": "2026-09-18T10:42:32.639Z"
+        },
+        {
+          "note_index": 46,
+          "trace_id": "711f10764478d49b30f0fe3a15317649",
+          "order_id": null,
+          "store": null,
+          "note": "send user to their recent order link if they want to self-validate.",
+          "ts": "2026-09-18T10:45:20.033Z"
+        },
+        {
+          "note_index": 49,
+          "trace_id": "c7c918336747a818730e6bf1ca3506fc",
+          "order_id": null,
+          "store": null,
+          "note": "add a link for the user which can help them to find their orders on their own accou\\nt.",
+          "ts": "2026-09-18T10:48:00.762Z"
+        },
+        {
+          "note_index": 59,
+          "trace_id": "9f2ca35491d1cebb8777dd5643bfec5e",
+          "order_id": null,
+          "store": null,
+          "note": "add a link for the user which can help them to find their orders on their own account.",
+          "ts": "2026-09-18T10:54:51.627Z"
+        },
+        {
+          "note_index": 71,
+          "trace_id": "744d9f6a8a47ae71e1f5821621f06e6e",
+          "order_id": null,
+          "store": null,
+          "note": "add a link for the user which can help them to find their orders on their own account.",
+          "ts": "2026-09-18T11:00:13.382Z"
+        },
+        {
+          "note_index": 74,
+          "trace_id": "e3e7e2776ea3196de7acdca7d450bbc0",
+          "order_id": null,
+          "store": null,
+          "note": "send them to the relevant help center / policy article so that they can read and learn more",
+          "ts": "2026-09-18T11:01:09.580Z"
+        },
+        {
+          "note_index": 77,
+          "trace_id": "c48547e6341ce5472616c70a2412646d",
+          "order_id": null,
+          "store": null,
+          "note": "add a link for the policy line for the support to read",
+          "ts": "2026-09-18T11:01:56.929Z"
+        },
+        {
+          "note_index": 78,
+          "trace_id": "c48547e6341ce5472616c70a2412646d",
+          "order_id": null,
+          "store": null,
+          "note": "add a policy / help center article link the support user can refer to in their comms with the user",
+          "ts": "2026-09-18T11:02:29.199Z"
+        }
+      ]
+    },
+    {
+      "mode": "unnecessary_detail_overload",
+      "definition": "The reply includes details or actions that distract from the current ask or appear before the user has confirmed what they need.",
+      "boundary": "Include unnecessary order IDs, product details, refund details, policy detail when the item was not found, unnecessary confirmations, and unnecessary actions. Exclude cases where the problem is the absence of a link/path; those belong under missing_actionable_reference.",
+      "requirement_source": "SPEC.md RESP-5: answer clearly and usefully; may need a concise task-focused response requirement.",
+      "supporting_annotation_count": 13,
+      "supporting_trace_count": 12,
+      "supporting_annotations": [
+        {
+          "note_index": 3,
+          "trace_id": "d2fdbbb39bb1aa2c13674d5e379037af",
+          "order_id": null,
+          "store": null,
+          "note": "no need to give detail on the return policy if the item is not found\\",
+          "ts": "2026-09-18T10:07:55.343Z"
+        },
+        {
+          "note_index": 26,
+          "trace_id": "39c29018745ef39229596313743c2e67",
+          "order_id": null,
+          "store": null,
+          "note": "no need to give product details as the user is asking about refund.",
+          "ts": "2026-09-18T10:31:41.501Z"
+        },
+        {
+          "note_index": 32,
+          "trace_id": "376a003be2fb346b0a9817dc09a9c9fe",
+          "order_id": null,
+          "store": null,
+          "note": "order id, status, refund details are all unnecessary and confusing details. Ask the user first what they need help with after confirming that their order has been located.",
+          "ts": "2026-09-18T10:36:00.813Z"
+        },
+        {
+          "note_index": 34,
+          "trace_id": "03293b341bd64bcbd20d10ec41865ae9",
+          "order_id": null,
+          "store": null,
+          "note": "explain why it was not refunded. No detauls are needed except the refund status and why it can not be refunded.",
+          "ts": "2026-09-18T10:38:15.678Z"
+        },
+        {
+          "note_index": 43,
+          "trace_id": "e75ac79481909be1b048b94f3df5b60b",
+          "order_id": null,
+          "store": null,
+          "note": "too much data - this direct response can be put upfront",
+          "ts": "2026-09-18T10:43:27.819Z"
+        },
+        {
+          "note_index": 44,
+          "trace_id": "711f10764478d49b30f0fe3a15317649",
+          "order_id": null,
+          "store": null,
+          "note": "unnecessary confirmation",
+          "ts": "2026-09-18T10:43:59.411Z"
+        },
+        {
+          "note_index": 48,
+          "trace_id": "711f10764478d49b30f0fe3a15317649",
+          "order_id": null,
+          "store": null,
+          "note": "too much information. the real ask is about the store, not the product exactly.",
+          "ts": "2026-09-18T10:47:02.317Z"
+        },
+        {
+          "note_index": 50,
+          "trace_id": "c7c918336747a818730e6bf1ca3506fc",
+          "order_id": null,
+          "store": null,
+          "note": "order id is unnecessary detail",
+          "ts": "2026-09-18T10:48:11.800Z"
+        },
+        {
+          "note_index": 55,
+          "trace_id": "e9f48e6de3778a6f7d5356943df48268",
+          "order_id": null,
+          "store": null,
+          "note": "unnecessary data",
+          "ts": "2026-09-18T10:52:23.194Z"
+        },
+        {
+          "note_index": 61,
+          "trace_id": "9f2ca35491d1cebb8777dd5643bfec5e",
+          "order_id": null,
+          "store": null,
+          "note": "too much information",
+          "ts": "2026-09-18T10:55:28.200Z"
+        },
+        {
+          "note_index": 65,
+          "trace_id": "af367466feb718768b14045b02bbd7b0",
+          "order_id": null,
+          "store": null,
+          "note": "order id is unnecessary detail",
+          "ts": "2026-09-18T10:57:59.664Z"
+        },
+        {
+          "note_index": 68,
+          "trace_id": "744d9f6a8a47ae71e1f5821621f06e6e",
+          "order_id": null,
+          "store": null,
+          "note": "order id is unnecessary detail",
+          "ts": "2026-09-18T10:59:20.813Z"
+        },
+        {
+          "note_index": 73,
+          "trace_id": "e3e7e2776ea3196de7acdca7d450bbc0",
+          "order_id": null,
+          "store": null,
+          "note": "unnecessary action",
+          "ts": "2026-09-18T11:00:52.035Z"
+        }
+      ]
+    },
+    {
+      "mode": "missing_clarification_or_disambiguation",
+      "definition": "The reply proceeds despite ambiguity, asks for an unnecessarily hard identifier, or fails to ask the user to confirm the candidate order/product/action before moving forward.",
+      "boundary": "Include notes about asking for product name instead of order ID, confirming a likely match, assumptions, and missing next-step clarification. Exclude extra details after a known target; those belong under unnecessary_detail_overload.",
+      "requirement_source": "SPEC.md RESP-3: state missing/inconsistent information rather than inventing values; may need a stronger disambiguation rule.",
+      "supporting_annotation_count": 9,
+      "supporting_trace_count": 8,
+      "supporting_annotations": [
+        {
+          "note_index": 4,
+          "trace_id": "d2fdbbb39bb1aa2c13674d5e379037af",
+          "order_id": null,
+          "store": null,
+          "note": "drop \"exact product name\" - product name should be enough\\",
+          "ts": "2026-09-18T10:08:22.478Z"
+        },
+        {
+          "note_index": 22,
+          "trace_id": "c8f92db31ccff89e08b51949908df3fe",
+          "order_id": null,
+          "store": null,
+          "note": "use exact product name instead - users do not remember or know the order ids",
+          "ts": "2026-09-18T10:25:45.898Z"
+        },
+        {
+          "note_index": 23,
+          "trace_id": "c8f92db31ccff89e08b51949908df3fe",
+          "order_id": null,
+          "store": null,
+          "note": "could have confirmed with the user first because user does not seem to remember what they order and when they had order it. After the confirmation, they can cancel/",
+          "ts": "2026-09-18T10:26:39.094Z"
+        },
+        {
+          "note_index": 32,
+          "trace_id": "376a003be2fb346b0a9817dc09a9c9fe",
+          "order_id": null,
+          "store": null,
+          "note": "order id, status, refund details are all unnecessary and confusing details. Ask the user first what they need help with after confirming that their order has been located.",
+          "ts": "2026-09-18T10:36:00.813Z"
+        },
+        {
+          "note_index": 45,
+          "trace_id": "711f10764478d49b30f0fe3a15317649",
+          "order_id": null,
+          "store": null,
+          "note": "agent making assumptions and guiding the user through a bumpy road",
+          "ts": "2026-09-18T10:44:35.339Z"
+        },
+        {
+          "note_index": 58,
+          "trace_id": "6d1fe5cbffc957525774784137281ada",
+          "order_id": null,
+          "store": null,
+          "note": "no clarification made about next steps and help offered to fix the problem",
+          "ts": "2026-09-18T10:54:18.257Z"
+        },
+        {
+          "note_index": 60,
+          "trace_id": "9f2ca35491d1cebb8777dd5643bfec5e",
+          "order_id": null,
+          "store": null,
+          "note": "making assumptions",
+          "ts": "2026-09-18T10:55:12.370Z"
+        },
+        {
+          "note_index": 66,
+          "trace_id": "af367466feb718768b14045b02bbd7b0",
+          "order_id": null,
+          "store": null,
+          "note": "could have confirmed with the user first because user does not seem to remember what they order and when they had order it. After the confirmation, they can cancel/",
+          "ts": "2026-09-18T10:58:25.270Z"
+        },
+        {
+          "note_index": 70,
+          "trace_id": "744d9f6a8a47ae71e1f5821621f06e6e",
+          "order_id": null,
+          "store": null,
+          "note": "should have listed closest match to what user asked and ask them to confirm",
+          "ts": "2026-09-18T10:59:56.797Z"
+        }
+      ]
+    },
+    {
+      "mode": "confusing_or_contradictory_answer",
+      "definition": "The reply contradicts itself, mixes distinct concepts, or leaves the user unclear about the actual status, decision, or reason.",
+      "boundary": "Include direct contradiction notes, unclear full-vs-partial refund wording, and mixing refund status with refund eligibility. Exclude too much but otherwise interpretable detail; that belongs under unnecessary_detail_overload.",
+      "requirement_source": "SPEC.md RESP-5; may need a SPEC revision about separating status, eligibility, reason, and next step.",
+      "supporting_annotation_count": 9,
+      "supporting_trace_count": 9,
+      "supporting_annotations": [
+        {
+          "note_index": 5,
+          "trace_id": "d2fdbbb39bb1aa2c13674d5e379037af",
+          "order_id": null,
+          "store": null,
+          "note": "contradiction to what was said in the beginning of the conversation",
+          "ts": "2026-09-18T10:08:53.622Z"
+        },
+        {
+          "note_index": 13,
+          "trace_id": "379b97d2d2ab40d9f88dda2d9da2b217",
+          "order_id": null,
+          "store": null,
+          "note": "confusing message, contradicting with what's asked and answered in other lines.",
+          "ts": "2026-09-18T10:19:14.036Z"
+        },
+        {
+          "note_index": 27,
+          "trace_id": "39c29018745ef39229596313743c2e67",
+          "order_id": null,
+          "store": null,
+          "note": "explain why it can not be refunded. Unclear message for the shopper\\",
+          "ts": "2026-09-18T10:31:58.259Z"
+        },
+        {
+          "note_index": 35,
+          "trace_id": "03293b341bd64bcbd20d10ec41865ae9",
+          "order_id": null,
+          "store": null,
+          "note": "confusing answer - checking refund status and refund eligibility in the same query is confusing.",
+          "ts": "2026-09-18T10:39:07.960Z"
+        },
+        {
+          "note_index": 51,
+          "trace_id": "c7c918336747a818730e6bf1ca3506fc",
+          "order_id": null,
+          "store": null,
+          "note": "confusing message - less clear.",
+          "ts": "2026-09-18T10:48:46.416Z"
+        },
+        {
+          "note_index": 52,
+          "trace_id": "4eb3bf043f6b4d5013a4e0d5fdd0464e",
+          "order_id": null,
+          "store": null,
+          "note": "unclear message - full refund vs partial refund",
+          "ts": "2026-09-18T10:50:49.627Z"
+        },
+        {
+          "note_index": 57,
+          "trace_id": "6d1fe5cbffc957525774784137281ada",
+          "order_id": null,
+          "store": null,
+          "note": "add additional details why missing product details could be bad",
+          "ts": "2026-09-18T10:53:50.374Z"
+        },
+        {
+          "note_index": 67,
+          "trace_id": "744d9f6a8a47ae71e1f5821621f06e6e",
+          "order_id": null,
+          "store": null,
+          "note": "confusing message, contradicting with what's asked and answered in other lines.",
+          "ts": "2026-09-18T10:58:56.046Z"
+        },
+        {
+          "note_index": 82,
+          "trace_id": "2a58d59844efc14cfc1f5a8fb2489d74",
+          "order_id": null,
+          "store": null,
+          "note": "confusing answer - checking refund status and refund eligibility in the same query is confusing.",
+          "ts": "2026-09-18T11:04:35.020Z"
+        }
+      ]
+    },
+    {
+      "mode": "missed_escalation_or_invented_rule",
+      "definition": "The reply should acknowledge uncertainty, route to a human/channel, or avoid making a rule up, but instead leaves the user without the needed handoff or invents authority.",
+      "boundary": "Include notes explicitly asking for escalation, a support/merchant channel, or saying the agent should not invent rules. Exclude ordinary missing links.",
+      "requirement_source": "SPEC.md ESC-3, ESC-4, RESP-3.",
+      "supporting_annotation_count": 2,
+      "supporting_trace_count": 2,
+      "supporting_annotations": [
+        {
+          "note_index": 64,
+          "trace_id": "9f2ca35491d1cebb8777dd5643bfec5e",
+          "order_id": null,
+          "store": null,
+          "note": "human escalation is needed - the agent is unsure, should not invent rules.",
+          "ts": "2026-09-18T10:57:16.033Z"
+        },
+        {
+          "note_index": 80,
+          "trace_id": "4d5f7611cdb1aeec2fde1580ed151132",
+          "order_id": null,
+          "store": null,
+          "note": "offer a channel between support and the merchant because it's missing data. Support and Merchant should clarify this.",
+          "ts": "2026-09-18T11:03:34.972Z"
+        }
+      ]
+    }
+  ],
+  "held_out_notes": {
+    "no_failure_observed": [
+      {
+        "note_index": 39,
+        "trace_id": "9ccf8cffd0d78254b85a7a1023980429",
+        "order_id": null,
+        "store": null,
+        "note": "no failures",
+        "ts": "2026-09-18T10:40:55.523Z"
+      }
+    ],
+    "review_infrastructure_or_schema_gap": [
+      {
+        "note_index": 8,
+        "trace_id": "016e3cc0f7504d6656aa564509d639ec",
+        "order_id": null,
+        "store": null,
+        "note": "ground truth tab does not show the order id",
+        "ts": "2026-09-18T10:11:56.169Z"
+      },
+      {
+        "note_index": 24,
+        "trace_id": "c8f92db31ccff89e08b51949908df3fe",
+        "order_id": null,
+        "store": null,
+        "note": "we could add a section about \"cancel_eligible\" so the agent can read the data directly from there",
+        "ts": "2026-09-18T10:29:21.222Z"
+      },
+      {
+        "note_index": 40,
+        "trace_id": "e75ac79481909be1b048b94f3df5b60b",
+        "order_id": null,
+        "store": null,
+        "note": "can not find order 42 in ground truth data",
+        "ts": "2026-09-18T10:41:45.405Z"
+      },
+      {
+        "note_index": 62,
+        "trace_id": "9f2ca35491d1cebb8777dd5643bfec5e",
+        "order_id": null,
+        "store": null,
+        "note": "product ids are missing in ground truth data.",
+        "ts": "2026-09-18T10:56:30.259Z"
+      }
+    ],
+    "not_promoted_policy_name_preference": [
+      {
+        "note_index": 6,
+        "trace_id": "d2fdbbb39bb1aa2c13674d5e379037af",
+        "order_id": null,
+        "store": null,
+        "note": "no need to call out specific policy name",
+        "ts": "2026-09-18T10:09:07.388Z"
+      },
+      {
+        "note_index": 10,
+        "trace_id": "fe47fec4e03cf55aa5df32fc9268fb60",
+        "order_id": null,
+        "store": null,
+        "note": "no need to call out specific policy name",
+        "ts": "2026-09-18T10:13:33.820Z"
+      },
+      {
+        "note_index": 41,
+        "trace_id": "e75ac79481909be1b048b94f3df5b60b",
+        "order_id": null,
+        "store": null,
+        "note": "no need to call out specific policy name",
+        "ts": "2026-09-18T10:42:03.495Z"
+      },
+      {
+        "note_index": 72,
+        "trace_id": "e3e7e2776ea3196de7acdca7d450bbc0",
+        "order_id": null,
+        "store": null,
+        "note": "no need to call out specific policy name",
+        "ts": "2026-09-18T11:00:36.699Z"
+      }
+    ],
+    "word_choice_tone_issue_needs_more_examples": [
+      {
+        "note_index": 17,
+        "trace_id": "a8d38a551dce6c17faa55af6d1704108",
+        "order_id": null,
+        "store": null,
+        "note": "\"override\" is a strong language to use externally.",
+        "ts": "2026-09-18T10:21:26.178Z"
+      }
+    ],
+    "scenario_authorization_context_question": [
+      {
+        "note_index": 9,
+        "trace_id": "016e3cc0f7504d6656aa564509d639ec",
+        "order_id": null,
+        "store": null,
+        "note": "which shopper id asked for that? We do not know if the shopper is authatorized to check the status.\\",
+        "ts": "2026-09-18T10:13:07.722Z"
+      }
+    ]
+  },
+  "human_decisions_needed": [
+    "Accept, rename, split, or reject each candidate mode.",
+    "Decide whether link/path expectations should become SPEC revisions before final structured labeling.",
+    "Re-check only the traces whose conversation context was fixed before using them as stable examples."
+  ]
+}

@@ -17,7 +17,9 @@ The mapping from concept to SDK primitive, stated once: the loop is
 from __future__ import annotations
 
 import hashlib
+import inspect
 import json
+from contextvars import ContextVar
 from typing import Any
 
 from agents import Agent, ModelSettings, RunContextWrapper, function_tool
@@ -30,6 +32,37 @@ from agent.helpcenter import get_index
 from agent.killswitch import kill_switch
 from observability.instrument import record_tool_result
 from seed.eligibility import refund_needs_approval
+
+
+_debug_tool_calls: ContextVar[list[dict[str, Any]] | None] = ContextVar(
+    "debug_tool_calls", default=None
+)
+
+
+def set_debug_tool_calls(log: list[dict[str, Any]] | None) -> Any:
+    """Set the tool-call log for the current chat turn."""
+    return _debug_tool_calls.set(log)
+
+
+def reset_debug_tool_calls(token: Any) -> None:
+    """Restore the previous tool-call log after a chat turn."""
+    _debug_tool_calls.reset(token)
+
+
+def _append_debug_tool_call(
+    tool_name: str, fn: Any, ctx: AuthContext, args: tuple[Any, ...], result: dict[str, Any]
+) -> None:
+    log = _debug_tool_calls.get()
+    if log is None:
+        return
+    bound = inspect.signature(fn).bind(ctx, *args)
+    log.append(
+        {
+            "name": tool_name,
+            "arguments": {key: value for key, value in bound.arguments.items() if key != "ctx"},
+            "result": result,
+        }
+    )
 
 # ---------------------------------------------------------------------------
 # System prompt (Artifact F). The injected-context block is filled by the
@@ -64,6 +97,10 @@ or credential changes, and anything outside Cartwheel.
 ## Tool guidance
 - Prefer a tool lookup over memory. Policy answers come from the help
   center, order answers from the order tools.
+- For merchant store ownership, store IDs, or store names, use
+    lookup_store_directory. Its default result is concise. Use
+    include_products only when products are explicitly requested; use the
+    product and policy tools for detailed product or policy questions.
 - Cite the policy id (for example cw-returns) for every policy claim.
 - Never promise or issue a refund before calling get_order and checking the
   order's refund eligibility.
@@ -326,6 +363,7 @@ def _call(
     except NotImplementedError as exc:
         result = {"ok": False, "error": "not_implemented", "reason": str(exc)}
     record_tool_result(wrapper.context, tool_name, result)
+    _append_debug_tool_call(tool_name, fn, wrapper.context, args, result)
     return result
 
 
@@ -391,7 +429,30 @@ def search_products(
     except NotImplementedError as exc:
         result = {"ok": False, "error": "not_implemented", "reason": str(exc)}
     record_tool_result(ctx, "search_products", result)
+    _append_debug_tool_call(
+        "search_products",
+        hw_tools.search_products,
+        ctx,
+        (query, store, max_price_usd, limit),
+        result,
+    )
     return result
+
+
+@function_tool
+def lookup_store_directory(
+    wrapper: RunContextWrapper[AuthContext],
+    merchant_id: int | None = None,
+    include_products: bool = False,
+) -> dict[str, Any]:
+    """Look up merchant store IDs and names, optionally including products."""
+    return _call(
+        wrapper,
+        "lookup_store_directory",
+        hw_tools.lookup_store_directory,
+        merchant_id,
+        include_products,
+    )
 
 
 @function_tool
@@ -424,13 +485,15 @@ _COMMON_TOOLS = [
     search_help_center,
     get_policy,
     search_products,
+    lookup_store_directory,
     get_order,
     issue_refund,
     cancel_order,
     escalate_to_human,
 ]
 TOOLS_BY_ROLE = {
-    "shopper": _COMMON_TOOLS + [list_my_orders, find_order],
+    "shopper": [tool for tool in _COMMON_TOOLS if tool is not lookup_store_directory]
+    + [list_my_orders, find_order],
     "merchant": _COMMON_TOOLS + [list_my_orders, find_order],
     "support": _COMMON_TOOLS + [find_order],
 }

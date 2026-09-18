@@ -129,6 +129,7 @@ def run_scenario(
                     "message": message,
                     "model": model,
                     "scenario_id": scenario["id"],
+                    "expected": scenario["expected"],
                 },
                 token=session["token"],
             )

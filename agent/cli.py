@@ -24,16 +24,23 @@ from __future__ import annotations
 
 import argparse
 import asyncio
+import json
 import time
 
 from agents import Runner, SQLiteSession
 from opentelemetry import trace
 
 from agent import db
-from agent.agent import build_agent, prompt_version, render_system_prompt
+from agent.agent import (
+    build_agent,
+    prompt_version,
+    render_system_prompt,
+    reset_debug_tool_calls,
+    set_debug_tool_calls,
+)
 from agent.auth import AuthContext
 from agent.config import REPO_ROOT
-from observability.instrument import load_env, setup_tracing
+from observability.instrument import load_env, setup_raindrop, setup_tracing
 
 DEFAULT_USERS = {"shopper": 1, "merchant": 9001, "support": 9501}
 MAX_TURNS = 12  # cap runaway loops; keeps conversations bounded
@@ -57,17 +64,26 @@ def resolve_auth(role: str, user_id: int | None) -> AuthContext:
     return AuthContext(user_id=user.id, role=user.role, store_id=user.store_id)
 
 
-async def chat(ctx: AuthContext, model: str | None, defenses: bool = False) -> None:
+async def chat(
+    ctx: AuthContext,
+    model: str | None,
+    defenses: bool = False,
+    debug: bool = False,
+    raindrop_client=None,
+) -> None:
     agent = build_agent(ctx, model=model, defenses=defenses)
-    session = SQLiteSession(
-        f"cli-{ctx.role}-{ctx.user_id}-{int(time.time())}", str(SESSIONS_DB)
-    )
+    model_name = getattr(agent.model, "model", agent.model)
+    if model_name is not None:
+        model_name = str(model_name)
+    session_id = f"cli-{ctx.role}-{ctx.user_id}-{int(time.time())}"
+    session = SQLiteSession(session_id, str(SESSIONS_DB))
     version = prompt_version(render_system_prompt(ctx))
     print(
         f"Cartwheel support CLI | role={ctx.role} user={ctx.user_id} "
         f"store={ctx.store_id} prompt_version={version} defenses={'on' if defenses else 'off'}"
     )
     print("Type a message, or 'quit' to exit.\n")
+    turn_index = 0
     while True:
         try:
             line = input(f"{ctx.role}> ").strip()
@@ -78,14 +94,47 @@ async def chat(ctx: AuthContext, model: str | None, defenses: bool = False) -> N
             continue
         if line.lower() in {"quit", "exit"}:
             return
-        with _tracer.start_as_current_span("cartwheel.session_message") as span:
-            if span.is_recording():
-                span.set_attribute("cartwheel.user_role", ctx.role)
-                span.set_attribute("cartwheel.user_id", str(ctx.user_id))
-                span.set_attribute("cartwheel.prompt_version", version)
-            result = await Runner.run(
-                agent, line, session=session, context=ctx, max_turns=MAX_TURNS
+        turn_index += 1
+        rd_interaction = None
+        if raindrop_client is not None:
+            rd_interaction = raindrop_client.begin(
+                user_id=str(ctx.user_id),
+                event="cartwheel.cli.turn",
+                event_id=f"{session_id}-{turn_index}",
+                convo_id=session_id,
+                input=line,
+                model=model_name,
+                properties={
+                    "cartwheel.surface": "cli",
+                    "cartwheel.user_role": ctx.role,
+                    "cartwheel.user_id": str(ctx.user_id),
+                    "cartwheel.store_id": ctx.store_id,
+                    "cartwheel.prompt_version": version,
+                    "cartwheel.session_id": session_id,
+                    "cartwheel.turn_index": turn_index,
+                    "cartwheel.defenses": defenses,
+                },
             )
+        try:
+            with _tracer.start_as_current_span("cartwheel.session_message") as span:
+                if span.is_recording():
+                    span.set_attribute("cartwheel.user_role", ctx.role)
+                    span.set_attribute("cartwheel.user_id", str(ctx.user_id))
+                    span.set_attribute("cartwheel.prompt_version", version)
+                tool_calls: list[dict] = []
+                debug_token = set_debug_tool_calls(tool_calls) if debug else None
+                try:
+                    result = await Runner.run(
+                        agent, line, session=session, context=ctx, max_turns=MAX_TURNS
+                    )
+                finally:
+                    if debug_token is not None:
+                        reset_debug_tool_calls(debug_token)
+        except Exception as exc:
+            if rd_interaction is not None:
+                rd_interaction.finish(output=f"Error: {type(exc).__name__}: {exc}")
+                raindrop_client.flush()
+            raise
 
         # ------------------------------------------------------------------
         # Module 4 pause and resume code (Homework 8, Part D). With defenses on,
@@ -122,7 +171,22 @@ async def chat(ctx: AuthContext, model: str | None, defenses: bool = False) -> N
                 "See the seam comment above."
             )
 
-        print(f"\nagent> {result.final_output}\n")
+        print(f"\nagent> {result.final_output}")
+        if rd_interaction is not None:
+            rd_interaction.set_properties(
+                {
+                    "cartwheel.tool_call_count": len(tool_calls),
+                    "cartwheel.tool_call_names": [call["name"] for call in tool_calls],
+                    "cartwheel.tool_call_ok": [
+                        call.get("result", {}).get("ok") for call in tool_calls
+                    ],
+                }
+            )
+            rd_interaction.finish(output=str(result.final_output))
+            raindrop_client.flush()
+        if debug:
+            print("tool_calls> " + json.dumps(tool_calls, sort_keys=True))
+        print()
 
 
 def main() -> None:
@@ -142,13 +206,32 @@ def main() -> None:
         action="store_true",
         help="turn on the Module 4 guards and the refund approval pause (Homework 8)",
     )
+    parser.add_argument(
+        "--debug",
+        action="store_true",
+        help="print each tool call's name, arguments, and result after each turn",
+    )
+    parser.add_argument(
+        "--raindrop",
+        action="store_true",
+        help="mirror CLI turns to local Raindrop Workshop",
+    )
     args = parser.parse_args()
 
     load_env()
     if args.trace:
         setup_tracing()
+    raindrop_client = setup_raindrop() if args.raindrop else None
     ctx = resolve_auth(args.role, args.user)
-    asyncio.run(chat(ctx, args.model, defenses=args.defenses))
+    asyncio.run(
+        chat(
+            ctx,
+            args.model,
+            defenses=args.defenses,
+            debug=args.debug,
+            raindrop_client=raindrop_client,
+        )
+    )
 
 
 if __name__ == "__main__":

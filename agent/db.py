@@ -126,6 +126,17 @@ def get_user(conn: sqlite3.Connection, user_id: int) -> User | None:
     return User(id=row["id"], name=row["name"], role=row["role"], store_id=row["store_id"])
 
 
+def list_users_by_role(conn: sqlite3.Connection, role: str) -> list[User]:
+    """List users with a role, ordered by user id."""
+    rows = conn.execute(
+        "SELECT * FROM users WHERE role = ? ORDER BY id", (role,)
+    ).fetchall()
+    return [
+        User(id=row["id"], name=row["name"], role=row["role"], store_id=row["store_id"])
+        for row in rows
+    ]
+
+
 def get_store(conn: sqlite3.Connection, store_id: int) -> Store | None:
     row = conn.execute("SELECT * FROM stores WHERE id = ?", (store_id,)).fetchone()
     return _store_from_row(row) if row else None

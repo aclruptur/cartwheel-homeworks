@@ -12,6 +12,7 @@ from agent.agent import (
     search_help_center_logic,
 )
 from agent.auth import AuthContext
+from agent import tools
 
 SHOPPER_1 = AuthContext(user_id=1, role="shopper")
 SHOPPER_2 = AuthContext(user_id=2, role="shopper")
@@ -93,3 +94,29 @@ def test_refund_respects_scope(world_copy: Path) -> None:
     result = issue_refund_logic(SHOPPER_2, 4127, 84.0, "not my order")
     assert result["ok"] is False
     assert result["error"] == "permission_denied"
+
+
+def test_store_directory_scopes_merchants_and_support(world: dict) -> None:
+    merchant = tools.lookup_store_directory(MERCHANT_STORE_2)
+    assert merchant["ok"] is True
+    assert merchant["count"] == 1
+    assert merchant["merchants"][0]["merchant_id"] == 9002
+    assert merchant["merchants"][0]["store_ids"] == [2]
+    assert merchant["merchants"][0]["stores"] == [
+        {"store_id": 2, "name": "Juniper Home Goods"}
+    ]
+
+    detailed = tools.lookup_store_directory(MERCHANT_STORE_2, include_products=True)
+    assert detailed["merchants"][0]["stores"][0]["products"]
+
+    support = tools.lookup_store_directory(SUPPORT, merchant_id=9002)
+    assert support["ok"] is True
+    assert support["merchants"][0]["store_ids"] == [2]
+
+    denied = tools.lookup_store_directory(MERCHANT_STORE_2, merchant_id=9001)
+    assert denied["ok"] is False
+    assert denied["error"] == "permission_denied"
+
+    shopper = tools.lookup_store_directory(SHOPPER_1)
+    assert shopper["ok"] is False
+    assert shopper["error"] == "permission_denied"

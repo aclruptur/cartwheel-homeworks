@@ -66,6 +66,32 @@ def setup_tracing() -> None:
     log.info("tracing enabled; spans go to %s", os.environ.get("LANGFUSE_HOST"))
 
 
+
+
+def setup_raindrop():
+    """Mirror top-level agent interactions to local Raindrop Workshop.
+
+    This intentionally does not enable Raindrop OpenTelemetry
+    auto-instrumentation. Langfuse owns the process-wide OTel provider in this
+    course repo, so Raindrop is used as a lightweight interaction boundary for
+    Homework 4 Part C Workshop inspection.
+    """
+    load_env()
+    try:
+        import raindrop.analytics as raindrop
+    except ImportError:
+        log.warning("raindrop-ai is not installed; Raindrop tracing is off.")
+        return None
+
+    raindrop.init(
+        os.environ.get("RAINDROP_WRITE_KEY") or "",
+        tracing_enabled=False,
+        auto_instrument=False,
+        max_text_field_chars=1_000_000,
+    )
+    log.info("raindrop enabled; interactions mirror to local Workshop when available")
+    return raindrop
+
 def record_tool_result(
     ctx: "AuthContext", tool_name: str, result: dict[str, Any]
 ) -> None:
@@ -83,10 +109,12 @@ def record_tool_result(
     with _tracer.start_as_current_span("cartwheel.tool_result") as span:
         if not span.is_recording():
             return
-        ### YOUR CODE HERE (HW2)
-        raise NotImplementedError(
-            "HW2: record the tool name, authenticated caller, and denial attributes"
-        )
+        span.set_attribute("gen_ai.tool.name", tool_name)
+        span.set_attribute("cartwheel.user_role", ctx.role)
+        span.set_attribute("cartwheel.user_id", str(ctx.user_id))
+        if ctx.role == "merchant":
+            span.set_attribute("cartwheel.store_id", ctx.store_id)
+        _set_permission_denied_attributes(span, result)
 
 
 def _set_permission_denied_attributes(
@@ -110,5 +138,9 @@ def _set_permission_denied_attributes(
     the smoke report counts them and Module 3 asserts on them. This is the one place in the
     course where you touch instrumentation by hand.
     """
-    ### YOUR CODE HERE (HW2)
-    raise NotImplementedError("HW2: set the cartwheel.permission_denied span attribute")
+    denied = result.get("error") == "permission_denied"
+    span.set_attribute("cartwheel.permission_denied", denied)
+    if denied:
+        span.set_attribute(
+            "cartwheel.permission_denied.reason", result.get("reason", "")
+        )

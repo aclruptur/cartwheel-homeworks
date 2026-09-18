@@ -1,0 +1,20 @@
+{
+  "ok": true,
+  "started_at": "2026-09-18T17:14:58.488142+00:00",
+  "finished_at": "2026-09-18T17:15:02.217759+00:00",
+  "taxonomy_version": "final_7_mode_merged_v1",
+  "reviewed_trace_count": 100,
+  "mode_count": 7,
+  "expected_scores": 700,
+  "scores_written": 700,
+  "mode_score_counts": {
+    "unhandled_data_quality_or_record_inconsistency": 100,
+    "missing_actionable_next_step": 100,
+    "identifier_heavy_or_missing_item_context": 100,
+    "unnecessary_detail_overload": 100,
+    "missing_clarification_or_disambiguation": 100,
+    "confusing_or_unsupported_answer": 100,
+    "presentation_formatting_noise": 100
+  },
+  "failures": []
+}

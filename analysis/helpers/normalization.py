@@ -26,7 +26,47 @@ def _text(value: Any) -> str:
         return ""
     if isinstance(value, str):
         return value
+    if isinstance(value, list) and all(isinstance(_data(item), dict) for item in value):
+        parts: list[str] = []
+        for item in value:
+            item = _data(item)
+            role = item.get("role")
+            item_parts = item.get("parts")
+            if isinstance(item_parts, list):
+                content = " ".join(
+                    str(part.get("content"))
+                    for part in item_parts
+                    if isinstance(part, dict) and part.get("content") is not None
+                )
+                if content:
+                    parts.append(f"{role}: {content}" if role else content)
+        if parts:
+            return "\n".join(parts)
     return json.dumps(value, ensure_ascii=False, sort_keys=True, default=str)
+
+
+def _chat_text(value: Any, expected_role: str | None = None) -> str:
+    """Extract readable content from chat-message arrays."""
+    value = _data(value)
+    if isinstance(value, list) and all(isinstance(_data(item), dict) for item in value):
+        parts: list[str] = []
+        for item in value:
+            item = _data(item)
+            role = item.get("role")
+            if expected_role and role and role != expected_role:
+                continue
+            item_parts = item.get("parts")
+            if isinstance(item_parts, list):
+                content = " ".join(
+                    str(part.get("content"))
+                    for part in item_parts
+                    if isinstance(part, dict) and part.get("content") is not None
+                )
+                if content:
+                    parts.append(content)
+        if parts:
+            return "\n".join(parts)
+    return _text(value)
 
 
 def _timestamp(value: Any) -> str | None:
@@ -83,6 +123,55 @@ def _metadata(record: dict[str, Any]) -> dict[str, Any]:
     return dict(metadata) if isinstance(metadata, dict) else {}
 
 
+def _metadata_value(metadata: dict[str, Any], *keys: str) -> Any:
+    """Read a metadata value from either flat or OpenTelemetry attribute shape."""
+    attributes = metadata.get("attributes")
+    for key in keys:
+        if metadata.get(key) is not None:
+            return metadata.get(key)
+        if isinstance(attributes, dict) and attributes.get(key) is not None:
+            return attributes.get(key)
+    return None
+
+
+def _expected_from_metadata(metadata: dict[str, Any]) -> dict[str, Any] | None:
+    """Read a scenario expected answer key from Langfuse trace metadata."""
+    raw_expected = _metadata_value(metadata, "cartwheel.expected")
+    if isinstance(raw_expected, str) and raw_expected.strip():
+        try:
+            parsed = json.loads(raw_expected)
+        except json.JSONDecodeError:
+            parsed = None
+        if isinstance(parsed, dict):
+            return parsed
+    if isinstance(raw_expected, dict):
+        return raw_expected
+
+    evaluation = _metadata_value(metadata, "cartwheel.expected.evaluation")
+    outcome = _metadata_value(metadata, "cartwheel.expected.outcome")
+    criterion = _metadata_value(metadata, "cartwheel.expected.criterion")
+    source_type = _metadata_value(metadata, "cartwheel.expected.source.type")
+    source_reference = _metadata_value(metadata, "cartwheel.expected.source.reference")
+    if not any([evaluation, outcome, criterion, source_type, source_reference]):
+        return None
+
+    expected: dict[str, Any] = {}
+    if evaluation:
+        expected["evaluation"] = evaluation
+    if outcome:
+        expected["outcome"] = outcome
+    if criterion:
+        expected["criterion"] = criterion
+    source: dict[str, Any] = {}
+    if source_type:
+        source["type"] = source_type
+    if source_reference:
+        source["reference"] = source_reference
+    if source:
+        expected["source"] = source
+    return expected
+
+
 def _observation_message(observation: Any) -> list[dict[str, Any]]:
     obs = _data(observation)
     if not isinstance(obs, dict):
@@ -101,7 +190,7 @@ def _observation_message(observation: Any) -> list[dict[str, Any]]:
             messages.append(
                 {"role": "tool_result", "name": name, "content": _data(out)}
             )
-    elif out is not None:
+    elif out is not None and ("retriev" in lowered or "policy" in lowered):
         messages.append({"role": "observation", "label": name, "text": _text(out)})
     return messages
 
@@ -127,11 +216,13 @@ def _messages(record: dict[str, Any]) -> list[dict[str, Any]]:
 
     messages = []
     if record.get("input") is not None:
-        messages.append({"role": "user", "text": _text(record.get("input"))})
+        messages.append({"role": "user", "text": _chat_text(record.get("input"), "user")})
     for observation in record.get("observations") or []:
         messages.extend(_observation_message(observation))
     if record.get("output") is not None:
-        messages.append({"role": "assistant", "text": _text(record.get("output"))})
+        messages.append(
+            {"role": "assistant", "text": _chat_text(record.get("output"), "assistant")}
+        )
 
     segments = record.get("segments")
     if not messages and isinstance(segments, dict):
@@ -197,14 +288,24 @@ def normalize_trace(value: Any) -> dict[str, Any]:
         }
     )
     meta = {
-        "role": metadata.get("cartwheel.user_role") or metadata.get("role"),
-        "store": metadata.get("cartwheel.store_id") or metadata.get("store_id"),
-        "prompt_version": metadata.get("cartwheel.prompt_version")
-        or metadata.get("prompt_version"),
+        "role": _metadata_value(metadata, "cartwheel.user_role", "role"),
+        "user_id": raw.get("userId")
+        or _metadata_value(metadata, "cartwheel.user_id", "user_id"),
+        "store": _metadata_value(metadata, "cartwheel.store_id", "store_id"),
+        "conversation_id": raw.get("sessionId")
+        or _metadata_value(metadata, "cartwheel.session_id")
+        or raw.get("cartwheel_scenario_id")
+        or _metadata_value(metadata, "cartwheel.scenario_id", "scenario_id"),
+        "prompt_version": _metadata_value(
+            metadata, "cartwheel.prompt_version", "prompt_version"
+        ),
         "scenario_id": raw.get("cartwheel_scenario_id")
-        or metadata.get("cartwheel.scenario_id")
-        or metadata.get("scenario_id"),
+        or _metadata_value(metadata, "cartwheel.scenario_id", "scenario_id"),
     }
+    raw_expected = _data(raw.get("expected"))
+    expected = raw_expected if isinstance(raw_expected, dict) else None
+    if expected is None:
+        expected = _expected_from_metadata(metadata)
     supplied_segments = raw.get("segments")
     segments = dict(supplied_segments) if isinstance(supplied_segments, dict) else {}
     segments.update({key: val for key, val in meta.items() if val is not None})
@@ -234,6 +335,9 @@ def normalize_trace(value: Any) -> dict[str, Any]:
         "meta": {key: val for key, val in meta.items() if val is not None},
         "segments": segments,
         "metadata": metadata,
+        "expected": expected,
+        "expected_summary": (expected or {}).get("outcome")
+        or (expected or {}).get("criterion"),
         "permalink": raw.get("permalink") or raw.get("url"),
     }
 

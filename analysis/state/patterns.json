@@ -1,139 +1,49 @@
 {
   "modes": [
     {
-      "name": "unsupported_policy_claim",
-      "definition": "The reply asserts a policy fact that no retrieved or existing policy doc supports (invented remedies, wrong-store terms, superseded platform defaults).",
-      "status": "frozen",
-      "example_trace_ids": [
-        "T2",
-        "D7",
-        "D10"
-      ],
-      "created_from": [
-        "T2",
-        "D7",
-        "D10"
-      ],
-      "first_failure_count": 5,
-      "any_instance_count": 7,
-      "evaluator_type": "judge",
-      "requirement_source": "SPEC.md, RESP-1",
-      "judge_decision": "use",
-      "evaluation_case_candidates": [
-        "T2",
-        "D7",
-        "D10"
+      "mode": "unhandled_data_quality_or_record_inconsistency",
+      "definition": "The source order/product/policy record is missing, corrupted, contradictory, or otherwise inconsistent, and the assistant treats the record as normal or gives an unsupported answer instead of flagging/escalating it.",
+      "binary_rule": "Fail when the trace contains source-record inconsistency or missing critical source data and the assistant does not clearly flag/escalate it. Pass when no such defect appears, or the assistant explicitly flags/escalates the defect without normalizing it."
+    },
+    {
+      "mode": "missing_actionable_next_step",
+      "definition": "The answer requires the user or a human support process to continue, but omits the concrete path, reference, owner, tracking destination, or follow-up step needed to proceed.",
+      "binary_rule": "Fail when the response leaves out a concrete reference, link, account path, policy/help-center page, owner, ticket/status location, or next handoff step needed for the user role to continue. Pass when no next step is needed or the response gives a clear enough path.",
+      "merged_from": [
+        "missing_actionable_reference",
+        "missing_human_review_followup_path"
       ]
     },
     {
-      "name": "unconfirmed_write_action",
-      "definition": "The agent executes a write tool (refund, cancel) without explicit user confirmation when the user's message was a question or ambiguous.",
-      "status": "confirmed",
-      "example_trace_ids": [
-        "T1",
-        "D8",
-        "D4"
-      ],
-      "created_from": [
-        "T1",
-        "D8"
-      ],
-      "first_failure_count": 5,
-      "any_instance_count": 5,
-      "evaluator_type": "judge",
-      "requirement_source": "SPEC.md revision motivated by annotation T1",
-      "evaluation_case_candidates": [
-        "T1",
-        "D8"
+      "mode": "identifier_heavy_or_missing_item_context",
+      "definition": "The answer relies on raw order IDs/product IDs/refund IDs/bare prices, or omits product names/images/links/context, making it hard for the user to recognize the item, order, refund, or cancellation.",
+      "binary_rule": "Fail when the response centers internal IDs or lacks user-recognizable item/order context. Pass when the answer gives enough user-facing context to identify the object."
+    },
+    {
+      "mode": "unnecessary_detail_overload",
+      "definition": "The answer includes extra policy mechanics, calculations, statuses, IDs, records, or long lists that distract from the current ask.",
+      "binary_rule": "Fail when the response includes material extra detail that makes the answer harder to use. Pass when the response stays focused on the task even if it includes necessary facts."
+    },
+    {
+      "mode": "missing_clarification_or_disambiguation",
+      "definition": "The assistant proceeds with a likely match, action, or answer before clarifying an ambiguous product, order, timeframe, user intent, or support context.",
+      "binary_rule": "Fail when the trace needed a clarifying question or confirmation before proceeding. Pass when the target/action was clear or the assistant appropriately asks for confirmation."
+    },
+    {
+      "mode": "confusing_or_unsupported_answer",
+      "definition": "The response gives a conflicting, misleading, unclear, or unsupported interpretation of status, policy, authorization, matching evidence, refund options, or next steps.",
+      "binary_rule": "Fail when the text leaves the user with a contradictory or materially confusing interpretation, or asserts an option/outcome that the available policy or tool evidence does not support. Pass when the answer is supported and any issue is only missing links, excess detail, or formatting without contradiction.",
+      "merged_from": [
+        "confusing_or_contradictory_answer",
+        "unsupported_or_invented_refund_option"
       ]
     },
     {
-      "name": "tool_result_misreport",
-      "definition": "The reply contradicts or invents what a tool actually returned (pending reported as done, empty results described as data).",
-      "status": "confirmed",
-      "example_trace_ids": [
-        "T3",
-        "D9",
-        "D4"
-      ],
-      "created_from": [
-        "T3",
-        "D9"
-      ],
-      "first_failure_count": 4,
-      "any_instance_count": 6,
-      "evaluator_type": "judge",
-      "requirement_source": "SPEC.md, RESP-2",
-      "evaluation_case_candidates": [
-        "T3",
-        "D9"
-      ]
-    },
-    {
-      "name": "missing_order_disambiguation",
-      "definition": "Multiple candidate orders exist and the agent picks one silently instead of asking.",
-      "status": "confirmed",
-      "example_trace_ids": [
-        "D4",
-        "D5",
-        "D9"
-      ],
-      "created_from": [
-        "D4"
-      ],
-      "first_failure_count": 3,
-      "any_instance_count": 4,
-      "evaluator_type": "code",
-      "requirement_source": "SPEC.md revision motivated by annotation D4",
-      "evaluation_case_candidates": [
-        "D4"
-      ]
-    },
-    {
-      "name": "stale_context_carryover",
-      "definition": "A constraint stated earlier in the session is dropped or contradicted later.",
-      "status": "confirmed",
-      "example_trace_ids": [
-        "D5",
-        "D4",
-        "D10"
-      ],
-      "created_from": [
-        "D5"
-      ],
-      "first_failure_count": 2,
-      "any_instance_count": 3,
-      "evaluator_type": "judge",
-      "requirement_source": "SPEC.md revision motivated by annotation D5",
-      "evaluation_case_candidates": [
-        "D5"
-      ]
-    },
-    {
-      "name": "sycophantic_opener",
-      "definition": "The reply opens with performative empathy unrelated to the user's actual tone or issue.",
-      "status": "confirmed",
-      "example_trace_ids": [
-        "D6",
-        "T1",
-        "D7"
-      ],
-      "created_from": [
-        "D6"
-      ],
-      "first_failure_count": 2,
-      "any_instance_count": 6,
-      "evaluator_type": "judge",
-      "requirement_source": "SPEC.md, RESP-5",
-      "evaluation_case_candidates": [
-        "D6"
-      ]
+      "mode": "presentation_formatting_noise",
+      "definition": "Visible Markdown markers, badly rendered tables, or other presentation choices make the response harder to read.",
+      "binary_rule": "Fail when formatting/presentation noise is present. Pass when no formatting issue was noted."
     }
   ],
-  "reconciliation": {
-    "traces_open_coded": 60,
-    "first_failure_total": 21,
-    "any_instance_total": 31,
-    "distinct_failing_traces_after_scan": 24
-  }
+  "created_at": "2026-09-18T17:10:18.242184+00:00",
+  "reviewed_trace_count": 100
 }

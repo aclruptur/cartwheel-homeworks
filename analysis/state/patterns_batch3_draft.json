@@ -1,0 +1,584 @@
+{
+  "batch": "part_b_batch_3",
+  "reviewed_counted_traces": 25,
+  "annotation_notes": 61,
+  "candidate_modes": [
+    {
+      "mode": "unhandled_data_quality_or_record_inconsistency",
+      "definition": "The reply treats corrupted, inconsistent, missing, or duplicate source data as normal instead of flagging the record problem and routing it to a human or repair path.",
+      "boundary": "Include false confidence about store mismatches, reversed dates, invalid negative prices, missing titles, and duplicate-title records when the response ignores or normalizes the source-data problem. Exclude ordinary ambiguous product matching without a known data-quality defect.",
+      "relationship": "Broadens Batch 2 `missed_data_quality_escalation`; Batch 3 shows the issue is not limited to order/store mismatches.",
+      "requirement_source": "SPEC.md RESP-3: state missing or inconsistent information rather than inventing or normalizing values; escalation policy for cases the assistant cannot resolve from policy and the order record.",
+      "supporting_notes": [
+        {
+          "note_number": 1,
+          "trace_id": "483a07d37cfdb9e8e0bcf17f3050e16f",
+          "scenario_id": "support-0189",
+          "role": "support",
+          "quote": "I don’t see a store ID/name mismatch on the order.",
+          "note": "overly confident when the answer is false - Order #8003 is tied to store 1 (Blue Heron Ceramics), but product 553 belongs to store 14 (Golden Hour Coffee)."
+        },
+        {
+          "note_number": 2,
+          "trace_id": "e2a0a77813a5b9277c1788dfd7722bb1",
+          "scenario_id": "support-0187",
+          "role": "shopper",
+          "quote": "Details:",
+          "note": "overly confident when the answer is false."
+        },
+        {
+          "note_number": 3,
+          "trace_id": "e2a0a77813a5b9277c1788dfd7722bb1",
+          "scenario_id": "support-0187",
+          "role": "shopper",
+          "quote": "The jam-related order I found is order **#8003**.",
+          "note": "escalating path to human agent is missing - the broken records needs fixing."
+        },
+        {
+          "note_number": 5,
+          "trace_id": "94671b82200254e8e6b773d106cec477",
+          "scenario_id": "support-0183",
+          "role": "merchant",
+          "quote": "**June 23, 2026*",
+          "note": "incorrectly confident even though the case should have been flagged to a human for further investigation. Agent needs to be more vary about the incosistencies"
+        },
+        {
+          "note_number": 8,
+          "trace_id": "2eab0e9c080fd6b62c423857082c3afe",
+          "scenario_id": "support-0199",
+          "role": "shopper",
+          "quote": "**-$5.00**",
+          "note": "fatal mistake -> missing data problem and ignoring it completely - should have escalated this to a human agent."
+        },
+        {
+          "note_number": 12,
+          "trace_id": "0c8b63933204e67483d89ba01e5eb68f",
+          "scenario_id": "support-0204",
+          "role": "merchant",
+          "quote": "**Title:** No title listed",
+          "note": "no flag for the missing data to the merchant. Agent ignores the problem completely."
+        },
+        {
+          "note_number": 15,
+          "trace_id": "b7e6e9a02d897418212ee3d32640d941",
+          "scenario_id": "support-0194",
+          "role": "merchant",
+          "quote": "Heavy-Duty Vase from Blue Heron Ceramics. Placeholder dev-scale listing; the full-scale catalog is sampled from the Amazon Reviews 2023 metadata.",
+          "note": "flag same name issue - duplicates. `agent ignores that"
+        }
+      ]
+    },
+    {
+      "mode": "presentation_formatting_noise",
+      "definition": "The response presentation makes the answer harder to read through visible Markdown markers or hard-to-scan table formatting.",
+      "boundary": "Include visible ** markers and table-display complaints. Exclude content overload unless the note is about visual readability.",
+      "relationship": "Confirmed from Batches 1 and 2.",
+      "requirement_source": "SPEC.md RESP-5: direct and useful language; also a product/UI formatting expectation.",
+      "supporting_notes": [
+        {
+          "note_number": 4,
+          "trace_id": "714fbe9bedbfd275e6539b165de3d60b",
+          "scenario_id": "support-0181",
+          "role": "support",
+          "quote": "*",
+          "note": "no need to use ** marks. Noisy signs that makes it harder to read. Should use bold font instead."
+        },
+        {
+          "note_number": 9,
+          "trace_id": "6e0857b411210dd228ca6cc0ba8ee42e",
+          "scenario_id": "support-0198",
+          "role": "support",
+          "quote": "*.",
+          "note": "no need to use ** marks. Noisy signs that makes it harder to read. Should use bold font instead."
+        },
+        {
+          "note_number": 14,
+          "trace_id": "b7e6e9a02d897418212ee3d32640d941",
+          "scenario_id": "support-0194",
+          "role": "merchant",
+          "quote": "| Product ID | Title | Category | Price | Description |",
+          "note": "bad formatting - need better table display"
+        },
+        {
+          "note_number": 24,
+          "trace_id": "ef201978c660e9b3b8f56fd249675941",
+          "scenario_id": "support-0095",
+          "role": "merchant",
+          "quote": "**.",
+          "note": "no need to use ** marks. Noisy signs that makes it harder to read. Should use bold font instead."
+        },
+        {
+          "note_number": 28,
+          "trace_id": "c7510a8f54af106b96b2856c00273e5f",
+          "scenario_id": "support-0039",
+          "role": "shopper",
+          "quote": "*",
+          "note": "no need to use ** marks. Noisy signs that makes it harder to read. Should use bold font instead."
+        },
+        {
+          "note_number": 51,
+          "trace_id": "26a5acb6094f57f898de43da211b84e7",
+          "scenario_id": "support-0250",
+          "role": "shopper",
+          "quote": "*",
+          "note": "no need to use ** marks. Noisy signs that makes it harder to read. Should use bold font instead."
+        },
+        {
+          "note_number": 61,
+          "trace_id": "5b4e0043940e5872a5a0e673493117d0",
+          "scenario_id": "support-0083",
+          "role": "merchant",
+          "quote": "| Order ID | Product ID | Qty | Total | Status | Ordered | Shipped | Delivered | Refund eligible |",
+          "note": "bad formatting - need better table display"
+        }
+      ]
+    },
+    {
+      "mode": "unnecessary_detail_overload",
+      "definition": "The reply includes extra status, ticket/refund IDs, policy names, policy mechanics, or long order lists that distract from the current ask.",
+      "boundary": "Include facts the user does not need at this step. Exclude cases where the main problem is missing user-recognizable item context; those belong under `identifier_heavy_or_missing_item_context`.",
+      "relationship": "Confirmed from Batches 1 and 2.",
+      "requirement_source": "SPEC.md RESP-5: clear, useful, task-focused responses.",
+      "supporting_notes": [
+        {
+          "note_number": 7,
+          "trace_id": "309ebfbc9689dca92e3a7c7b6a9f5670",
+          "scenario_id": "support-0180",
+          "role": "support",
+          "quote": "not the purchase date",
+          "note": "do not need call out the opposite - already clarified the conditions in the previous sentence"
+        },
+        {
+          "note_number": 11,
+          "trace_id": "3eb872501faea4390f6b4ae6ec61435f",
+          "scenario_id": "support-0205",
+          "role": "shopper",
+          "quote": "**Ticket #160**",
+          "note": "no need to share the ticket id with the user as they do not need it."
+        },
+        {
+          "note_number": 26,
+          "trace_id": "77b1ffab2763d78d774327fc10967f1d",
+          "scenario_id": "support-0092",
+          "role": "merchant",
+          "quote": "Status: auto-approved",
+          "note": "no need to call out specific status about auto-approvals"
+        },
+        {
+          "note_number": 30,
+          "trace_id": "c7510a8f54af106b96b2856c00273e5f",
+          "scenario_id": "support-0039",
+          "role": "shopper",
+          "quote": "**Refund request ID:** 577",
+          "note": "too much information - refund request id is not needed"
+        },
+        {
+          "note_number": 31,
+          "trace_id": "c7510a8f54af106b96b2856c00273e5f",
+          "scenario_id": "support-0039",
+          "role": "shopper",
+          "quote": "**Support ticket:** 151",
+          "note": "too much information - support ticket id is not relevant"
+        },
+        {
+          "note_number": 32,
+          "trace_id": "c7510a8f54af106b96b2856c00273e5f",
+          "scenario_id": "support-0039",
+          "role": "shopper",
+          "quote": "Because the amount is over the auto-approval threshold, it’s been queued for human review.",
+          "note": "too much information about policies."
+        },
+        {
+          "note_number": 37,
+          "trace_id": "f546444044510518456a2afa5e67481f",
+          "scenario_id": "support-0026",
+          "role": "shopper",
+          "quote": "*cw-cancellations**",
+          "note": "too much information - policy names do not need to be called out."
+        },
+        {
+          "note_number": 39,
+          "trace_id": "f546444044510518456a2afa5e67481f",
+          "scenario_id": "support-0026",
+          "role": "shopper",
+          "quote": "return/refund eligible",
+          "note": "too much data, user is only asking aboiut cards and we unload data about all the orders. Irrelevant and confusing data for the user"
+        }
+      ]
+    },
+    {
+      "mode": "missing_clarification_or_disambiguation",
+      "definition": "The reply proceeds despite uncertainty about the intended product, order, timeframe, or support action instead of confirming the target first.",
+      "boundary": "Include vague wording, likely-match assertions, missing confirmation before refund/cancellation, and support workflows where the next action should be clarified. Exclude known data-quality defects; those belong under `unhandled_data_quality_or_record_inconsistency`.",
+      "relationship": "Confirmed from Batches 1 and 2.",
+      "requirement_source": "SPEC.md RESP-3 and RESP-5.",
+      "supporting_notes": [
+        {
+          "note_number": 13,
+          "trace_id": "0c8b63933204e67483d89ba01e5eb68f",
+          "scenario_id": "support-0204",
+          "role": "merchant",
+          "quote": "appears to be",
+          "note": "vague language - appears to be vs is"
+        },
+        {
+          "note_number": 17,
+          "trace_id": "d7f49dd47c67a8050ac129fa3a7c3046",
+          "scenario_id": "support-0193",
+          "role": "support",
+          "quote": "a link so you can confirm the exact price.",
+          "note": "unhelpful - support user could provide the list to get confirmation."
+        },
+        {
+          "note_number": 27,
+          "trace_id": "c7510a8f54af106b96b2856c00273e5f",
+          "scenario_id": "support-0039",
+          "role": "shopper",
+          "quote": "so I submitted the refund request",
+          "note": "making assumptions - needs clarity to understand what needs to be refunde first. agent is too quick to decide."
+        },
+        {
+          "note_number": 34,
+          "trace_id": "f546444044510518456a2afa5e67481f",
+          "scenario_id": "support-0026",
+          "role": "shopper",
+          "quote": "I can help.",
+          "note": "too confident - I can help but then adding bombardment of information that confuses the user further."
+        },
+        {
+          "note_number": 44,
+          "trace_id": "08b10fed6ad100ae9fe9293d229521e4",
+          "scenario_id": "support-0247",
+          "role": "shopper",
+          "quote": "**Item:** likely the plate set",
+          "note": "confusing message - likely the plate set is not clear enougnt for the user"
+        },
+        {
+          "note_number": 45,
+          "trace_id": "08b10fed6ad100ae9fe9293d229521e4",
+          "scenario_id": "support-0247",
+          "role": "shopper",
+          "quote": "found one",
+          "note": "agent making assumptions and guiding the user through a bumpy road"
+        },
+        {
+          "note_number": 49,
+          "trace_id": "26a5acb6094f57f898de43da211b84e7",
+          "scenario_id": "support-0250",
+          "role": "shopper",
+          "quote": "It looks like the gardening",
+          "note": "vague language - \"looks like\""
+        }
+      ]
+    },
+    {
+      "mode": "identifier_heavy_or_missing_item_context",
+      "definition": "The answer relies on internal IDs or bare prices, or omits product names/images/links, so the user cannot recognize the item, order, refund, or cancellation being discussed.",
+      "boundary": "Include raw order IDs/product IDs, missing product names, price lists without item context, and requests for visual/product links. Exclude general self-service links; those belong under `missing_actionable_reference`.",
+      "relationship": "New in Batch 2 and strongly confirmed in Batch 3.",
+      "requirement_source": "SPEC.md RESP-5; likely needs a product requirement for user-recognizable order/product references.",
+      "supporting_notes": [
+        {
+          "note_number": 16,
+          "trace_id": "d7f49dd47c67a8050ac129fa3a7c3046",
+          "scenario_id": "support-0193",
+          "role": "support",
+          "quote": "Tell the shopper the available prices are:",
+          "note": "price listings without product names and product links is ambiguous."
+        },
+        {
+          "note_number": 19,
+          "trace_id": "b070b0ef604e506c9987e37eed52566a",
+          "scenario_id": "support-0192",
+          "role": "shopper",
+          "quote": "- $9.00\n- $134.75\n- $149.50\n- $254.75\n- $281.00",
+          "note": "unhelpful and not clear - send product links, images together with the price data."
+        },
+        {
+          "note_number": 38,
+          "trace_id": "f546444044510518456a2afa5e67481f",
+          "scenario_id": "support-0026",
+          "role": "shopper",
+          "quote": "*Order #8134**",
+          "note": "order id is unnecessary detail"
+        },
+        {
+          "note_number": 40,
+          "trace_id": "f546444044510518456a2afa5e67481f",
+          "scenario_id": "support-0026",
+          "role": "shopper",
+          "quote": "Wooden Whale Workshop",
+          "note": "should have listed the exact product name - product name is there, instead of product ids and order ids"
+        },
+        {
+          "note_number": 42,
+          "trace_id": "08b10fed6ad100ae9fe9293d229521e4",
+          "scenario_id": "support-0247",
+          "role": "shopper",
+          "quote": "**Order #323**",
+          "note": "order id is unnecessary detail"
+        },
+        {
+          "note_number": 46,
+          "trace_id": "08b10fed6ad100ae9fe9293d229521e4",
+          "scenario_id": "support-0247",
+          "role": "shopper",
+          "quote": "order #323.",
+          "note": "irrelevant data - users do not remember order 323"
+        },
+        {
+          "note_number": 47,
+          "trace_id": "08b10fed6ad100ae9fe9293d229521e4",
+          "scenario_id": "support-0247",
+          "role": "shopper",
+          "quote": "- **Status:** Delivered",
+          "note": "missing product name in the order summary"
+        },
+        {
+          "note_number": 48,
+          "trace_id": "26a5acb6094f57f898de43da211b84e7",
+          "scenario_id": "support-0250",
+          "role": "shopper",
+          "quote": "**Order #8777**",
+          "note": "order id is unnecessary detail"
+        },
+        {
+          "note_number": 57,
+          "trace_id": "aa6bea5cfcf590cbbb70f1c08ee41002",
+          "scenario_id": "support-0060",
+          "role": "shopper",
+          "quote": "#3722.",
+          "note": "order id is unnecessary detail"
+        },
+        {
+          "note_number": 59,
+          "trace_id": "aa6bea5cfcf590cbbb70f1c08ee41002",
+          "scenario_id": "support-0060",
+          "role": "shopper",
+          "quote": "Done",
+          "note": "missing information in out output - add picture, link and exact product name of the cancelled order so that user is fully aware"
+        }
+      ]
+    },
+    {
+      "mode": "missing_actionable_reference",
+      "definition": "The reply does not give a concrete link, account path, policy page, store page, viewed-item page, order page, or other self-service reference the user can follow.",
+      "boundary": "Include explicit requests for links or pages. Exclude “do not call out policy name” preferences unless they also ask for a usable reference.",
+      "relationship": "Confirmed from Batches 1 and 2.",
+      "requirement_source": "SPEC.md RESP-5; likely needs a product/UI requirement for usable references.",
+      "supporting_notes": [
+        {
+          "note_number": 18,
+          "trace_id": "b070b0ef604e506c9987e37eed52566a",
+          "scenario_id": "support-0192",
+          "role": "shopper",
+          "quote": "Prices include:",
+          "note": "send a link to the user with their \"viewed items\""
+        },
+        {
+          "note_number": 29,
+          "trace_id": "c7510a8f54af106b96b2856c00273e5f",
+          "scenario_id": "support-0039",
+          "role": "shopper",
+          "quote": "Order #120",
+          "note": "add a link for the user which can help them to find their orders on their own account."
+        },
+        {
+          "note_number": 35,
+          "trace_id": "f546444044510518456a2afa5e67481f",
+          "scenario_id": "support-0026",
+          "role": "shopper",
+          "quote": "couldn’t find an order matching “playcards” exactly,",
+          "note": "send user to their recent order link if they want to self-validate."
+        },
+        {
+          "note_number": 36,
+          "trace_id": "f546444044510518456a2afa5e67481f",
+          "scenario_id": "support-0026",
+          "role": "shopper",
+          "quote": "can likely be",
+          "note": "certainty is missing - send user to return policy page to get full confirmation."
+        },
+        {
+          "note_number": 43,
+          "trace_id": "08b10fed6ad100ae9fe9293d229521e4",
+          "scenario_id": "support-0247",
+          "role": "shopper",
+          "quote": "matching order",
+          "note": "send user to their recent order link if they want to self-validate."
+        },
+        {
+          "note_number": 50,
+          "trace_id": "26a5acb6094f57f898de43da211b84e7",
+          "scenario_id": "support-0250",
+          "role": "shopper",
+          "quote": "item was:",
+          "note": "add a link for the user which can help them to find their orders on their own account."
+        },
+        {
+          "note_number": 53,
+          "trace_id": "8ae6239e34515492ba4ea2873f314759",
+          "scenario_id": "support-0054",
+          "role": "shopper",
+          "quote": "find an order matching “snack bag”",
+          "note": "add a link for the user which can help them to find their orders on their own account."
+        },
+        {
+          "note_number": 58,
+          "trace_id": "aa6bea5cfcf590cbbb70f1c08ee41002",
+          "scenario_id": "support-0060",
+          "role": "shopper",
+          "quote": "I cancelled your dry bag order",
+          "note": "add a link for the user which can help them to find their orders on their own account."
+        },
+        {
+          "note_number": 60,
+          "trace_id": "5b4e0043940e5872a5a0e673493117d0",
+          "scenario_id": "support-0083",
+          "role": "merchant",
+          "quote": "Here are Meridian Cycles’ 20 recent orders:",
+          "note": "add a link for the merchant where they can see their store details"
+        }
+      ]
+    },
+    {
+      "mode": "unsupported_or_invented_refund_option",
+      "definition": "The reply presents a refund choice, such as full versus partial refund, as available even though the reviewed policy/tool evidence does not define that option.",
+      "boundary": "Include invented refund-option language. Exclude legitimate queued or auto-approved refund statuses when the tool confirms them.",
+      "relationship": "New in Batch 2 and confirmed again in Batch 3.",
+      "requirement_source": "SPEC.md RESP-3: do not invent unsupported facts or values.",
+      "supporting_notes": [
+        {
+          "note_number": 20,
+          "trace_id": "83164a4efc01ed104438919841ff9199",
+          "scenario_id": "support-0086",
+          "role": "merchant",
+          "quote": "**full refund of $158.25**, or a partial refund?",
+          "note": "partial refund or full refund are not separate options. agent seems to invent rules."
+        },
+        {
+          "note_number": 22,
+          "trace_id": "e1599c9c9c67ce20187cc5b58411d2cf",
+          "scenario_id": "support-0098",
+          "role": "merchant",
+          "quote": "**full refund of $177.25**?",
+          "note": "refund options are non-existent - inventing options."
+        }
+      ]
+    },
+    {
+      "mode": "missing_human_review_followup_path",
+      "definition": "The reply says or implies human review is needed, but does not explain how the user or merchant can track, trigger, or complete that human follow-up.",
+      "boundary": "Include queued refunds and above-threshold human-review cases where the path is unclear. Exclude source-record defects unless the note specifically asks for a human path for fixing the record.",
+      "relationship": "Sharper split from `missing_actionable_reference`; Batch 3 supplied repeated refund/escalation-path evidence.",
+      "requirement_source": "Escalation policy and SPEC.md RESP-5: escalation should leave the user with a clear next step.",
+      "supporting_notes": [
+        {
+          "note_number": 21,
+          "trace_id": "83164a4efc01ed104438919841ff9199",
+          "scenario_id": "support-0086",
+          "role": "merchant",
+          "quote": "The order total is **$158.25**.",
+          "note": "no escalation is being called as human agent involvement is needed."
+        },
+        {
+          "note_number": 23,
+          "trace_id": "e1599c9c9c67ce20187cc5b58411d2cf",
+          "scenario_id": "support-0098",
+          "role": "merchant",
+          "quote": "The order total is **$177.25**.",
+          "note": "human escalation path is not called"
+        },
+        {
+          "note_number": 25,
+          "trace_id": "ef201978c660e9b3b8f56fd249675941",
+          "scenario_id": "support-0095",
+          "role": "merchant",
+          "quote": "follow up.",
+          "note": "follow up is not clarified - where and how, unclear guidance that creates confusion."
+        }
+      ]
+    },
+    {
+      "mode": "confusing_or_contradictory_answer",
+      "definition": "The reply leaves the user with an unclear or conflicting interpretation because the chosen match, status, or policy explanation contradicts the ask or earlier framing.",
+      "boundary": "Include confusing irrelevant matches, refund-eligible-versus-human-review confusion, and account-change contradictions. Exclude simple missing confirmation, which belongs under clarification.",
+      "relationship": "Confirmed from Batches 1 and 2.",
+      "requirement_source": "SPEC.md RESP-5 and RESP-3 when the confusion hides uncertainty.",
+      "supporting_notes": [
+        {
+          "note_number": 10,
+          "trace_id": "3eb872501faea4390f6b4ae6ec61435f",
+          "scenario_id": "support-0205",
+          "role": "shopper",
+          "quote": "The closest match is an order from **store 3**:\n\n- **Order #8666**\n- **Product ID:** 109\n- **Status:** delivered\n- **Ordered:** 2025-02-05",
+          "note": "inventing an irrelevant entry - confusing data for the user"
+        },
+        {
+          "note_number": 33,
+          "trace_id": "c7510a8f54af106b96b2856c00273e5f",
+          "scenario_id": "support-0039",
+          "role": "shopper",
+          "quote": "A human support agent should follow up within **24 hours**.",
+          "note": "contradicting and confusing data - marked refund-eligible and then human follow up in 24 hrs is confusing"
+        },
+        {
+          "note_number": 41,
+          "trace_id": "f546444044510518456a2afa5e67481f",
+          "scenario_id": "support-0026",
+          "role": "shopper",
+          "quote": "but I do see a few June orders on your account:",
+          "note": "lacking matching capability - Woven Card Game is the name of the product. Confusing data for the user"
+        },
+        {
+          "note_number": 52,
+          "trace_id": "8ae6239e34515492ba4ea2873f314759",
+          "scenario_id": "support-0054",
+          "role": "shopper",
+          "quote": "I did find one order that can likely still be canceled because it hasn’t shipped yet",
+          "note": "irrelevant data - snack bag has nothing to do with Coffee."
+        },
+        {
+          "note_number": 56,
+          "trace_id": "9e94c136ef865e5fcce260112ecf2e6b",
+          "scenario_id": "support-0218",
+          "role": "support",
+          "quote": "If they can’t access the account or the change needs staff handling, escalate to a human support agent; account changes go to a human",
+          "note": "contradiction to what was said in the beginning of the conversation"
+        }
+      ]
+    }
+  ],
+  "held_out": [
+    {
+      "bucket": "policy_name_preference_without_reference_request",
+      "description": "Preference to avoid exposing internal policy names. Held out unless paired with a request for a usable policy/help-center link.",
+      "notes": [
+        {
+          "note_number": 6,
+          "trace_id": "309ebfbc9689dca92e3a7c7b6a9f5670",
+          "scenario_id": "support-0180",
+          "role": "support",
+          "quote": "cw-returns",
+          "note": "no need to call out specific policy name"
+        },
+        {
+          "note_number": 54,
+          "trace_id": "579aa949ed85ee8cf0ba43aee661764a",
+          "scenario_id": "support-0237",
+          "role": "support",
+          "quote": "**cw-escalations*",
+          "note": "no need to call out specific policy name"
+        },
+        {
+          "note_number": 55,
+          "trace_id": "9e94c136ef865e5fcce260112ecf2e6b",
+          "scenario_id": "support-0218",
+          "role": "support",
+          "quote": "cw-account-security",
+          "note": "no need to call out specific policy name"
+        }
+      ]
+    }
+  ]
+}
