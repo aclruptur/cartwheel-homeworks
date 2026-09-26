@@ -1,0 +1,13 @@
+{
+  "intentional_regression": {
+    "case_id": "e-001",
+    "first_run_url": "https://github.com/aclruptur/cartwheel-homeworks/actions/runs/36275538253",
+    "first_run_result": "failed",
+    "first_run_summary": "The intentional prompt regression reached the verifier and blocked regression case e-001 with 1/5 passes. Other regression cases also blocked in the same run.",
+    "revert_commit": "3138902",
+    "second_run_url": "https://github.com/aclruptur/cartwheel-homeworks/actions/runs/36277447160",
+    "second_run_result": "failed",
+    "second_run_summary": "After reverting the intentional prompt instruction, e-001 returned to 5/5. The run still failed because regression case e-002 passed 3/5 and blocked CI.",
+    "explanation": "The first run demonstrates the eval suite catching the intentional regression. The second run shows the selected behavior returned for e-001, but also surfaced a non-infrastructure failure in e-002; per the handout, the same commit should not be rerun just to chase a passing result."
+  }
+}
