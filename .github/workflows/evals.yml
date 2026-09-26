@@ -32,7 +32,6 @@ jobs:
 
   complete-evaluations:
     name: complete evaluations and leakage check
-    if: github.event_name != 'push'
     runs-on: ubuntu-latest
     env:
       CARTWHEEL_RUN_E2E: "1"
