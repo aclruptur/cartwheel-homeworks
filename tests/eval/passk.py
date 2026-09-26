@@ -26,6 +26,15 @@ from math import comb
 from typing import Any
 
 
+def _validate_counts(n: int, c: int, k: int) -> None:
+    if n < 1:
+        raise ValueError("n must be at least 1")
+    if c < 0 or c > n:
+        raise ValueError("c must be between 0 and n")
+    if k < 1 or k > n:
+        raise ValueError("k must be between 1 and n")
+
+
 def pass_at_k(n: int, c: int, k: int) -> float:
     """Unbiased estimator of pass@k from n runs with c successes.
 
@@ -57,8 +66,11 @@ def pass_at_k(n: int, c: int, k: int) -> float:
         pass_at_k(8, 6, 4) == 1.0  (only 2 failures, so every 4-subset hits
                                     a success)
     """
-    ### YOUR CODE HERE (hw6)
-    raise NotImplementedError("hw6: implement pass_at_k")
+    _validate_counts(n, c, k)
+    failures = n - c
+    if failures < k:
+        return 1.0
+    return 1.0 - (comb(failures, k) / comb(n, k))
 
 
 def pass_hat_k(n: int, c: int, k: int) -> float:
@@ -89,8 +101,10 @@ def pass_hat_k(n: int, c: int, k: int) -> float:
         pass_hat_k(8, 6, 4) == C(6,4)/C(8,4) == 15/70 == 0.2142857...
         pass_hat_k(8, 6, 8) == 0.0  (not all 8 succeeded)
     """
-    ### YOUR CODE HERE (hw6)
-    raise NotImplementedError("hw6: implement pass_hat_k")
+    _validate_counts(n, c, k)
+    if c < k:
+        return 0.0
+    return comb(c, k) / comb(n, k)
 
 
 def case_passes(
@@ -139,5 +153,35 @@ def case_passes(
         case_passes("capability", 2, 5, 0.6)     -> pass  (never blocks)
         case_passes("capability", 1, 5, 0.6)     -> pass  (never blocks)
     """
-    ### YOUR CODE HERE (hw6)
-    raise NotImplementedError("hw6: implement case_passes")
+    if k < 1:
+        raise ValueError("k must be at least 1")
+    if passes < 0 or passes > k:
+        raise ValueError("passes must be between 0 and k")
+    if kind not in {"regression", "capability"}:
+        raise ValueError("kind must be regression or capability")
+
+    if kind == "regression":
+        failures = k - passes
+        if failures:
+            return {
+                "decision": "block",
+                "reason": f"regression case failed {failures} of {k} runs",
+            }
+        return {
+            "decision": "pass",
+            "reason": f"regression case passed all {k} runs",
+        }
+
+    rate = passes / k
+    baseline = (
+        "not recorded"
+        if baseline_pass_rate is None
+        else f"{baseline_pass_rate:.1f}"
+    )
+    return {
+        "decision": "pass",
+        "reason": (
+            f"capability case passed {passes} of {k} runs "
+            f"(observed {rate:.1f}, baseline {baseline}); not blocking"
+        ),
+    }

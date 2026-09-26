@@ -17,3 +17,9 @@ __pycache__/
 *.pyc
 .venv/
 .pytest_cache/
+
+# Local tool caches
+.cache/
+
+# Generated Harbor tasks and jobs.
+.harbor/

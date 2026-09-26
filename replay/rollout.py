@@ -368,6 +368,39 @@ def retrieved_docs_text(transcript: dict[str, Any]) -> str:
     return "\n\n".join(chunks) if chunks else "(no policy documents were retrieved)"
 
 
+def judge_trace_text(transcript: dict[str, Any]) -> str:
+    """Render a rollout transcript for a frozen Homework 5 judge.
+
+    The generated Harbor judge receives the same kind of evidence the HW5
+    DocETL rows used: user turns, assistant replies, tool activity, the final
+    reply, and the policy documents retrieved in the trace.
+    """
+    sections: list[str] = []
+    for index, turn in enumerate(transcript.get("turns", []), start=1):
+        sections.append(f"Turn {index}")
+        user = str(turn.get("user", "")).strip()
+        if user:
+            sections.append(f"User: {user}")
+        for call in turn.get("tool_calls", []):
+            name = call.get("name")
+            args = json.dumps(call.get("args", {}), ensure_ascii=False, sort_keys=True)
+            result = json.dumps(call.get("result"), ensure_ascii=False, sort_keys=True)
+            sections.append(f"Tool call: {name}({args})")
+            sections.append(f"Tool result: {result}")
+        reply = str(turn.get("reply", "")).strip()
+        if reply:
+            sections.append(f"Assistant: {reply}")
+        sections.append("")
+
+    final_reply = str(transcript.get("final_reply", "")).strip()
+    sections.append("Final assistant reply:")
+    sections.append(final_reply or "(empty)")
+    sections.append("")
+    sections.append("Policy documents retrieved in the trace:")
+    sections.append(retrieved_docs_text(transcript))
+    return "\n".join(sections)
+
+
 def judge_reply(judge: dict[str, Any], reply: str, docs: str) -> str:
     """Run one frozen judge on a reply. Returns "pass" or "fail".
 
