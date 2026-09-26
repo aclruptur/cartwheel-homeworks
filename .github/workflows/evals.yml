@@ -28,7 +28,7 @@ jobs:
       - name: Unit and integration tests, with no model keys
         run: uv run pytest tests/eval -k "unit or integration" -q
       - name: Homework structural checks
-        run: uv run pytest --runxfail tests/test_hw_holes.py -q -k "hw6"
+        run: uv run pytest --runxfail tests/test_hw_holes.py -q -k "hw6_pass or hw6_case or find_leaks"
 
   complete-evaluations:
     name: complete evaluations and leakage check
