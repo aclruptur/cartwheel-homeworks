@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+from copy import deepcopy
 from collections import defaultdict
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
@@ -120,6 +121,109 @@ def _period(config: dict[str, Any], label: str) -> dict[str, Any]:
     raise ValueError(f"unknown period: {label}")
 
 
+def _legacy_api_unavailable(exc: Exception) -> bool:
+    body = getattr(exc, "body", None)
+    return getattr(exc, "status_code", None) == 410 or "LEGACY_API_UNAVAILABLE" in str(body or exc)
+
+
+def _langfuse_v2_observation_url() -> str:
+    host = os.environ.get("LANGFUSE_HOST") or os.environ.get("LANGFUSE_BASE_URL") or ""
+    if not host:
+        raise RuntimeError("LANGFUSE_HOST is required for Langfuse Cloud monitoring")
+    host = host.rstrip("/")
+    if host.endswith("/api/public"):
+        return f"{host}/v2/observations"
+    return f"{host}/api/public/v2/observations"
+
+
+def _parse_observation_io(value: Any) -> Any:
+    if not isinstance(value, str):
+        return value
+    stripped = value.strip()
+    if not stripped:
+        return value
+    try:
+        return json.loads(stripped)
+    except ValueError:
+        return value
+
+
+def _trace_from_observations(trace_id: str, observations: list[dict[str, Any]]) -> dict[str, Any]:
+    ordered = sorted(observations, key=lambda obs: str(obs.get("startTime") or obs.get("start_time") or ""))
+    root = next((obs for obs in ordered if obs.get("isRootObservation")), ordered[0])
+    metadata: dict[str, Any] = {}
+    for obs in ordered:
+        obs_metadata = obs.get("metadata")
+        if isinstance(obs_metadata, dict):
+            metadata.update(obs_metadata)
+    trace: dict[str, Any] = {
+        "id": trace_id,
+        "trace_id": trace_id,
+        "timestamp": root.get("startTime") or root.get("createdAt"),
+        "sessionId": root.get("sessionId"),
+        "userId": root.get("userId"),
+        "metadata": metadata,
+        "observations": [],
+    }
+    root_input = _parse_observation_io(root.get("input"))
+    root_output = _parse_observation_io(root.get("output"))
+    if root_input is not None:
+        trace["input"] = root_input
+    if root_output is not None:
+        trace["output"] = root_output
+    for obs in ordered:
+        record = deepcopy(obs)
+        if "input" in record:
+            record["input"] = _parse_observation_io(record.get("input"))
+        if "output" in record:
+            record["output"] = _parse_observation_io(record.get("output"))
+        trace["observations"].append(record)
+    return trace
+
+
+def fetch_period_observation_traces(period: dict[str, Any]) -> list[dict[str, Any]]:
+    """Fetch Langfuse Cloud v2 observations and reconstruct trace-shaped records."""
+    _load_env()
+    import httpx
+
+    public_key = os.environ.get("LANGFUSE_PUBLIC_KEY")
+    secret_key = os.environ.get("LANGFUSE_SECRET_KEY")
+    if not public_key or not secret_key:
+        raise RuntimeError("LANGFUSE_PUBLIC_KEY and LANGFUSE_SECRET_KEY are required")
+
+    observations: list[dict[str, Any]] = []
+    cursor: str | None = None
+    fields = "core,basic,time,io,metadata,model,usage,metrics,trace_context"
+    while True:
+        params: dict[str, Any] = {
+            "fromStartTime": period["from"],
+            "toStartTime": period["to"],
+            "fields": fields,
+            "limit": 1000,
+        }
+        if cursor:
+            params["cursor"] = cursor
+        response = httpx.get(
+            _langfuse_v2_observation_url(),
+            params=params,
+            auth=(public_key, secret_key),
+            timeout=30,
+        )
+        response.raise_for_status()
+        payload = response.json()
+        batch = payload.get("data") or []
+        observations.extend(obs for obs in batch if isinstance(obs, dict) and obs.get("traceId"))
+        meta = payload.get("meta") if isinstance(payload, dict) else {}
+        cursor = meta.get("cursor") if isinstance(meta, dict) else None
+        if not cursor:
+            break
+
+    by_trace: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    for obs in observations:
+        by_trace[str(obs["traceId"])].append(obs)
+    return [_trace_from_observations(trace_id, obs) for trace_id, obs in sorted(by_trace.items())]
+
+
 def fetch_period_traces(period: dict[str, Any]) -> list[dict[str, Any]]:
     """Fetch full Langfuse traces whose timestamps fall in the period."""
     _load_env()
@@ -131,25 +235,30 @@ def fetch_period_traces(period: dict[str, Any]) -> list[dict[str, Any]]:
     records: list[dict[str, Any]] = []
     page = 1
     page_size = 100
-    while True:
-        response = client.api.trace.list(page=page, limit=page_size)
-        batch = list(response.data or [])
-        if not batch:
-            break
-        for trace_summary in batch:
-            summary = _jsonable(trace_summary)
-            timestamp = summary.get("timestamp") or summary.get("createdAt")
-            if not timestamp:
-                continue
-            ts = _parse_time(str(timestamp))
-            if not (start <= ts <= end):
-                continue
-            full = client.api.trace.get(summary["id"])
-            records.append(_jsonable(full))
-        if len(batch) < page_size:
-            break
-        page += 1
-    return records
+    try:
+        while True:
+            response = client.api.trace.list(page=page, limit=page_size)
+            batch = list(response.data or [])
+            if not batch:
+                break
+            for trace_summary in batch:
+                summary = _jsonable(trace_summary)
+                timestamp = summary.get("timestamp") or summary.get("createdAt")
+                if not timestamp:
+                    continue
+                ts = _parse_time(str(timestamp))
+                if not (start <= ts <= end):
+                    continue
+                full = client.api.trace.get(summary["id"])
+                records.append(_jsonable(full))
+            if len(batch) < page_size:
+                break
+            page += 1
+        return records
+    except Exception as exc:
+        if _legacy_api_unavailable(exc):
+            return fetch_period_observation_traces(period)
+        raise
 
 
 def _model_ok(trace: dict[str, Any], expected_model: str) -> bool:
