@@ -1,0 +1,33 @@
+name: monitor
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "23 8 * * *"
+
+jobs:
+  daily-monitor:
+    name: daily monitoring sample
+    runs-on: ubuntu-latest
+    env:
+      LANGFUSE_PUBLIC_KEY: ${{ secrets.LANGFUSE_PUBLIC_KEY }}
+      LANGFUSE_SECRET_KEY: ${{ secrets.LANGFUSE_SECRET_KEY }}
+      LANGFUSE_HOST: ${{ vars.LANGFUSE_HOST }}
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - name: Install repository dependencies
+        run: uv sync
+      - name: Run scheduled Cartwheel monitor
+        run: uv run python -m monitoring.run --last-hours 24
+      - name: Upload monitoring output artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: hw7-monitoring-output
+          path: |
+            monitoring/outputs
+            monitoring/history.jsonl
+            monitoring/prevalence.svg
+          if-no-files-found: warn

@@ -43,17 +43,56 @@ def select_traces(
     Raises:
         ValueError: if random_rate is outside (0, 1] or a trace has no "id".
     """
-    ### YOUR CODE HERE (hw7)
-    raise NotImplementedError("hw7: implement select_traces")
+    import random
+
+    if not (0 < random_rate <= 1):
+        raise ValueError("random_rate must be in (0, 1]")
+    for trace in traces:
+        if not trace.get("id"):
+            raise ValueError("every trace must have an id")
+
+    sample_size = max(1, round(random_rate * len(traces))) if traces else 0
+    rng = random.Random(seed)
+    random_sample = rng.sample(traces, sample_size) if sample_size else []
+
+    selected_risk_groups: dict[str, list[dict[str, Any]]] = {}
+    for name, predicate in risk_groups.items():
+        selected_risk_groups[name] = [trace for trace in traces if predicate(trace)]
+
+    seen: set[str] = set()
+    to_judge: list[dict[str, Any]] = []
+    for trace in random_sample:
+        trace_id = str(trace["id"])
+        if trace_id not in seen:
+            seen.add(trace_id)
+            to_judge.append(trace)
+    for group_traces in selected_risk_groups.values():
+        for trace in group_traces:
+            trace_id = str(trace["id"])
+            if trace_id not in seen:
+                seen.add(trace_id)
+                to_judge.append(trace)
+
+    return {
+        "random": list(random_sample),
+        "risk_groups": selected_risk_groups,
+        "to_judge": to_judge,
+    }
 
 
 # Each function identifies one risk group in the Cartwheel traces.
 DEFAULT_RISK_GROUPS: dict[str, Callable[[dict[str, Any]], bool]] = {
     "policy_lookup": lambda t: bool(
-        {"get_policy", "search_help_center"} & set(t.get("tools", []))
+        {"get_policy", "search_help_center"} & set(t.get("tools", t.get("tool_names", [])))
     ),
     "write_action": lambda t: bool(
-        {"issue_refund", "cancel_order"} & set(t.get("tools", []))
+        {"issue_refund", "cancel_order"} & set(t.get("tools", t.get("tool_names", [])))
     ),
-    "multi_turn": lambda t: int(t.get("turn_count", 0)) > 1,
+    "multi_turn": lambda t: int(t.get("turn_count", t.get("user_turns", 0))) > 1,
+    "override_policy_question": lambda t: bool(
+        t.get("segments", {}).get("store_override_topic")
+    ),
+    "above_threshold_refund": lambda t: bool(
+        t.get("segments", {}).get("above_threshold_refund")
+    ),
 }
