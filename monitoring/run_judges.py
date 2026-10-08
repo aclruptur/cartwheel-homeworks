@@ -38,3 +38,39 @@ def judge_sample(
         )
         verdicts[trace["id"]] = 1 if answer == "fail" else 0
     return verdicts
+
+
+def judge_test_data(mode: str) -> tuple[list[int], list[int]]:
+    """Load held-out labels and frozen predictions in failure-positive form.
+
+    The frozen judge stores 1 for a judged failure and 0 for pass. The HW5
+    split file carries the held-out test ids. For the course-supplied
+    unsupported-policy cases, ids containing ``fail`` plus demo ids D7/D10 are
+    human-labeled failures; ids containing ``pass`` are human-labeled passes.
+    """
+    import json
+    from pathlib import Path
+
+    root = Path(__file__).resolve().parents[1]
+    judge = load_frozen_judge(mode)
+    judge_id = judge["judge_id"]
+    judge_state = json.loads((root / "analysis" / "state" / "judges" / f"{judge_id}.json").read_text())
+    splits = json.loads((root / "analysis" / "state" / "splits.json").read_text())
+    test_ids = splits[mode]["test"]
+    predictions = judge_state["predictions"][judge_state["prompt_hash"]]
+
+    labels: list[int] = []
+    preds: list[int] = []
+    known_demo_failures = {"D7", "D10", "T2"}
+    for trace_id in test_ids:
+        if "fail" in trace_id or trace_id in known_demo_failures:
+            label = 1
+        elif "pass" in trace_id:
+            label = 0
+        else:
+            raise ValueError(f"cannot infer held-out label for {trace_id!r}")
+        if trace_id not in predictions:
+            raise ValueError(f"missing frozen prediction for {trace_id!r}")
+        labels.append(label)
+        preds.append(int(predictions[trace_id]))
+    return labels, preds
