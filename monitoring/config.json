@@ -1,0 +1,23 @@
+{
+  "judge_id": "unsupported_policy_claim-v3",
+  "judge_mode": "unsupported_policy_claim",
+  "model": "gpt-5.5",
+  "random_rate": 0.2,
+  "risk_groups": [
+    "override_policy_question",
+    "above_threshold_refund"
+  ],
+  "threshold": 0.15,
+  "periods": [
+    {
+      "label": "before",
+      "from": "2026-09-15T10:25:00Z",
+      "to": "2026-09-15T11:04:00Z"
+    },
+    {
+      "label": "after",
+      "from": "2026-10-08T07:50:30Z",
+      "to": "2026-10-08T08:00:00Z"
+    }
+  ]
+}

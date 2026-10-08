@@ -55,5 +55,72 @@ def corrected_mode_prevalence(
             lengths, a value is not 0 or 1, a class is absent, the judge is
             missing a usable correction, or no bootstrap replicate is valid.
     """
-    ### YOUR CODE HERE (hw7)
-    raise NotImplementedError("hw7: implement corrected_mode_prevalence")
+    import numpy as np
+
+    if not sample_preds:
+        raise ValueError("sample_preds must not be empty")
+    if not test_labels:
+        raise ValueError("test_labels must not be empty")
+    if len(test_labels) != len(test_preds):
+        raise ValueError("test_labels and test_preds must have the same length")
+
+    sample = np.asarray(sample_preds, dtype=int)
+    labels = np.asarray(test_labels, dtype=int)
+    preds = np.asarray(test_preds, dtype=int)
+
+    def _rates(label_arr: np.ndarray, pred_arr: np.ndarray) -> tuple[float, float]:
+        positives = label_arr == 1
+        negatives = label_arr == 0
+        if not positives.any() or not negatives.any():
+            raise ValueError("test data must contain both failures and passes")
+        tpr_value = float((pred_arr[positives] == 1).mean())
+        tnr_value = float((pred_arr[negatives] == 0).mean())
+        return tpr_value, tnr_value
+
+    def _correct(raw_rate: float, tpr_value: float, tnr_value: float) -> float:
+        denominator = tpr_value + tnr_value - 1.0
+        if denominator <= 0:
+            return float("nan")
+        return min(1.0, max(0.0, (raw_rate + tnr_value - 1.0) / denominator))
+
+    raw = float(sample.mean())
+    tpr, tnr = _rates(labels, preds)
+    corrected = _correct(raw, tpr, tnr)
+
+    rng = np.random.default_rng(seed)
+    boot: list[float] = []
+    sample_n = len(sample)
+    test_n = len(labels)
+    for _ in range(bootstrap_iterations):
+        sample_idx = rng.integers(0, sample_n, sample_n)
+        test_idx = rng.integers(0, test_n, test_n)
+        boot_raw = float(sample[sample_idx].mean())
+        try:
+            boot_tpr, boot_tnr = _rates(labels[test_idx], preds[test_idx])
+        except ValueError:
+            continue
+        boot_corrected = _correct(boot_raw, boot_tpr, boot_tnr)
+        if not np.isnan(boot_corrected):
+            boot.append(boot_corrected)
+
+    alpha = 1.0 - confidence
+    if boot:
+        ci_low, ci_high = np.quantile(boot, [alpha / 2.0, 1.0 - alpha / 2.0])
+    else:
+        ci_low = ci_high = corrected
+
+    warning = ""
+    if tpr + tnr <= 1.05:
+        warning = "judge calibration is close to chance; corrected prevalence is unstable"
+
+    return {
+        "raw": round(raw, 4),
+        "corrected": round(corrected, 4),
+        "ci_low": round(float(ci_low), 4),
+        "ci_high": round(float(ci_high), 4),
+        "confidence": confidence,
+        "failure_sensitivity": round(tpr, 4),
+        "pass_specificity": round(tnr, 4),
+        "n_sample": int(sample_n),
+        "validity_warning": warning,
+    }

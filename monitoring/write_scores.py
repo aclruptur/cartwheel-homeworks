@@ -25,6 +25,7 @@ def build_score_records(
     risk_verdicts: dict[str, int],
     estimate: dict[str, Any],
     batch_label: str,
+    timestamp: Any | None = None,
 ) -> list[dict[str, Any]]:
     """Build repeatable Langfuse score records for one monitoring run.
 
@@ -70,8 +71,49 @@ def build_score_records(
         A list of score record dicts with keys: score_id, name, value,
         data_type, trace_id, comment (comment is None for verdicts).
     """
-    ### YOUR CODE HERE (hw7)
-    raise NotImplementedError("hw7: implement build_score_records")
+    records: list[dict[str, Any]] = []
+    for trace_id, verdict in random_verdicts.items():
+        records.append(
+            {
+                "score_id": _stable_id(mode, "verdict", trace_id),
+                "name": f"{mode}_verdict",
+                "value": float(verdict),
+                "data_type": "NUMERIC",
+                "trace_id": trace_id,
+                "comment": None,
+                "timestamp": timestamp,
+            }
+        )
+
+    for trace_id, verdict in risk_verdicts.items():
+        records.append(
+            {
+                "score_id": _stable_id(mode, "risk_verdict", trace_id),
+                "name": f"{mode}_risk_verdict",
+                "value": float(verdict),
+                "data_type": "NUMERIC",
+                "trace_id": trace_id,
+                "comment": None,
+                "timestamp": timestamp,
+            }
+        )
+
+    records.append(
+        {
+            "score_id": _stable_id(mode, "prevalence", batch_label),
+            "name": f"{mode}_corrected_prevalence",
+            "value": float(estimate["corrected"]),
+            "data_type": "NUMERIC",
+            "trace_id": None,
+            "session_id": batch_label,
+            "comment": (
+                f"95% CI {estimate['ci_low']}-{estimate['ci_high']}, "
+                f"raw {estimate['raw']}, n={estimate['n_sample']}"
+            ),
+            "timestamp": timestamp,
+        }
+    )
+    return records
 
 
 # ---------------------------------------------------------------------------
@@ -105,8 +147,12 @@ def post_scores(records: list[dict[str, Any]]) -> int:
         }
         if record.get("trace_id") is not None:
             kwargs["trace_id"] = record["trace_id"]
+        if record.get("session_id") is not None:
+            kwargs["session_id"] = record["session_id"]
         if record.get("comment"):
             kwargs["comment"] = record["comment"]
+        if record.get("timestamp") is not None:
+            kwargs["timestamp"] = record["timestamp"]
         client.create_score(**kwargs)
     client.flush()
     return len(records)
